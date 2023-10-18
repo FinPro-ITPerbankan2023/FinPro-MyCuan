@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('user_detail', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->nullable()->index()->constrained();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
+            $table->date('date_birth');
+            $table->text('address');
+            $table->longText('phone_number');
+            $table->string('mother_maiden');
+            $table->bigInteger('user_identity')->unsigned()->unique();
             $table->timestamps();
-
         });
     }
 
@@ -28,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('user_detail');
+
     }
 };
