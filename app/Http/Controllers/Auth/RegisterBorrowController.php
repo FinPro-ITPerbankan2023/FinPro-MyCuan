@@ -23,7 +23,6 @@ class RegisterBorrowController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed',Rules\Password::default()],
             'confirmPassword' => 'required|same:password',
-            'phoneNumber' => ['required', 'string', 'Numeric','min:5'], // Add validation for phone number
         ]);
         $user = User::create([
             'name' => $request->name,
@@ -33,5 +32,6 @@ class RegisterBorrowController extends Controller
         return $user;
        
     }
+
 
 }
