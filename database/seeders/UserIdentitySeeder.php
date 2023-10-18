@@ -16,8 +16,8 @@ class UserIdentitySeeder extends Seeder
                 'user_id' => $index,
                 'identity_type' => 'KTP',
                 'identity_number' => rand(1000000000000000, 9999999999999999),
-                'identity_image' => $faker->image('public/storage/identity_images', 100, 100, null, false),
-                'selfie_image' => $faker->image('public/storage/selfie_images', 100, 100, null, false),
+                'identity_image' => $faker->imageUrl(100, 100, 'people', true),
+                'selfie_image' => $faker->imageUrl(100, 100, 'people', true),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
