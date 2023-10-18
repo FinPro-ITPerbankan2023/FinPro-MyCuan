@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->index()->constrained('user_detail', 'user_identity');
             $table->string('identity_type');
             $table->bigInteger('identity_number');
-            $table->binary('identity_image');
-            $table->binary('selfie_image');
+            $table->longText('identity_image');
+            $table->longText('selfie_image');
             $table->timestamps();
         });
 
