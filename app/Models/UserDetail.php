@@ -11,10 +11,19 @@ class UserDetail extends Model
 
     protected $fillable = [
         'user_id',
+        'user_identity',
         'date_birth',
-        'address',
+        'place_birth',
+        'address_home',
+        'province',
+        'city',
+        'district',
         'phone_number',
         'mother_maiden',
-        'user_identity',
     ];
+
+    public function user() : \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 }

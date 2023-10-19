@@ -17,20 +17,28 @@ class RegisterDetailBorrowController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'user_identity' => ['required', 'numeric'],
             'date_birth' => ['required', 'date'],
-            'address' => ['required', 'string', 'max:255'],
+            'place_birth' => ['required', 'string','max:100'],
+            'address_home' => ['required', 'string', 'max:255'],
+            'province' => ['required', 'string', 'max:100'],
+            'city' => ['required', 'string', 'max:100'],
+            'district' => ['required', 'string', 'max:100'],
             'phone_number' => ['required', 'numeric','min:5','max:13'],
             'mother_maiden' => ['required', 'string','max:255'],
-            'user_identity' => ['required', 'numeric'],
         ]);
         $userId = $request->user()->id;
         $user = UserDetail::create([
             'user_id' => $userId,
+            'user_identity' => $request->user_identity,
             'date_birth' => $request->date_birth,
-            'address' => $request->address,
+            'place_birth' => $request->place_birth,
+            'address_home' => $request->address_home,
+            'province' => $request->province,
+            'city' => $request->city,
+            'district' => $request->district,
             'phone_number' => $request->phone_number,
             'mother_maiden' => $request->mother_maiden,
-            'user_identity' => $request->user_identity,
         ]);
         return $user;
        

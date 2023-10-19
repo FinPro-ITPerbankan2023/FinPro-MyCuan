@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('user_detail', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->index()->constrained();
+            $table->bigInteger('user_identity')->unsigned()->unique();
             $table->date('date_birth');
-            $table->text('address');
+            $table->string('place_birth');
+            $table->text('address_home');
+            $table->text('province');
+            $table->text('city');
+            $table->text('district');
             $table->longText('phone_number');
             $table->string('mother_maiden');
-            $table->bigInteger('user_identity')->unsigned()->unique();
             $table->timestamps();
         });
     }
