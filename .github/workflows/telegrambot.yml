@@ -1,0 +1,75 @@
+name: Telegram Notifier
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - closed
+  issues:
+    types:
+      - opened
+      - closed
+
+jobs:
+  notify_push:
+    if: github.event_name == 'push'
+    environment: telegram
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Notify on Push Event
+        uses: appleboy/telegram-action@master
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          format: html
+          message: |
+            Push event in ${{ github.repository }}:
+            Commit message: ${{ github.event.commits[0].message }}
+            See changes: [Commit Details](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+  notify_pull_request:
+    if: github.event_name == 'pull_request'
+    environment: telegram
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Notify on Pull Request Event
+        uses: appleboy/telegram-action@master
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          format: html
+          message: |
+            Pull request event in ${{ github.repository }}:
+            Pull Request: ${{ github.event.pull_request.title }}
+            Action: ${{ github.event.action }}
+            See details: [PR Details](https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }})
+  notify_issue:
+    if: github.event_name == 'issues'
+    environment: telegram
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Notify on Issue Event
+        uses: appleboy/telegram-action@master
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          format: html
+          message: |
+            Issue event in ${{ github.repository }}:
+            Issue: ${{ github.event.issue.title }}
+            Action: ${{ github.event.action }}
+            See details: [Issue Details](https://github.com/${{ github.repository }}/issues/${{ github.event.issue.number }})
