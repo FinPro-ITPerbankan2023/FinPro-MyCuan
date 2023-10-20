@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_identity', function (Blueprint $table) {
+        Schema::create('business', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->index()->constrained('user_detail', 'user_id');
-            $table->string('identity_type');
-            $table->bigInteger('identity_number');
-            $table->longText('identity_image');
-            $table->longText('selfie_image');
+            $table->string('business_name');
+            $table->string('field_of_business');
+            $table->string('business_ownership');
+            $table->string('business_duration');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_identity');
+        Schema::dropIfExists('business');
     }
 };

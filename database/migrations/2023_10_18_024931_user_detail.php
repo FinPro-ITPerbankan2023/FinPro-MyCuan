@@ -17,8 +17,6 @@ return new class extends Migration
             $table->date('date_birth');
             $table->text('address');
             $table->longText('phone_number');
-            $table->string('mother_maiden');
-            $table->bigInteger('user_identity')->unsigned()->unique();
             $table->timestamps();
         });
     }
