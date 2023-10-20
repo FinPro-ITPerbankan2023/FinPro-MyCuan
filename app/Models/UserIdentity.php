@@ -15,7 +15,5 @@ class UserIdentity extends Model
         'user_id',
         'identity_type',
         'identity_number',
-        'identity_images',
-        'selfie_images',
     ];
 }

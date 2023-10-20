@@ -12,16 +12,14 @@ class UserIdentityController extends Controller
     {
         $request->validate([
             'user_id' => 'required|integer',
-            'date_birth' => 'required|date',
-            'address' => 'required|string',
-            'phone_number' => 'required|string',
+            'identity_type' => 'required|string',
+            'identity_number' => 'required|integer',
         ]);
 
         $userDetail = UserIdentity::create([
             'user_id' => $request->user_id,
-            'date_birth' => $request->date_birth,
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
+            'identity_type' => $request->identity_type,
+            'identity_number' => $request->identity_number,
 
         ]);
 

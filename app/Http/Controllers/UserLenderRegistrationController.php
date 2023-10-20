@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 
-class UserBorrowerRegistrationController extends Controller
+class UserLenderRegistrationController extends Controller
 {
     public function register(Request $request)
     {
