@@ -24,22 +24,22 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="w-8/12 mt-16 mx-auto">
-                        <x-input-label class="text-white text-xl font-poppins" for="email" value="{{ __('Email')}}" />
+                        <x-input-label class="text-white text-xl font-poppins dark:text-white" for="email" value="{{ __('Email')}}" />
                         <div
                             class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
                             <x-input name="email" type="email" id="email"
-                                class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0"
+                                class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent dark:text-black"
                                 placeholder="{{ __('Silakan masukan alamat email Anda') }}" required
                                 autocomplete="username" :value="old('email')" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                     </div>
                     <div class="w-8/12 mt-12 mx-auto">
-                        <x-input-label class="text-white text-xl font-poppins" for="password"
+                        <x-input-label class="text-white text-xl font-poppins dark:text-white" for="password"
                             value="{{ __('Kata Sandi')}}" />
                         <div class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
                             <x-input name="password" type="password" id="password"
-                                class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0"
+                                class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent dark:text-black"
                                 placeholder="{{ __('Silakan masukan kata sandi Anda') }}" required
                                 autocomplete="current-password" />
                                 <img class="w-6 h-6 mr-2" src="{{asset('assets/img/eye-hidden.png')}}" alt="Hidden Password" id="eye-hidden" onclick="show()">
@@ -50,13 +50,13 @@
                     <div class="flex flex-wrap w-8/12 mt-6 mx-auto">
                         <div class="w-1/2 content-center">
                             <x-label class="block" for="remember">
-                                <span class="text-white text-xl font-poppins">{{ _('Ingat Saya')}}</span>
-                                <x-input class="rounded-md mb-1" type="checkbox" id="remember" name="remember" />
+                                <span class="text-white text-xl font-poppins">Ingat Saya</span>
+                                <x-input class="rounded-md mb-1 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent dark:text-blue-600" type="checkbox" id="remember" name="remember" />
                             </x-label>
                         </div>
                         <div class="w-1/2">
                             @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="float-right text-white text-xl font-poppins">{{_ ('Lupa Kata Sandi?')}}
+                            <a href="{{ route('password.request') }}" class="float-right text-white text-xl font-poppins">Lupa Kata Sandi?
                             </a>
                             @endif
                         </div>
