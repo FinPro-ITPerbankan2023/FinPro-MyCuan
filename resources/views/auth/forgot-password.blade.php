@@ -42,7 +42,7 @@
                         </x-button>
                     </div>
 
-                    <!-- Session Status -->
+                    <!-- Session Status alert-->
                     @if (session('status'))
                     <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400 justify-center text-center mt-5">
                         {{ session('status') }}
