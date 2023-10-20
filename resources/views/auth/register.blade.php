@@ -29,7 +29,19 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+            <div class="mt-4">
+                <x-label for="phone_number" value="{{ __('Phone Number') }}" />
+                <x-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required />
+            </div>
+
+
+            <div class="mt-4">
+                <x-label for="identity_number" value="{{ __('NIK KTP') }}" />
+                <x-input id="identity_number" class="block mt-1 w-full" type="text" name="identity_number" :value="old('identity_number')" required />
+            </div>
+
+
+        @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-label for="terms">
                         <div class="flex items-center">

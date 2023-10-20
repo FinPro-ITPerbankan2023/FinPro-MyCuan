@@ -21,10 +21,13 @@ class UserDetailSeeder extends Seeder
             DB::table('user_detail')->insert([
                 'user_id' => $index,
                 'date_birth' => $faker->date,
-                'address' => $faker->address,
+                'birth_place' => $faker->name,
+                'street' => $faker->streetAddress,
+                'district' => $faker->streetName,
+                'city' => $faker->city,
+                'province' => $faker->city,
+                'postal_code' => $faker->postcode,
                 'phone_number' => $faker->phoneNumber,
-                'mother_maiden' => $faker->name,
-                'user_identity' => $index,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

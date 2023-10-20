@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserDetail extends Model
+class UserIdentity extends Model
 {
     use HasFactory;
-    protected $table = 'user_detail';
-
+    protected $table = 'user_identity';
     protected $fillable = [
         'user_id',
-        'date_birth',
-        'address',
-        'phone_number',
+        'identity_number',
     ];
+
     public function user(): BelongsTo
 
     {
@@ -24,5 +22,4 @@ class UserDetail extends Model
         return $this->belongsTo(User::class);
 
     }
-
 }
