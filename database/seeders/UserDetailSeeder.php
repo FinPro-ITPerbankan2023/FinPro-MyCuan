@@ -23,8 +23,6 @@ class UserDetailSeeder extends Seeder
                 'date_birth' => $faker->date,
                 'address' => $faker->address,
                 'phone_number' => $faker->phoneNumber,
-                'mother_maiden' => $faker->name,
-                'user_identity' => $index,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

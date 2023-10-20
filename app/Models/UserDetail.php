@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserDetail extends Model
 {
     use HasFactory;
+    protected $table = 'user_detail';
 
     protected $fillable = [
         'user_id',
@@ -15,7 +16,5 @@ class UserDetail extends Model
         'date_birth',
         'address',
         'phone_number',
-        'mother_maiden',
-        'user_identity',
     ];
 }
