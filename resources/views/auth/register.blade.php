@@ -29,22 +29,11 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <!-- Additional Fields for UserDetail -->
-
-            <div class="mt-4">
-                <x-label for="date_birth" value="{{ __('Date of Birth') }}" />
-                <x-input id="date_birth" class="block mt-1 w-full" type="date" name="date_birth" :value="old('date_birth')" required />
-            </div>
-
             <div class="mt-4">
                 <x-label for="phone_number" value="{{ __('Phone Number') }}" />
                 <x-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required />
             </div>
 
-            <div class="mt-4">
-                <x-label for="address" value="{{ __('Address') }}" />
-                <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
-            </div>
 
             <div class="mt-4">
                 <x-label for="identity_number" value="{{ __('NIK KTP') }}" />
