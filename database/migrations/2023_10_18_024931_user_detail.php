@@ -14,9 +14,14 @@ return new class extends Migration
         Schema::create('user_detail', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->date('date_birth');
-            $table->text('address');
-            $table->longText('phone_number');
+            $table->date('date_birth')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->text('street')->nullable();
+            $table->text('district')->nullable();
+            $table->text('city')->nullable();
+            $table->text('province')->nullable();
+            $table->integer('post_code')->nullable();
+            $table->longText('phone_number')->nullable();
             $table->timestamps();
         });
     }
