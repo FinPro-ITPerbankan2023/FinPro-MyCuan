@@ -40,7 +40,7 @@
                 <x-input id="identity_number" class="block mt-1 w-full" type="text" name="identity_number" :value="old('identity_number')" required />
             </div>
 
-            <input type="hidden" name="role" value="lender">
+            <input type="hidden" name="role" value="borrower">
 
         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
