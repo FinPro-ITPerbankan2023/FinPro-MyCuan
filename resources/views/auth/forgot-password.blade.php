@@ -1,12 +1,4 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    @if (session('status'))
-    <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-        {{ session('status') }}
-    </div>
-    @endif
-
-
     <div class="flex flex-wrap max-h-full">
         <div class="w-1/2 h-screen">
             <div class="flex flex-wrap items-center h-40 ">
@@ -18,29 +10,44 @@
             </div>
         </div>
         <div class="w-1/2 bg-[#13A89E] max-h-full ">
-            <div class="flex flex-col mx-auto mt-2">
-                <div class="flex items-center justify-center mx-auto">
-                    <h1 class="text-white mt-28 font-bold font-poppins text-3xl items-center justify-center">Lupa Kata Sandi</h1>
+            <div class="flex flex-col w-3/5 mx-auto mt-2 justify-center">
+
+                <!-- judul -->
+                <div class="flex mx-auto">
+                    <h1 class="text-white mt-28 font-bold font-poppins text-3xl text-center ">Lupa Kata Sandi</h1>
                 </div>
-                <div class="flex mb-4 text-sm text-white items-center justify-center mt-4">
+
+                <!-- deskripsi -->
+                <div class="flex mb-4 text-sm text-white text-center mt-4 text-[16px]">
                     {{ __('Masukan alamat email yang telah terdaftar untuk menerima email reset kata sandi') }}
                 </div>
 
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
 
-                    <div class="w-8/12 mt-16 mx-auto">
+                    <!-- form email -->
+                    <div class="w-3/4 mt-10 mx-auto">
                         <x-input-label class="text-white text-xl font-poppins dark:text-white" for="email" value="{{ __('Email')}}" />
                         <div class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
                             <x-input name="email" type="email" id="email" class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukan alamat email Anda') }}" required autocomplete="username" :value="old('email')" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
+                        <!-- alert email -->
+                        <x-input-error :messages="$errors->get('email')" class="mt-2 bg-white" />
                     </div>
 
-                    <div class="flex flex-col w-8/12 mt-6 mx-auto justify-center">
+                    <!-- button kirim -->
+                    <div class="flex flex-col w-3/4 mt-6 mx-auto justify-center">
                         <x-button class="justify-center">
                             {{ __('Kirim') }}
                         </x-button>
                     </div>
+
+                    <!-- Session Status -->
+                    @if (session('status'))
+                    <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400 justify-center text-center mt-5">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+
                 </form>
 </x-guest-layout>
