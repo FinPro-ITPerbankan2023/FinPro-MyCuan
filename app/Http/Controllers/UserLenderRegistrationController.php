@@ -8,29 +8,27 @@ use Illuminate\Http\Request;
 
 class UserLenderRegistrationController extends Controller
 {
-    public function register(Request $request)
+// app/Http/Controllers/UserDetailsController.php
+    public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|integer',
-            'date_birth' => 'required|date',
-            'address' => 'required|string',
-            'phone_number' => 'required|string',
-        ]);
 
-        $userDetail = UserDetail::create([
-            'user_id' => $request->user_id,
-            'date_birth' => $request->date_birth,
-            'address' => $request->address,
+        $user = User::find($request->user_id);
+
+        $user->detail()->create([
+            'birth_date' => $request->birth_date,
             'phone_number' => $request->phone_number,
+            'address' => $request->address,
 
         ]);
 
-        return response()->json(['user_detail' => $userDetail], 201);
+        return response()->json(['message' => 'User details created successfully']);
     }
 
-    public function getUsers()
+    public function show($userId)
     {
-        $users = UserDetail::all();
-        return response()->json(['users' => $users], 200);
+        $user = User::find($userId);
+
+        return response()->json(['user_detail' => $user->detail]);
     }
+
 }
