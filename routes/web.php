@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MyCuanController;
 use Illuminate\Support\Facades\Route;
 
 /*
