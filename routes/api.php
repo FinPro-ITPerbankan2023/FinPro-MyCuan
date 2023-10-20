@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterBorrowController;
 use App\Http\Controllers\Auth\RegisterDetailBorrowController;
+use App\Http\Controllers\RegisterUserIndentityBorrowController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/detailUser',[RegisterDetailBorrowController::class|'store',RegisterUserIndentityBorrowController::class|'store' ])->name('register.user');
+Route::post('/register/detailUser',[RegisterDetailBorrowController::class, 'store'])->name('user.registerDetail');
+Route::post('/register/detailUserKTP',[RegisterUserIndentityBorrowController::class, 'store'])->name('user.registerDetailKTP');

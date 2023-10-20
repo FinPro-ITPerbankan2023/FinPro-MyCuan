@@ -40,7 +40,7 @@ class RegisterDetailBorrowController extends Controller
             'phone_number' => $request->phone_number,
             'mother_maiden' => $request->mother_maiden,
         ]);
-        return $user;
+        return json_encode($user);
        
     }
 }
