@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_identity', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index()->constrained('user_detail', 'user_id');
-            $table->string('identity_type');
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('identity_type')->nullable();
             $table->bigInteger('identity_number');
             $table->longText('identity_image')->nullable();
             $table->longText('selfie_image')->nullable();
