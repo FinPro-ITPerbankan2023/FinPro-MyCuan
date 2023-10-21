@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\RegisterRoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,8 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/register-role', [RegisterRoleController::class, 'registerrole']);
+Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
+Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
+
+
 

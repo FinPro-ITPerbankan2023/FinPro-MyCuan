@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 class RegisterRoleController extends Controller
 {
     //
-    public function registerrole(){
+    public function registerRole(){
         return view('register-role');
+    }
+
+    public function RegisterBorrowerPage(){
+        return view('auth.register-borrower');
     }
 }
