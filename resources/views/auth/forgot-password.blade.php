@@ -45,7 +45,7 @@
 
                     <!-- button kirim -->
                     <div class="flex flex-col w-3/4 mt-6 mx-auto justify-center">
-                        <x-button class="justify-center hover:border-sky-600 bg-white dark:bg-white">
+                        <x-button class="justify-center hover:border-sky-600 bg-white dark:bg-white dark:text-black text-black">
                             {{ __('Kirim') }}
                         </x-button>
                     </div>
