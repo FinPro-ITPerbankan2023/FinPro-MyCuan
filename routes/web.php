@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MyCuanController;
+use App\Http\Controllers\RegisterRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/register-role', [RegisterRoleController::class, 'registerrole']);
