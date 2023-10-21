@@ -1,7 +1,6 @@
 <?php
 
-use App\Actions\Fortify\CreateNewUser;
-use App\Http\Controllers\ChooseRoleController;
+use App\Http\Controllers\RegisterRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +28,5 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/choose-role', [ChooseRoleController::class, 'showChooseRolePage'])->name('choose-role');
-Route::get('/register-borrower', [ChooseRoleController::class, 'registerBorrower'])->name('register-borrower');
+Route::get('/register-role', [RegisterRoleController::class, 'registerrole']);
 
