@@ -18,7 +18,6 @@ class RegisterUserIndentityBorrowController extends Controller
         $numberIdentity = 1;
         $userIdentity = UserIdentity::create([
             'user_identity' => $numberIdentity,
-            'identity_type' => 'KTP',
             'identity_number' => $numberIdentity,
             'identity_image' => 'oke',
             'selfie_image' => 'oke'

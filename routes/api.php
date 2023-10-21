@@ -19,6 +19,3 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::post('/register/detailUser',[RegisterDetailBorrowController::class, 'store'])->name('user.registerDetail');
-Route::post('/register/detailUserKTP',[RegisterUserIndentityBorrowController::class, 'store'])->name('user.registerDetailKTP');
