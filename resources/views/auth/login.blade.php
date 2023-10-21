@@ -1,3 +1,5 @@
+@section('title', 'Login')
+
 <x-guest-layout>
     <!-- Session Status -->
     @if (session('status'))
@@ -24,7 +26,8 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="w-8/12 mt-16 mx-auto">
-                        <x-input-label class="text-white text-xl font-poppins dark:text-white" for="email" value="{{ __('Email')}}" />
+                        <x-input-label class="text-white text-xl font-poppins dark:text-white" for="email"
+                            value="{{ __('Email')}}" />
                         <div
                             class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
                             <x-input name="email" type="email" id="email"
@@ -37,13 +40,16 @@
                     <div class="w-8/12 mt-12 mx-auto">
                         <x-input-label class="text-white text-xl font-poppins dark:text-white" for="password"
                             value="{{ __('Kata Sandi')}}" />
-                        <div class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
+                        <div
+                            class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
                             <x-input name="password" type="password" id="password"
                                 class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                 placeholder="{{ __('Silakan masukan kata sandi Anda') }}" required
                                 autocomplete="current-password" />
-                                <img class="w-6 h-6 mr-2" src="{{asset('assets/img/eye-hidden.png')}}" alt="Hidden Password" id="eye-hidden" onclick="show()">
-                                <img class="w-6 h-6 mr-2 hidden" src="{{asset('assets/img/eye-show.png')}}" alt="Show Password" id="eye-show" onclick="show()">
+                            <img class="w-6 h-6 mr-2" src="{{asset('assets/img/eye-hidden.png')}}" alt="Hidden Password"
+                                id="eye-hidden" onclick="show()">
+                            <img class="w-6 h-6 mr-2 hidden" src="{{asset('assets/img/eye-show.png')}}"
+                                alt="Show Password" id="eye-show" onclick="show()">
                         </div>
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
@@ -51,27 +57,33 @@
                         <div class="w-1/2 content-center">
                             <x-label class="block" for="remember">
                                 <span class="text-white text-xl font-poppins">{{ __('Ingat Saya') }}</span>
-                                <x-input class="rounded-md mb-1 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent dark:text-blue-600" type="checkbox" id="remember" name="remember" />
+                                <x-input
+                                    class="rounded-md mb-1 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent dark:text-blue-600"
+                                    type="checkbox" id="remember" name="remember" />
                             </x-label>
                         </div>
                         <div class="w-1/2">
                             @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="float-right text-white text-xl font-poppins">{{ __('Lupa Kata Sandi?') }}
+                            <a href="{{ route('password.request') }}"
+                                class="float-right text-white text-xl font-poppins">{{ __('Lupa Kata Sandi?') }}
                             </a>
                             @endif
                         </div>
                     </div>
                     <div class="flex flex-col w-8/12 mt-6 mx-auto justify-center">
-                        <button class="w-full mt-3 h-10 bg-[#186F65] text-white font-bold text-base font-worksans justify-center rounded-md hover:bg-white hover:text-[#186F65]">
+                        <button
+                            class="w-full mt-3 h-10 bg-[#186F65] text-white font-bold text-base font-worksans justify-center rounded-md hover:bg-white hover:text-[#186F65]">
                             {{ __('MASUK') }}
                         </button>
                     </div>
                 </form>
                 <div class="flex flex-col w-8/12 mt-6 mx-auto justify-center">
-                    
-                <button class="w-full h-10 bg-white text-[#186F65] font-bold text-base font-worksans justify-center rounded-md hover:bg-[#186F65] hover:text-white" onclick="window.location='{{ route('register') }}'">
-                    {{ __('DAFTAR') }}
-                </button>
+
+                    <button
+                        class="w-full h-10 bg-white text-[#186F65] font-bold text-base font-worksans justify-center rounded-md hover:bg-[#186F65] hover:text-white"
+                        onclick="window.location='{{ route('register') }}'">
+                        {{ __('DAFTAR') }}
+                    </button>
                 </div>
             </div>
         </div>
