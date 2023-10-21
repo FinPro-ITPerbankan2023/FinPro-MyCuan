@@ -18,7 +18,7 @@
                 </div>
 
                 <!-- deskripsi -->
-                <div class="flex mb-4 text-sm text-white text-center mt-4 text-[16px]">
+                <div class="flex mx-auto text-sm text-white text-center mt-4 text-[16px]">
                     {{ __('Masukan alamat email yang telah terdaftar untuk menerima email reset kata sandi') }}
                 </div>
 
@@ -33,7 +33,15 @@
                         </div>
                         <!-- alert email -->
                         <x-input-error :messages="$errors->get('email')" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
+
+                        <!-- Session Status alert-->
+                        @if (session('status'))
+                        <div class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-green-600 border-green-800 px-4 py-3 rounded relative">
+                            {{ session('status') }}
+                        </div>
+                        @endif
                     </div>
+
 
                     <!-- button kirim -->
                     <div class="flex flex-col w-3/4 mt-6 mx-auto justify-center">
@@ -41,14 +49,6 @@
                             {{ __('Kirim') }}
                         </x-button>
                     </div>
-
-
-                    <!-- Session Status alert-->
-                    @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-green-600 border-green-800 px-4 py-3 rounded relative">
-                        {{ session('status') }}
-                    </div>
-                    @endif
 
                 </form>
 </x-guest-layout>
