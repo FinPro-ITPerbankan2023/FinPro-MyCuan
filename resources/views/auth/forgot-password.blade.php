@@ -28,23 +28,24 @@
                     <!-- form email -->
                     <div class="w-3/4 mt-10 mx-auto">
                         <x-input-label class="text-white text-xl font-poppins dark:text-white" for="email" value="{{ __('Email')}}" />
-                        <div class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
+                        <div class="flex flex-row items-center w-full bg-white rounded-md hover:border-sky-600 border-transparent border-2 mt-2 ">
                             <x-input name="email" type="email" id="email" class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukan alamat email Anda') }}" required autocomplete="username" :value="old('email')" />
                         </div>
                         <!-- alert email -->
-                        <x-input-error :messages="$errors->get('email')" class="mt-2 bg-white" />
+                        <x-input-error :messages="$errors->get('email')" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
                     </div>
 
                     <!-- button kirim -->
                     <div class="flex flex-col w-3/4 mt-6 mx-auto justify-center">
-                        <x-button class="justify-center">
+                        <x-button class="justify-center hover:border-sky-600 ">
                             {{ __('Kirim') }}
                         </x-button>
                     </div>
 
+
                     <!-- Session Status alert-->
                     @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400 justify-center text-center mt-5">
+                    <div class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-green-600 border-green-800 px-4 py-3 rounded relative">
                         {{ session('status') }}
                     </div>
                     @endif
