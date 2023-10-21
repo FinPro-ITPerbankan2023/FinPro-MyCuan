@@ -81,7 +81,7 @@
 
                     <button
                         class="w-full h-10 bg-white text-[#186F65] font-bold text-base font-worksans justify-center rounded-md hover:bg-[#186F65] hover:text-white"
-                        onclick="window.location='{{ route('register') }}'">
+                        onclick="window.location='{{ route('register-role') }}'">
                         {{ __('DAFTAR') }}
                     </button>
                 </div>
