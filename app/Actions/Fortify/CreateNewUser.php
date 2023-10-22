@@ -26,7 +26,6 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
             'phone_number' => ['required', 'string'],
-            'role' => ['required', 'string'],
         ];
 
 // Check the role and add additional validation rules accordingly
@@ -43,7 +42,7 @@ class CreateNewUser implements CreatesNewUsers
         $user = User::create([
             'name' => $input['name'] ?? null,
             'email' => $input['email'],
-            'role' => $input['role'],
+            'role_id' => $input['role_id'],
             'password' => Hash::make($input['password']),
         ]);
 
