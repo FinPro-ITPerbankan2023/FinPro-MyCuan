@@ -9,12 +9,14 @@
                 <img class="w-3/4 h-3/4 ml-16" src="{{asset('assets/img/MyCuan_Image.png')}}" alt="Desain MyCuan">
             </div>
         </div>
-        <div class="w-1/2 bg-[#13A89E] max-h-full ">
+
+        <!-- Body here -->
+        <div class="w-1/2 bg-[#13A89E] max-h-full grid justify-items-center">
             <div class="flex flex-col w-3/5 mx-auto mt-2 justify-center">
 
                 <!-- judul -->
                 <div class="flex mx-auto">
-                    <h1 class="text-white mt-28 font-bold font-poppins text-3xl text-center ">Lupa Kata Sandi</h1>
+                    <h1 class="text-white font-bold font-poppins text-3xl text-center ">Lupa Kata Sandi</h1>
                 </div>
 
                 <!-- deskripsi -->
@@ -45,7 +47,7 @@
 
                     <!-- button kirim -->
                     <div class="flex flex-col w-3/4 mt-6 mx-auto justify-center">
-                        <x-button class="justify-center hover:border-sky-600 bg-white dark:bg-white dark:text-black text-black">
+                        <x-button class="justify-center dark:text-black text-black dark:bg-white bg-white">
                             {{ __('Kirim') }}
                         </x-button>
                     </div>
