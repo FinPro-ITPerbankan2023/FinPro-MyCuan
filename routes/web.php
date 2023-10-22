@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\Lender\LenderController;
 use App\Http\Controllers\RegisterRoleController;
 use App\Http\Controllers\Borrower\BorrowerController;
@@ -40,4 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
     });
 });
 
+
+Route::get('file-upload', [ FileUploadController::class, 'getFileUploadForm' ])->name('get.fileupload');
+Route::post('file-upload', [ FileUploadController::class, 'store' ])->name('store.file');
 
