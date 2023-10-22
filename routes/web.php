@@ -1,10 +1,9 @@
 <?php
 
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Lender\LenderController;
 use App\Http\Controllers\RegisterRoleController;
-use App\Http\Controllers\Seller\SellerController;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Borrower\BorrowerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,17 +28,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
 
 Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
 Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
-Route::group(['middleware' => 'auth'], function() {
-    Route::group(['middleware' => 'role:user', 'prefix' => 'user', 'as' => 'user.'], function() {
-        Route::resource('dashboard', UserController::class);
-    });
-    Route::group(['middleware' => 'role:seller', 'prefix' => 'seller', 'as' => 'seller.'], function() {
-        Route::resource('dashboard', SellerController::class);
-    });
-    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
-        Route::resource('dashboard', AdminController::class);
-    });
+Route::get('/register-lender', [RegisterRoleController::class, 'RegisterLenderPage'])->name('register-lender');
 
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::group(['middleware' => 'role:lender', 'prefix' => 'lender', 'as' => 'lender.'], function() {
+        Route::resource('dashboard', BorrowerController::class);
+    });
+    Route::group(['middleware' => 'role:borrower', 'prefix' => 'borrower', 'as' => 'borrower.'], function() {
+        Route::resource('dashboard', LenderController::class);
+    });
 });
 
 

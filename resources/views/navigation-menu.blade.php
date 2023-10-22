@@ -16,21 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @can('manage-users')
-                        <x-nav-link href="{{ route('admin.dashboard.index') }}" :active="request()->routeIs('admin.dashboard.index')">
-                            {{ __('Admin Dashboard') }}
+
+                    @if (auth()->user()->role_id == 1)
+                        <x-nav-link href="{{ route('lender.dashboard.index') }}" :active="request()->routeIs('lender.dashboard.index')">
+                            {{ __('Lender Dashboard') }}
                         </x-nav-link>
                     @endif
 
                     @if (auth()->user()->role_id == 2)
-                        <x-nav-link href="{{ route('seller.dashboard.index') }}" :active="request()->routeIs('seller.dashboard.index')">
-                            {{ __('Seller Dashboard') }}
-                        </x-nav-link>
-                    @endif
-
-                    @if (auth()->user()->role_id == 3)
-                        <x-nav-link href="{{ route('user.dashboard.index') }}" :active="request()->routeIs('user.dashboard.index')">
-                            {{ __('User Dashboard') }}
+                        <x-nav-link href="{{ route('borrower.dashboard.index') }}" :active="request()->routeIs('borrower.dashboard.index')">
+                            {{ __('Borrower Dashboard') }}
                         </x-nav-link>
                     @endif
                 </div>

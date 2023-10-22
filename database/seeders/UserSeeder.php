@@ -17,29 +17,22 @@ class UserSeeder extends Seeder
 {
         DB::table('users')->insert([
         // Admin Seeder Data
-        [
-            'name' =>'Admin',
-            'email'=>'admin@site.com',
-            'email_verified_at' =>  now(),
-            'password'=>Hash::make('12345678'),
-            'role_id'=>'1',
-        ],
 
         // Agent Seeder Data
         [
-            'name' =>'Seller',
+            'name' =>'Lender',
             'email_verified_at' =>  now(),
-            'email'=>'seller@site.com',
-            'password'=>Hash::make('12345678'),
-            'role_id'=>'2',
+            'email'=>'lender@site.com',
+            'password'=>Hash::make('password'),
+            'role_id'=>'1',
         ],
         // Agent Seeder Data
         [
-            'name' =>'User',
-            'email'=>'user@site.com',
+            'name' =>'Borrower',
             'email_verified_at' =>  now(),
-            'password'=>Hash::make('12345678'),
-            'role_id'=>'3',
+            'email'=>'borrower@site.com',
+            'password'=>Hash::make('password'),
+            'role_id'=>'2',
         ],
 
     ]);
