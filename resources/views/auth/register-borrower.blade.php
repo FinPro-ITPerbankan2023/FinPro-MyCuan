@@ -30,7 +30,7 @@
             </div>
 
 
-            <input type="hidden" name="role" value="borrower">
+            <input type="hidden" name="role_id" value="1">
 
         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
