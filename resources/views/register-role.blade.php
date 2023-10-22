@@ -20,18 +20,21 @@
                     <h1 class="text-white font-poppins text-base">Saya ingin mulai memberi dana</h1>
                     <button
                         class="w-full h-10 mt-2 bg-[#186F65] text-white font-bold text-base font-worksans justify-center rounded-md hover:bg-white hover:text-[#186F65]"
-                        onclick="window.location=''">
+                        onclick="window.location='{{ route('register', ['role' => 'lender']) }}'">
                         {{ __('PEMBERI DANA') }}
                     </button>
                 </div>
+
                 <div class="mt-16 w-4/6">
                     <h1 class="text-white font-poppins text-base">Saya ingin mencari modal usaha</h1>
                     <button
                         class="w-full h-10 mt-2 bg-white text-[#186F65] font-bold text-base font-worksans justify-center rounded-md hover:bg-[#186F65] hover:text-white"
-                        onclick="window.location=''">
+                        onclick="window.location='{{ route('register-borrower', ['role' => 'borrower']) }}'">
                         {{ __('PENERIMA DANA') }}
                     </button>
                 </div>
+
+
             </div>
         </div>
 </x-guest-layout>
