@@ -28,15 +28,6 @@ class CreateNewUser implements CreatesNewUsers
             'phone_number' => ['required', 'string'],
         ];
 
-// Check the role and add additional validation rules accordingly
-        if ($input['role'] === 'borrower') {
-            $validatorRules['name'] = ['sometimes', 'nullable', 'string'];
-        } elseif ($input['role'] === 'lender') {
-            $validatorRules['name'] = ['required', 'string'];
-            $validatorRules['identity_number'] = ['required', 'string'];
-        }
-
-
         Validator::make($input, $validatorRules)->validate();
 
         $user = User::create([
@@ -50,11 +41,9 @@ class CreateNewUser implements CreatesNewUsers
             'phone_number' => $input['phone_number'],
         ]);
 
-        if ($input['role'] === 'lender') {
-            $user->userIdentity()->create([
-                'identity_number' => $input['identity_number'],
-            ]);
-        }
+        $user->userIdentity()->create([
+            'identity_number' => $input['identity_number'] ?? null,
+        ]);
 
         return $user;
     }
