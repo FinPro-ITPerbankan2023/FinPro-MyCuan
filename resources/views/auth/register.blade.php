@@ -22,6 +22,11 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <style>
+                .letter-spacing-input {
+                    letter-spacing: 2px; 
+                }
+            </style>
 
             <div class="mt-4">
                 <x-label class="text-white text-xl font-poppins dark:text-white" for="email" value="{{ __('Email')}}" />
@@ -63,14 +68,14 @@
         </div>
 
         <div class="mt-4">
-            <x-label class="text-white text-xl font-poppins dark:text-white" for="phone_number" value="{{ __('No. Phone') }}" />
+            <x-label class="text-white text-xl font-poppins dark:text-white" for="phone_number" value="{{ __('No. Telepon') }}" />
             <div class="relative flex items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
             <x-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" class="w-full py-2,5 ml-0 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
             placeholder="{{ __('Masukkan Telepon Anda') }}" :value="old('phone_number')" required />
             </div>
         </div>
 
-            <div>
+            <div class="mt-4">
                 <x-label class="text-white text-xl font-poppins dark:text-white" for="name" value="{{ __('Nama Lengkap') }}" />
                 <div class="relative flex items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name"
@@ -90,6 +95,17 @@
                 </div>
             </div>
 
+            
+            <p class="mt-4 text-white text-lg">Untuk melanjutkan pendaftaran di MyCuan, kami membutuhkan persetujuan Anda pada dokumen di bawah ini:</p>
+
+            <div class="mt-4">
+                <div class="flex items-center">
+                    <div class="ml-2 text-white">
+                        {!! __('<strong>Syarat & Ketentuan</strong>') !!}
+                    </div>
+                </div>
+            </div>            
+
 
         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
@@ -97,10 +113,10 @@
                         <div class="flex items-center">
                             <x-checkbox name="terms" id="terms" required />
 
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('Privacy Policy').'</a>',
+                            <div class="ml-2, text-white">
+                                {!! __('saya telah :membaca and :menyetujui semua ketentuan di atas', [
+                                        'membaca' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-white-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('membaca').'</a>',
+                                        'menyetujui' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-white-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('menyetujui').'</a>',
                                 ]) !!}
                             </div>
                         </div>
@@ -108,14 +124,10 @@
                 </div>
             @endif
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
+            <div class="mt-4">
+                <button class="w-full mt-3 h-10 bg-[#186F65] text-white font-bold text-base font-worksans justify-center rounded-md hover:bg-white hover:text-[#186F65]">
                     {{ __('DAFTAR') }}
-                </x-button>
+                </button>
             </div>
         </form>
 
