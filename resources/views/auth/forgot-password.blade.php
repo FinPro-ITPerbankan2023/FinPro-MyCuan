@@ -24,6 +24,7 @@
                     {{ __('Masukan alamat email yang telah terdaftar untuk menerima email reset kata sandi') }}
                 </div>
 
+                <!-- router -->
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
 
@@ -47,9 +48,9 @@
 
                     <!-- button kirim -->
                     <div class="flex flex-col w-3/4 mt-6 mx-auto justify-center">
-                        <x-button class="justify-center dark:text-black text-black dark:bg-white bg-white">
+                        <button class="justify-center dark:text-black text-black dark:bg-white bg-white py-3 rounded-md hover:bg-gray-200 font-poppins text-bold text-relative">
                             {{ __('Kirim') }}
-                        </x-button>
+                        </button>
                     </div>
 
                 </form>
