@@ -11,15 +11,14 @@ class UserDetail extends Model
 
     protected $fillable = [
         'user_id',
-        'user_identity',
         'date_birth',
-        'place_birth',
-        'address_home',
+        'birth_place',
+        'street',
         'province',
         'city',
         'district',
         'phone_number',
-        'mother_maiden',
+        'post_code',
     ];
 
     public function user() : \Illuminate\Database\Eloquent\Relations\BelongsTo

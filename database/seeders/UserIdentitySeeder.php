@@ -14,7 +14,6 @@ class UserIdentitySeeder extends Seeder
         foreach (range(1, 5) as $index) {
             DB::table('user_identity')->insert([
                 'user_id' => $index,
-                'identity_type' => 'KTP',
                 'identity_number' => rand(1000000000000000, 9999999999999999),
                 'identity_image' => $faker->imageUrl(100, 100, 'people', true),
                 'selfie_image' => $faker->imageUrl(100, 100, 'people', true),
@@ -24,4 +23,3 @@ class UserIdentitySeeder extends Seeder
         }
     }
 }
-

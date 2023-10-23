@@ -17,6 +17,7 @@ class RegisterUserIndentityBorrowController extends Controller
         ]);
         $numberIdentity = 1;
         $userIdentity = UserIdentity::create([
+            'user_id' => $request->user()->id,
             'user_identity' => $numberIdentity,
             'identity_number' => $numberIdentity,
             'identity_image' => 'oke',

@@ -18,13 +18,15 @@ class UserDetailSeeder extends Seeder
         $faker = Faker::create();
 
         foreach (range(1, 5) as $index) {
-            DB::table('user_detail')->insert([
+            DB::table('user_details')->insert([
                 'user_id' => $index,
                 'date_birth' => $faker->date,
-                'address' => $faker->address,
+                'birth_place' => $faker->name,
+                'street' => $faker->streetAddress,
+                'district' => $faker->streetName,
+                'city' => $faker->city,
+                'province' => $faker->city,
                 'phone_number' => $faker->phoneNumber,
-                'mother_maiden' => $faker->name,
-                'user_identity' => $index,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
