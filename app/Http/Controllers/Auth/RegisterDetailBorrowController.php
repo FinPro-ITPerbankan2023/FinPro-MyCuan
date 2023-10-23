@@ -26,8 +26,8 @@ class RegisterDetailBorrowController extends Controller
             'province' => 'required|string|max:100',
             'city' => 'required|string|max:100',
             'district' => 'required|string|max:100',
-            'phone_number' => 'required|integer|min:5|max:13',
-            'post_code' => 'required|integer|max:255',
+            'phone_number' => 'required|numeric',
+            'post_code' => 'required|numeric',
         ]);
         try {
             $user = UserDetail::create([
