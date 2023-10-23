@@ -3,9 +3,7 @@
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UserLenderRegistrationController;
 use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\UserIdentityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::post('/register', [CreateNewUser::class, 'register']);
+
+Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'getBusiness']);
+Route::post('/business', [\App\Http\Controllers\BusinessController::class, 'InsertTable']);
