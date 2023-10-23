@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('business_ownership');
             $table->string('business_duration');
             $table->integer('income_avg');
+            $table->string('business_permit_image');
+            $table->string('business_place_image');
+            $table->string('business_product_image');
             $table->timestamps();
         });
     }

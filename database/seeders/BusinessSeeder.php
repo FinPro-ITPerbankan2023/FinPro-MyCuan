@@ -25,6 +25,9 @@ class BusinessSeeder extends Seeder
                 'business_ownership' => $faker->name,
                 'business_duration' => $faker->streetName,
                 'income_avg' => $faker->numberBetween(1000, 3000000),
+                'business_permit_image' => $faker->imageUrl,
+                'business_place_image' => $faker->imageUrl,
+                'business_product_image' => $faker->imageUrl,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

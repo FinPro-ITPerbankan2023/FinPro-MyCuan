@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Http\Controllers\FileUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
@@ -25,3 +26,6 @@ Route::post('/register', [CreateNewUser::class, 'register']);
 
 Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'getBusiness']);
 Route::post('/business', [\App\Http\Controllers\BusinessController::class, 'InsertTable']);
+
+Route::get('/file-upload', [ FileUploadController::class, 'getFileUploadForm' ])->name('get.fileupload');
+Route::post('/file-upload', [ FileUploadController::class, 'store' ])->name('store.file');

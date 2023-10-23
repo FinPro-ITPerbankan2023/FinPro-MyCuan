@@ -19,6 +19,9 @@ class Business extends Model
         'business_ownership',
         'business_duration',
         'income_avg',
+        'business_permit_image',
+        'business_place_image',
+        'business_product_image'
     ];
 
     public function user(): BelongsTo
