@@ -1,7 +1,7 @@
 <?php
 
 use App\Actions\Fortify\CreateNewUser;
-use App\Http\Controllers\UserBorrowersDetailController;
+use App\Http\Controllers\FileUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UserController;
@@ -20,9 +20,15 @@ use \App\Http\Controllers\UserController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+//user common
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::post('/register', [CreateNewUser::class, 'register']);
-//register Detail Borrowers
-Route::post('/register/userDetail', [\App\Http\Controllers\Auth\UserBorrowersDetailController::class,'store'] );
-Route::get('/register/userDetail', [\App\Http\Controllers\Auth\UserBorrowersDetailController::class,'getAll']);
+//user detail borrower
+Route::post('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'store']);
+Route::get('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'getAll']);
+
+Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'getBusiness']);
+Route::post('/business', [\App\Http\Controllers\BusinessController::class, 'InsertTable']);
+
+Route::get('/file-upload', [ FileUploadController::class, 'getFileUploadForm' ])->name('get.fileupload');
+Route::post('/file-upload', [ FileUploadController::class, 'store' ])->name('store.file');
