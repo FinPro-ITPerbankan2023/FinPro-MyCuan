@@ -34,7 +34,7 @@
                                 class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                 placeholder="{{ __('Silakan masukan alamat email Anda') }}" required
                                 autocomplete="username" :value="old('email')" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-error for="email" class="mt-2" />
                         </div>
                     </div>
                     <div class="w-8/12 mt-12 mx-auto">
@@ -51,7 +51,7 @@
                             <img class="w-6 h-6 mr-2 hidden" src="{{asset('assets/img/eye-show.png')}}"
                                 alt="Show Password" id="eye-show" onclick="show()">
                         </div>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        <x-input-error for="password" class="mt-2" />
                     </div>
                     <div class="flex flex-wrap w-8/12 mt-6 mx-auto">
                         <div class="w-1/2 content-center">

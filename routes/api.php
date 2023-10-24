@@ -30,5 +30,7 @@ Route::get('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerContro
 Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'getBusiness']);
 Route::post('/business', [\App\Http\Controllers\BusinessController::class, 'InsertTable']);
 
-Route::get('/file-upload', [ FileUploadController::class, 'getFileUploadForm' ])->name('get.fileupload');
-Route::post('/file-upload', [ FileUploadController::class, 'store' ])->name('store.file');
+Route::get('/edit-profile-lender', [\App\Http\Controllers\Lender\EditProfileLender::class, 'retrieveData']);
+Route::put('/edit-profile-lender', [\App\Http\Controllers\Lender\EditProfileLender::class, 'editData']);
+
+
