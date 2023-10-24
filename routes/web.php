@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\Lender\LenderController;
 use App\Http\Controllers\RegisterRoleController;
@@ -38,6 +39,9 @@ Route::group(['middleware' => 'auth'], function() {
     });
     Route::group(['middleware' => 'role:borrower', 'prefix' => 'borrower', 'as' => 'borrower.'], function() {
         Route::resource('dashboard', LenderController::class);
+    });
+    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
+        Route::resource('dashboard', AdminController::class);
     });
 });
 
