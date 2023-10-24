@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\UserDetail;
+use App\Models\UserIdentity;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
@@ -18,6 +20,8 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+   
     public function definition(): array
     {
         return [
@@ -28,6 +32,7 @@ class UserFactory extends Factory
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
+            'role_id' => $this->faker->numberBetween(1,2),
             'profile_photo_path' => null,
             'current_team_id' => null,
         ];

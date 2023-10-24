@@ -2,10 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\UserDetail;
+use Database\Factories\UserIdentityFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -15,26 +19,6 @@ class UserSeeder extends Seeder
 
     public function run(): void
 {
-        DB::table('users')->insert([
-        // Admin Seeder Data
-
-        // Agent Seeder Data
-        [
-            'name' =>'Lender',
-            'email_verified_at' =>  now(),
-            'email'=>'lender@site.com',
-            'password'=>Hash::make('password'),
-            'role_id'=>'1',
-        ],
-        // Agent Seeder Data
-        [
-            'name' =>'Borrower',
-            'email_verified_at' =>  now(),
-            'email'=>'borrower@site.com',
-            'password'=>Hash::make('password'),
-            'role_id'=>'2',
-        ],
-
-    ]);
+        User::factory()->has(UserDetail::factory())->count(10)->create();
 }
 }

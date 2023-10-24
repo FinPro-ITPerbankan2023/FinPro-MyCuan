@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\UserIdentity;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -48,6 +49,8 @@ class UserBorrowersDetailController extends Controller
                 'account_name' => $request->account_name,
                 'bank_name' => $request->bank_name,
             ]);
+
+
             return response()->json(['data' => $user],201);
         }
         catch (Exception $e){
