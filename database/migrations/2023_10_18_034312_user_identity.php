@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_identity', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->bigInteger('identity_number');
+            $table->bigInteger('identity_number')->nullable();
             $table->longText('identity_image')->nullable();
             $table->longText('selfie_image')->nullable();
             $table->timestamps();

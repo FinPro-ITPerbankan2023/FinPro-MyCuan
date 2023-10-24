@@ -12,6 +12,10 @@ class RegisterRoleController extends Controller
     }
 
     public function RegisterBorrowerPage(){
-        return view('auth.register-borrower');
+        return view('borrower.auth.register');
+    }
+
+    public function RegisterLenderPage(){
+        return view('lender.auth.register');
     }
 }
