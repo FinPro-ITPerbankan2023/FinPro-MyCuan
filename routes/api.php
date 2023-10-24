@@ -1,11 +1,10 @@
 <?php
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Http\Controllers\UserBorrowersDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UserLenderRegistrationController;
 use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\UserIdentityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::post('/register', [CreateNewUser::class, 'register']);
+//register Detail Borrowers
+Route::post('/register/userDetail', [\App\Http\Controllers\Auth\UserBorrowersDetailController::class,'store'] );
+Route::get('/register/userDetail', [\App\Http\Controllers\Auth\UserBorrowersDetailController::class,'getAll']);
