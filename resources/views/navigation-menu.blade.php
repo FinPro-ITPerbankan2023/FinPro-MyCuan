@@ -28,6 +28,13 @@
                             {{ __('Borrower Dashboard') }}
                         </x-nav-link>
                     @endif
+
+                    @if (auth()->user()->role_id == 3)
+                        <x-nav-link href="{{ route('admin.dashboard.index') }}" :active="request()->routeIs('admin.dashboard.index')">
+                            {{ __('Admin Dashboard') }}
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 

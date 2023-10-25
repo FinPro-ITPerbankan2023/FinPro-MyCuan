@@ -29,5 +29,15 @@ class UsersSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
+
+        DB::table('users')->insert([
+            'name' => 'Administrator',
+            'role_id' => 3,
+            'email' => 'admin@mycuan.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
