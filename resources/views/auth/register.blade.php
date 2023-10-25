@@ -11,11 +11,11 @@
 
         </div>
 
-        <div class="w-1/2 bg-[#13A89E] max-h-full ">
+        <div class="w-1/2 bg-[#13A89E] max-h-full">
             <div class="flex flex-col w-3/4 h-3/4 mx-auto mt-2 content-center">
-        <div class="w-8/12 mx-auto text-center">
-            <h1 class="text-white mt-28 font-bold font-poppins text-3xl">Register</h1>
-        </div>
+                <div class="w-8/12 mx-auto text-center">
+                    <h1 class="text-white mt-16 font-bold font-poppins text-3xl">Register</h1>
+                </div>
 
 
         <x-validation-errors class="mb-4" />
