@@ -1,11 +1,13 @@
 <?php
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\Lender\EditProfileLender;
+use App\Http\Controllers\Marketplace\LoanListsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UserLenderRegistrationController;
 use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\UserIdentityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::post('/register', [CreateNewUser::class, 'register']);
+
+Route::get('/business', [BusinessController::class, 'getBusiness']);
+Route::post('/business', [BusinessController::class, 'InsertTable']);
+
+Route::get('/edit-profile-lender', [EditProfileLender::class, 'retrieveData']);
+Route::put('/edit-profile-lender', [EditProfileLender::class, 'editData']);
+
+Route::get('/marketplace', [LoanListsController::class, 'retrieveLoanList']);
+
+
+

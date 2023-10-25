@@ -30,7 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'role',
+        'role_id',
     ];
 
     /**
@@ -73,6 +73,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
 
         return $this->hasOne(UserIdentity::class,);
+
+    }
+
+    public function Business(): HasOne
+    {
+
+        return $this->hasOne(Business::class,);
+
+    }
+    public function Loans(): HasOne
+    {
+
+        return $this->hasOne(Loans::class,);
 
     }
 
