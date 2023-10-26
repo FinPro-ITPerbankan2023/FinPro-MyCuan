@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\RegisterPenerimaDanaController;
-use App\Http\Controllers\RegisterPenerimaDatadiriController;
+
 use App\Http\Controllers\RegisterRoleController;
+use App\Http\Controllers\Borrower\BorrowerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,20 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        return view('dashboard');})->name('dashboard');
 });
 
 Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
 Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
-Route::get('/register-penerima-datadiri', [RegisterPenerimaDatadiriController::class, 'registerPenerimaDatadiri'])->name('register-penerima-datadiri');
-Route::get('/register-penerima-dana', [RegisterPenerimaDanaController::class, 'registerpenerimadana'])->name('register-penerima-dana');
 
 
 

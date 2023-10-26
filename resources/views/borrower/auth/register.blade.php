@@ -8,12 +8,7 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
-
+            <h1 class="text-center"> Peminjam Dana</h1>
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
@@ -35,12 +30,7 @@
             </div>
 
 
-            <div class="mt-4">
-                <x-label for="identity_number" value="{{ __('NIK KTP') }}" />
-                <x-input id="identity_number" class="block mt-1 w-full" type="text" name="identity_number" :value="old('identity_number')" required />
-            </div>
-
-            <input type="hidden" name="role" value="lender">
+            <input type="hidden" name="role_id" value="2">
 
         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
