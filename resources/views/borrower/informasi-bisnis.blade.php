@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <!-- body -->
+        <!-- body nya-->
         <div class="flex flex-col pb-20 px-20">
             <div class="bg-white rounded-lg p-10 shadow-xl">
 
