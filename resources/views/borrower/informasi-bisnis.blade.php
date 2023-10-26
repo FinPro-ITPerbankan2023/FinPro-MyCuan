@@ -89,7 +89,7 @@
                             @endif
                         </div>
 
-                        <!-- Lama usaha -->
+                        <!-- Lama usaha ini-->
                         <div class="w-3/4 mx-auto">
                             <x-input-label class="text-black text-xl font-poppins dark:text-black" for="email" value="{{ __('Lama Usaha')}}" />
                             <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
