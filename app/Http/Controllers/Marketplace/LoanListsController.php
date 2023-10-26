@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Marketplace;
 
 use App\Http\Controllers\Controller;
 use App\Models\Business;
+use App\Models\Loans;
 use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\UserIdentity;
@@ -29,14 +30,17 @@ class LoanListsController extends Controller
                 ->where('user_id', $userId)
                 ->first();
 
+            $loanData = Loans::select('amount')
+                ->where('borrower_id', $userId)
+                ->first();
+
             $response = [
                 'name' => $userData->name,
                 'business_name' => $businessData->business_name,
                 'field_of_business' => $businessData->field_of_business,
                 'city' => $detailData->city,
                 'province' => $detailData->province,
-
-
+                'amount' => $loanData->amount,
             ];
 
 

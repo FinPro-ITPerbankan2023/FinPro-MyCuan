@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\Loans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,6 +21,8 @@ class BusinessController extends Controller
             'business_ownership' => 'required|string',
             'business_duration' => 'required|string',
             'income_avg' => 'required|integer',
+            'amount' => 'required|integer',
+
         ]);
 
         // Upload business_permit_image
@@ -53,7 +56,14 @@ class BusinessController extends Controller
             'business_product_image' => $productUrl,
         ]);
 
-        return response()->json(['users' => $userDetail], 201);
+        $applyLoan = Loans::create([
+            'borrower_id' => $request->user_id,
+            'amount' => $request->amount,
+            'loan_status' => 'pending',
+            'application_date' => now(),
+        ]);
+
+        return response()->json(['users' => $userDetail, 'loans' => $applyLoan], 201);
     }
 
 
