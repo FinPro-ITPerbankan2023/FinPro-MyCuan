@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterPenerimaDanaController;
 use App\Http\Controllers\RegisterPenerimaDatadiriController;
 use App\Http\Controllers\RegisterRoleController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::middleware([
 Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
 Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
 Route::get('/register-penerima-datadiri', [RegisterPenerimaDatadiriController::class, 'registerPenerimaDatadiri'])->name('register-penerima-datadiri');
+Route::get('/register-penerima-dana', [RegisterPenerimaDanaController::class, 'registerpenerimadana'])->name('register-penerima-dana');
 
 
 
