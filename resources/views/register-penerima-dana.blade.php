@@ -27,7 +27,6 @@
                                 class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                 placeholder="{{ __('Masukan alamat email') }}" required autocomplete="username"
                                 :value="old('email')" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                     </div>
                     <div class="w-8/12 mt-6 mx-auto">
@@ -43,7 +42,6 @@
                             <img class="w-6 h-6 mr-2 hidden" src="{{asset('assets/img/eye-show.png')}}"
                                 alt="Show Password" id="eye-show" onclick="show()">
                         </div>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <div class="w-8/12 mt-6 mx-auto">
                         <x-input-label class="text-white text-xl font-poppins dark:text-white" for="password"
@@ -59,7 +57,6 @@
                             <img class="w-6 h-6 mr-2 hidden" src="{{asset('assets/img/eye-show.png')}}"
                                 alt="Show Password" id="eye-show-confirm" onclick="showconfirm()">
                         </div>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <div class="w-8/12 mt-6 mx-auto">
                         <x-input-label class="text-white text-xl font-poppins dark:text-white" for="password"
@@ -69,7 +66,6 @@
                             <x-input id="phone" type="tel" placeholder="{{ __('Masukan nomor telepon') }} " name="phone"
                                 class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" />
                         </div>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <div class="flex flex-col w-8/12 mt-6 mx-auto text-white font-poppins">
                         <div class="w-9/12 ">
@@ -83,7 +79,6 @@
                         <div class="flex flex-row w-9/12 mt-5">
                             <x-input id="checkbox-agree" type="checkbox" class="mt-1.5" onchange="enablebutton()" />
                             <p class="text-lg ml-4">Saya telah membaca dan menyetujui semua ketentuan di atas.</p>
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                     </div>
                     <div class="flex flex-col w-8/12 mt-6 mx-auto justify-center">
@@ -103,7 +98,7 @@
         });
 
         buttonagree = document.getElementById("button-register");
-        var checkboxagree = document/getElementById("checkbox-agree");
+        var checkboxagree = document.getElementById("checkbox-agree");
         buttonagree.disabled = true;
         checkboxagree.onclick = function () {
             if (checkboxagree.checked) {
