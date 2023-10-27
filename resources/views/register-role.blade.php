@@ -20,7 +20,7 @@
                     <h1 class="text-white font-poppins text-base">Saya ingin mulai memberi dana</h1>
                     <button
                         class="w-full h-10 mt-2 bg-[#186F65] text-white font-bold text-base font-worksans justify-center rounded-md hover:bg-white hover:text-[#186F65]"
-                        onclick="window.location='{{ route('register-lender') }}'">
+                        onclick="window.location='{{ route('register', ['role' => 'lender']) }}'">
                         {{ __('PEMBERI DANA') }}
                     </button>
                 </div>
