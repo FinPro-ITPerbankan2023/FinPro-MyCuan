@@ -36,7 +36,7 @@
                 class="w-full py-2.5 ml-0 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                 placeholder="{{ __('Masukan Alamat Email Anda') }}" required
                 autocomplete="username" :value="old('email')" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-error :for="$errors->get('email')" class="mt-2" />
                 </div>
             </div>
 
