@@ -18,24 +18,44 @@ class UsersSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 5) as $index) {
-            DB::table('users')->insert([
-                'name' => $faker->name,
-                'role_id' => $faker->numberBetween(1, 2),
-                'email' => $faker->unique()->safeEmail,
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+//        foreach (range(1, 5) as $index) {
+//            DB::table('users')->insert([
+//                'name' => $faker->name,
+//                'role_id' => $faker->numberBetween(1, 2),
+//                'email' => $faker->unique()->safeEmail,
+//                'email_verified_at' => now(),
+//                'password' => Hash::make('password'),
+//                'created_at' => now(),
+//                'updated_at' => now(),
+//            ]);
+//        }
+
+        DB::table('users')->insert([
+            'name' => 'Lender',
+            'role_id' => 1,
+            'email' => 'lender@mycuan.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('r4ngk1ng'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Borrower',
+            'role_id' => 2,
+            'email' => 'borrower@mycuan.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('r4ngk1ng'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         DB::table('users')->insert([
             'name' => 'Administrator',
             'role_id' => 3,
             'email' => 'admin@mycuan.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'password' => Hash::make('r4ngk1ng'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

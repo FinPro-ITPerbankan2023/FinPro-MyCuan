@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens;
     use HasFactory;
@@ -88,5 +89,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Loans::class,);
 
     }
+
+    public function canAccessPanel(Panel|\Filament\Panel $panel): bool
+    {
+        return match ($panel->getId()) {
+            'admin' => $this->role_id === 3,
+            'borrower' => $this->role_id === 2,
+            'lender' => $this->role_id === 1,
+            default => true,
+        };
+    }
+
 
 }

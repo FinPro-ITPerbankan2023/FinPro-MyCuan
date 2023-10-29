@@ -17,10 +17,10 @@ class LoansSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 5) as $index) {
+        foreach (range(1, 3) as $index) {
             DB::table('loans')->insert([
                 'id' => $index,
-                'borrower_id' => $index,
+                'user_id' => $index,
                 'loan_status' => $faker->randomElement(['approved', 'pending', 'rejected']),
                 'amount' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1000, $max = 100000),
                 'loan_duration' => $faker->numberBetween($min = 1, $max = 12),
