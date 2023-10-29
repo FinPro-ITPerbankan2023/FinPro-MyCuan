@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class UserIdentityResource extends Resource
 {
@@ -71,10 +72,17 @@ class UserIdentityResource extends Resource
                 ]),
                 Tables\Actions\BulkAction::make('post')
                     ->action(function (Collection $records) {
-                        $records->each(function ($record) {
-                            // Assuming $record is an Eloquent model
-                            $dataToInsert = $record->toArray(); // Adjust this based on your requirements
+                        $authenticatedUser = Auth::user();
+
+                        $records->each(function ($record) use ($authenticatedUser) {
+                            $dataToInsert = $record->toArray();
+
+                            $dataToInsert['user_id'] = $authenticatedUser->id;
+
                             new_identity::create($dataToInsert);
+
+                            $record->delete();
+
                         });
                     })
             ])

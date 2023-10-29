@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('new_identity', function (Blueprint $table) {
             $table->id();
             $table->string('identity_number');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

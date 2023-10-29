@@ -47,7 +47,6 @@ class LenderPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Lender/Widgets'), for: 'App\\Filament\\Lender\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

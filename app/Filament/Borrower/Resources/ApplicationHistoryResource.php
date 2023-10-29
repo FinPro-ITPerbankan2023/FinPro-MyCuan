@@ -3,13 +3,12 @@
 namespace App\Filament\Borrower\Resources;
 
 use App\Filament\Borrower\Resources\ApplicationHistoryResource\Pages;
-use App\Filament\Borrower\Resources\ApplicationHistoryResource\RelationManagers;
-use App\Models\ApplicationHistory;
 use App\Models\Loans;
+use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
+use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +17,45 @@ class ApplicationHistoryResource extends Resource
 {
     protected static ?string $model = Loans::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $label = 'Riwayat Pengajuan';
+    protected static ?string $pluralLabel = 'Riwayat Pengajuan';
+    protected static ?string $breadcrumb = 'Riwayat Pengajuan';
+    protected static ?string $navigationLabel = 'Riwayat Pengajuan';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+                ->schema([
+                    Wizard::make([
+                        Wizard\Step::make('Identitas Peminjam')
+                            ->schema([
+                                Forms\Components\TextInput::make('user.name')
+                                    ->label('Nama Peminjam')
+                                    ->required()
+                            ]),
+                        Wizard\Step::make('Jumlah Dana')
+                            ->schema([
+                                Forms\Components\TextInput::make('amount')
+                                    ->label('Dana Yang Diajukan')
+                                    ->required()
+                            ]),
+                        Wizard\Step::make('Rekening Peminjam')
+                            ->schema([
+                                Forms\Components\TextInput::make('amount')
+                                    ->label('Nomor Rekening anda')
+                                    ->required()
+                            ]),
+                    ])
+                    ->skippable()
+                    ->columns([
+                        'sm' => 2,
+                    ])
+                    ->columnSpan([
+                        'sm' => 2,
+                    ])
+
+                ]);
+
     }
 
     public static function table(Table $table): Table
@@ -63,8 +93,8 @@ class ApplicationHistoryResource extends Resource
                     ->date()
                     ->sortable(),
 
-
-            ]);
+            ])
+            ->striped();
 
 
     }
@@ -73,6 +103,9 @@ class ApplicationHistoryResource extends Resource
     {
         return [
             'index' => Pages\ListApplicationHistories::route('/'),
+            'create' => Pages\CreateApplicationHistory::route('/create'),
+
         ];
     }
+
 }

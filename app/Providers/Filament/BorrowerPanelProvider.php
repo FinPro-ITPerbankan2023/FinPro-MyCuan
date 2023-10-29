@@ -26,8 +26,12 @@ class BorrowerPanelProvider extends PanelProvider
             ->id('borrower')
             ->path('borrower')
             ->login()
+            ->profile()
+            ->darkMode(false)
             ->passwordReset()
             ->emailVerification()
+            ->breadcrumbs(false)
+            ->sidebarCollapsibleOnDesktop()
             ->registration()
             ->colors([
                 'primary' => Color::Green,
@@ -40,7 +44,6 @@ class BorrowerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Borrower/Widgets'), for: 'App\\Filament\\Borrower\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Table;
 use Illuminate\Support\Collection;
+use Filament\Tables\Columns\ImageColumn;
+
 
 
 
@@ -61,6 +63,7 @@ class BusinessResource extends Resource
     {
         return $table
             ->columns([
+
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
@@ -75,9 +78,12 @@ class BusinessResource extends Resource
                 Tables\Columns\TextColumn::make('income_avg')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('business_permit_image'),
-                Tables\Columns\ImageColumn::make('business_place_image'),
-                Tables\Columns\ImageColumn::make('business_product_image'),
+                Tables\Columns\ImageColumn::make('business_permit_image')
+                    ->disk('s3'),
+                Tables\Columns\ImageColumn::make('business_place_image')
+                    ->disk('s3'),
+                Tables\Columns\ImageColumn::make('business_product_image')
+                    ->disk('s3'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -88,7 +94,6 @@ class BusinessResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -101,6 +106,7 @@ class BusinessResource extends Resource
                 BulkAction::make('delete')
                     ->action(fn (Collection $records) => $records->each->delete())
             ])
+            ->striped()
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
             ]);
@@ -109,7 +115,6 @@ class BusinessResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 

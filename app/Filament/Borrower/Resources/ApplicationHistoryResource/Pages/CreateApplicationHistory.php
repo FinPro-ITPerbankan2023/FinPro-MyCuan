@@ -9,4 +9,5 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateApplicationHistory extends CreateRecord
 {
     protected static string $resource = ApplicationHistoryResource::class;
+
 }
