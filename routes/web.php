@@ -30,6 +30,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
 Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
 Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
 Route::get('/register-penerima-datadiri', [RegisterPenerimaDatadiriController::class, 'registerPenerimaDatadiri'])->name('register-penerima-datadiri');
-Route::get('/register-penerima-dana', [RegisterPenerimaDanaController::class, 'registerpenerimadana'])->name('register-penerima-dana');
+// Route::get('/register-penerima-dana', [RegisterPenerimaDanaController::class, 'registerpenerimadana'])->name('register-penerima-dana');
 
 
