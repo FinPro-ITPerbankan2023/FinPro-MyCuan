@@ -13,7 +13,7 @@ class Loans extends Model
     protected $table = 'loans';
 
     protected $fillable = [
-        'borrower_id',
+        'user_id',
         'loan_status',
         'amount',
         'loan_duration',

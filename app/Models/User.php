@@ -90,6 +90,13 @@ class User extends Authenticatable implements FilamentUser
 
     }
 
+    public function BankDetail(): HasOne
+    {
+
+        return $this->hasOne(BankDetail::class,);
+
+    }
+
     public function canAccessPanel(Panel|\Filament\Panel $panel): bool
     {
         return match ($panel->getId()) {

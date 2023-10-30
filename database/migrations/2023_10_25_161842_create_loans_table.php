@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('loan_status');
             $table->integer('amount');
             $table->string('loan_duration')->nullable();
-            $table->date('application_date');
+            $table->dateTime('application_date');
             $table->date('approval_date')->nullable();
             $table->date('denied_date')->nullable();
             $table->timestamps();

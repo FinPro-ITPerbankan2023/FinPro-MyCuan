@@ -24,7 +24,7 @@ class LoansSeeder extends Seeder
                 'loan_status' => $faker->randomElement(['approved', 'pending', 'rejected']),
                 'amount' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1000, $max = 100000),
                 'loan_duration' => $faker->numberBetween($min = 1, $max = 12),
-                'application_date' => $faker->date(),
+                'application_date' => $faker->dateTime(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

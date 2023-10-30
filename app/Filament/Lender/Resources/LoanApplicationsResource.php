@@ -6,20 +6,27 @@ use App\Filament\Lender\Resources\LoanApplicationsResource\Pages;
 use App\Filament\Lender\Resources\LoanApplicationsResource\RelationManagers;
 use App\Models\LoanApplications;
 use App\Models\Loans;
+use App\Models\new_identity;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class LoanApplicationsResource extends Resource
 {
     protected static ?string $model = Loans::class;
 
     protected static ?string $modelLabel = 'Daftar Ajuan Pinjaman';
+
+    protected static ?string $pluralLabel = 'Daftar Ajuan Pinjaman';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -35,25 +42,27 @@ class LoanApplicationsResource extends Resource
 
     public static function table(Table $table): Table
     {
+
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->where('loan_status', 'Approved');
+            })
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('loan_status')
+                    ->badge()
+                    ->color('success'),
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('application_date')
-                    ->date()
+                    ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->numeric(
-                        decimalPlaces: 0,
-                        decimalSeparator: '.',
-                        thousandsSeparator: ',',
-                    )
+                    ->money('idr')
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -62,7 +71,23 @@ class LoanApplicationsResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+
                 ]),
+                Tables\Actions\BulkAction::make('Checkout')
+                    ->action(function (Collection $records) {
+                        $authenticatedUser = Auth::user();
+
+                        $records->each(function ($record) use ($authenticatedUser) {
+                            $dataToInsert = $record->toArray();
+
+                            $dataToInsert['user_id'] = $authenticatedUser->id;
+
+                            new_identity::create($dataToInsert);
+
+                            $record->delete();
+
+                        });
+                    })
             ])
             ->striped()
             ->emptyStateActions([

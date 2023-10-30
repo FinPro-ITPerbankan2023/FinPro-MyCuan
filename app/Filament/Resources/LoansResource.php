@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -50,8 +51,13 @@ class LoansResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('loan_status')
-                    ->searchable(),
+                SelectColumn::make('loan_status')
+                    ->options([
+                        'Approved' => 'Approved',
+                        'Rejected'=> 'Rejected',
+                        'Pending'=> 'Pending',
+                    ])
+                    ->rules(['required']),
                 Tables\Columns\TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),
@@ -89,7 +95,8 @@ class LoansResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
-            ]);
+            ])
+            ->striped();
     }
 
     public static function getRelations(): array
