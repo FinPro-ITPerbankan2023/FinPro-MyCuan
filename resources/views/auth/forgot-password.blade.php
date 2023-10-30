@@ -35,7 +35,7 @@
                             <x-input name="email" type="email" id="email" class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukan alamat email Anda') }}" required autocomplete="username" :value="old('email')" />
                         </div>
                         <!-- alert email -->
-                        <x-input-error :messages="$errors->get('email')" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
+                        <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
 
                         <!-- Session Status alerrt-->
                         @if (session('status'))
