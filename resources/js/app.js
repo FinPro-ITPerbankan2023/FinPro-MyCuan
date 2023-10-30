@@ -21,5 +21,27 @@ function show(){
         }
     }
 }
+function showconfirm(){
+    let eyeiconhidden = document.getElementById('eye-hidden-confirm');
+    let eyeiconshow = document.getElementById('eye-show-confirm');
+    let password = document.getElementById('password-confirm');
+
+    eyeiconhidden.onclick = function(){
+        if(password.type == "password"){
+            password.type = "text";
+            eyeiconshow.style.display = "block"
+            eyeiconhidden.style.display = "none"
+        }
+    }
+
+    eyeiconshow.onclick = function(){
+        if(password.type == "text"){
+            password.type = "password";
+            eyeiconhidden.style.display = "block"
+            eyeiconshow.style.display = "none"
+        }
+    }
+}
 
 show()
+showconfirm()
