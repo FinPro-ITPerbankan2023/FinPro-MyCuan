@@ -50,7 +50,8 @@ class LoansResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 SelectColumn::make('loan_status')
                     ->options([
                         'Approved' => 'Approved',

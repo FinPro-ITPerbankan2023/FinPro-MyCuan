@@ -28,7 +28,7 @@ class LoanApplicationsResource extends Resource
 
     protected static ?string $pluralLabel = 'Daftar Ajuan Pinjaman';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static ?string $navigationGroup = 'Marketplace';
 
@@ -50,23 +50,28 @@ class LoanApplicationsResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('loan_status')
                     ->badge()
-                    ->color('success'),
-                Tables\Columns\TextColumn::make('loan_duration')
+                    ->color('success')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('loan_duration')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('application_date')
                     ->dateTime()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
                     ->money('idr')
+                    ->summarize(Sum::make()->money('idr'))
             ])
             ->filters([
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+//                Tables\Actions\ViewAction::make(),
+//                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -100,6 +105,11 @@ class LoanApplicationsResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 
     public static function getPages(): array

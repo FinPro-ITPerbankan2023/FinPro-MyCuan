@@ -33,6 +33,7 @@ class LenderPanelProvider extends PanelProvider
             ->path('lender')
             ->profile(EditProfile::class)
             ->login()
+            ->breadcrumbs(false)
             ->passwordReset()
             ->emailVerification()
             ->registration()

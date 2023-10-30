@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->breadcrumbs(false)
             ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
         ->colors([
                 'primary' => Color::Cyan,

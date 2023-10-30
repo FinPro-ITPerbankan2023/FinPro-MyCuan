@@ -14,6 +14,7 @@ class ListLoanApplications extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+
         ];
     }
 }

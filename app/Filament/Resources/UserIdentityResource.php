@@ -10,6 +10,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,11 +21,12 @@ use Illuminate\Support\Facades\Auth;
 class UserIdentityResource extends Resource
 {
     protected static ?string $model = UserIdentity::class;
-
+    protected static ?string $pluralLabel = 'User Identity';
+    protected static ?string $modelLabel = 'User Identity';
+    protected static ?string $navigationLabel = 'User Identity';
     protected static ?string $navigationGroup = 'Users Management';
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
-
     public static function form(Form $form): Form
     {
         return $form
@@ -44,20 +47,18 @@ class UserIdentityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identity_number')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Split::make([
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('user.name')
+                            ->icon('heroicon-o-user'),
+                        Tables\Columns\TextColumn::make('identity_number')
+                            ->icon('heroicon-o-shield-check'),
+                    ]),
+                    Tables\Columns\ImageColumn::make('selfie_image')
+                        ->size(50),
+                    Tables\Columns\ImageColumn::make('identity_image')
+                        ->size(50)
+                ])
             ])
             ->filters([
                 //
@@ -97,6 +98,12 @@ class UserIdentityResource extends Resource
             //
         ];
     }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
 
     public static function getPages(): array
     {

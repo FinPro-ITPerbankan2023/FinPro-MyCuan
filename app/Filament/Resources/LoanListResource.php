@@ -42,15 +42,15 @@ class LoanListResource extends Resource
             ->join('users', 'loans.user_id', '=', 'users.id')
             ->select('loans.*', 'users.name as user_name');
 
-        // Set the custom query for the table
         $table->query($query);
 
         return $table
             ->columns([
-                // Use the standard Columns class
-                Tables\Columns\TextColumn::make('user_name')->label('User Name'),
-                Tables\Columns\TextColumn::make('amount')->label('Loan Amount'),
-                // ... other columns from the loans table
+                Tables\Columns\TextColumn::make('user_name')
+                    ->label('User Name'),
+                Tables\Columns\TextColumn::make('amount')
+                    ->label('Loan Amount')
+                    ->money('idr')
             ])
             ->filters([
                 //

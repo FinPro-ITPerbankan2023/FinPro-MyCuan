@@ -3,23 +3,24 @@
 namespace App\Filament\Borrower\Resources;
 
 use App\Filament\Borrower\Resources\ApplicationHistoryResource\Pages;
+use App\Filament\Borrower\Resources\ApplicationHistoryResource\RelationManagers\BusinessRelationManager;
 use App\Models\BankDetail;
 use App\Models\Loans;
 use App\Models\User;
 use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class ApplicationHistoryResource extends Resource
 {
     protected static ?string $model = Loans::class;
-
-
 
     protected static ?string $label = 'Riwayat Pengajuan';
     protected static ?string $pluralLabel = 'Riwayat Pengajuan';
@@ -31,18 +32,28 @@ class ApplicationHistoryResource extends Resource
         return $form
             ->schema([
                 Wizard::make([
-                    Wizard\Step::make('Rekening Peminjam')
+                    Wizard\Step::make('Ajukan Pinjaman')
                         ->schema([
                             Forms\Components\TextInput::make('user_id')
                                 ->label('User ID'),
+                        ]),
+                    Wizard\Step::make('Pinjaman')
+                        ->schema([
                             Forms\Components\TextInput::make('amount')
                                 ->label('Jumlah Pinjaman')
-                                ->required(),
+                                ->required()
+                                ->default('1000000'),
                             Forms\Components\TextInput::make('loan_duration')
                                 ->label('Lama Pinjaman')
                                 ->required(),
                         ]),
                 ])
+                    ->nextAction(
+                        fn (Action $action) => $action->label('Selanjutnya'),
+                    )
+                    ->previousAction(
+                        fn (Action $action) => $action->label('Sebelumnya'),
+                    )
                     ->skippable()
                     ->columns([
                         'sm' => 2,
@@ -72,11 +83,7 @@ class ApplicationHistoryResource extends Resource
                         'pending', 'Pending', 'PENDING' => 'info',
                     }),
                 Tables\Columns\TextColumn::make('amount')
-                    ->numeric(
-                        decimalPlaces: 0,
-                        decimalSeparator: '.',
-                        thousandsSeparator: ',',
-                    )
+                    ->money('idr')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->searchable(),
@@ -103,5 +110,12 @@ class ApplicationHistoryResource extends Resource
             'create' => Pages\CreateApplicationHistory::route('/create'),
         ];
     }
+
+    public static function getRelations(): array
+    {
+        return [
+        ];
+    }
+
 
 }
