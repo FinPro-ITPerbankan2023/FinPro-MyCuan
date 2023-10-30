@@ -37,7 +37,7 @@
                         <!-- alert email -->
                         <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
 
-                        <!-- Session Status alerrt-->
+                        <!-- Session Status alert-->
                         @if (session('status'))
                         <div class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-green-600 border-green-800 px-4 py-3 rounded relative">
                             {{ session('status') }}
