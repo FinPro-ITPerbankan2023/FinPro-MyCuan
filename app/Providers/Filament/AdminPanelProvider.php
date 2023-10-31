@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->path('admin')
+            ->darkMode(false)
             ->login()
             ->breadcrumbs(false)
             ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
