@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/landing', function () {
+    return view('landing');
+});
+
+//Route::get('/landing', 'landingController@create');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
