@@ -34,12 +34,13 @@ class LenderPanelProvider extends PanelProvider
             ->path('lender')
             ->profile()
             ->login()
+            ->darkMode(false)
             ->plugin(
                 BreezyCore::make()
                     ->myProfile(
                         shouldRegisterUserMenu: true,
                         shouldRegisterNavigation: false,
-                        hasAvatars: true, //
+                        hasAvatars: true,
                         slug: 'my-profile'
                     )
             )

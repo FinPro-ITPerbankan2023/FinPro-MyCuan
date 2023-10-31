@@ -17,6 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 class BorrowerPanelProvider extends PanelProvider
 {
@@ -26,6 +27,15 @@ class BorrowerPanelProvider extends PanelProvider
             ->id('borrower')
             ->path('borrower')
             ->login()
+            ->plugin(
+                BreezyCore::make()
+                    ->myProfile(
+                        shouldRegisterUserMenu: true,
+                        shouldRegisterNavigation: false,
+                        hasAvatars: true,
+                        slug: 'my-profile'
+                    )
+            )
             ->profile()
             ->darkMode(false)
             ->passwordReset()
