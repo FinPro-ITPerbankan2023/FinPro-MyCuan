@@ -37,6 +37,8 @@ class LoansResource extends Resource
                     ->numeric(),
                 Forms\Components\TextInput::make('loan_duration')
                     ->maxLength(255),
+                Forms\Components\TextInput::make('loan_purpose')
+                    ->maxLength(255),
                 Forms\Components\DatePicker::make('application_date')
                     ->required(),
                 Forms\Components\DatePicker::make('approval_date'),
@@ -65,19 +67,18 @@ class LoansResource extends Resource
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('application_date')
-                    ->date()
+                    ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('approval_date')
-                    ->date()
+                    ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('denied_date')
-                    ->date()
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
