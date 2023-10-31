@@ -65,7 +65,8 @@ class ApplicationHistoryResource extends Resource
                                 ->label('Jumlah Pinjaman')
                                 ->required()
                                 ->prefix('Rp.')
-                                ->inputMode('decimal'),
+                                ->inputMode('decimal')
+                                ->currencyMask(thousandSeparator: ',',decimalSeparator: '.',precision: 2),
                             Hidden::make('user_id')
                                 ->default(function () {
                                     $authUserId = auth()->id();
