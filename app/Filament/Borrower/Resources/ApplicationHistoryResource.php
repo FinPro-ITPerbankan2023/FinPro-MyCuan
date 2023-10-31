@@ -25,6 +25,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\HtmlString;
 
 class ApplicationHistoryResource extends Resource
 {
@@ -52,12 +53,12 @@ class ApplicationHistoryResource extends Resource
                             Select::make('loan_duration')
                                 ->label('Lama Pinjaman')
                                 ->options([
-                                    '1' => '1 Bulan',
-                                    '3' => '3 Bulan',
-                                    '6' => '6 Bulan',
-                                    '12' => '12 Bulan',
-                                    '18' => '18 Bulan',
-                                    '24' => '24 Bulan'
+                                    '1 Bulan' => '1 Bulan',
+                                    '3 Bulan' => '3 Bulan',
+                                    '6 Bulan' => '6 Bulan',
+                                    '12 Bulan' => '12 Bulan',
+                                    '18 Bulan' => '18 Bulan',
+                                    '24 Bulan' => '24 Bulan'
                                 ])
                                 ->required(),
                             Forms\Components\TextInput::make('amount')
@@ -65,19 +66,25 @@ class ApplicationHistoryResource extends Resource
                                 ->required()
                                 ->prefix('Rp.')
                                 ->inputMode('decimal'),
-                            Forms\Components\TextInput::make('user_id')
-                                ->label('Nama Peminjam')
+                            Hidden::make('user_id')
+                                ->default(function () {
+                                    $authUserId = auth()->id();
+                                    return User::where('id', $authUserId)->value('id', 'id');
+                                })
+                                ->disabled()
+                                ->dehydrated()
 
-                        ]),
-//                    Wizard\Step::make('Konfirmasi Pinjaman')
-//                        ->icon('heroicon-o-check-circle')
-//                        ->schema([
-//                            Tabs::make('Label')
-//                                ->tabs([
-//                                    Tabs\Tab::make('Data Diri')
-//                                        ->icon('heroicon-m-user-circle')
-//                                        ->iconPosition(IconPosition::After)
-//                                        ->schema([
+
+                ]),
+                    Wizard\Step::make('Konfirmasi Pinjaman')
+                        ->icon('heroicon-o-check-circle')
+                        ->schema([
+                            Tabs::make('Label')
+                                ->tabs([
+                                    Tabs\Tab::make('Data Diri')
+                                        ->icon('heroicon-m-user-circle')
+                                        ->iconPosition(IconPosition::After)
+                                        ->schema([
 //                                            Forms\Components\TextInput::make('user_id')
 //                                                ->label('Nama Peminjam')
 //                                                ->default(function () {
@@ -85,81 +92,83 @@ class ApplicationHistoryResource extends Resource
 //                                                    return User::where('id', $authUserId)->value('name', 'id');
 //                                                })
 //                                                ->disabled(),
-//                                            Forms\Components\TextInput::make('identity_number')
-//                                                ->label('Nomor Identitas')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return UserIdentity::where('id', $authUserId)->value('identity_number', 'id');
-//                                                })
-//                                                ->disabled(),
-//                                        ]),
-//                                    Tabs\Tab::make('Informasi Bank')
-//                                        ->icon('heroicon-m-building-office')
-//                                        ->iconPosition(IconPosition::After)
-//                                        ->schema([
-//                                            Forms\Components\TextInput::make('bank_name')
-//                                                ->label('Nama Bank')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return BankDetail::where('id', $authUserId)->value('bank_name');
-//                                                })
-//                                                ->disabled(),
-//                                            Forms\Components\TextInput::make('bank_number')
-//                                                ->label('Nomor Bank')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return BankDetail::where('id', $authUserId)->value('bank_number');
-//                                                })
-//                                                ->disabled(),
-//                                        ]),
-//                                    Tabs\Tab::make('Informasi Usaha')
-//                                        ->icon('heroicon-m-building-storefront')
-//                                        ->iconPosition(IconPosition::After)
-//                                        ->schema([
-//                                            Forms\Components\TextInput::make('business_name')
-//                                                ->label('Nama Usaha')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return Business::where('id', $authUserId)->value('business_name');
-//                                                })
-//                                                ->disabled(),
-//                                            Forms\Components\TextInput::make('field_of_business')
-//                                                ->label('Bidang Usaha')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return Business::where('id', $authUserId)->value('field_of_business');
-//                                                })
-//                                                ->disabled(),
-//                                            Forms\Components\TextInput::make('business_ownership')
-//                                                ->label('Kepemilikan Usaha')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return Business::where('id', $authUserId)->value('business_ownership');
-//                                                })
-//                                                ->disabled(),
-//                                            Forms\Components\TextInput::make('business_duration')
-//                                                ->label('Lama Usaha Berdiri')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return Business::where('id', $authUserId)->value('business_duration');
-//                                                })
-//                                                ->disabled(),
-//                                            Forms\Components\TextInput::make('income_avg')
-//                                                ->label('Penghasilan Rata-Rata')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return Business::where('id', $authUserId)->value('income_avg');
-//                                                })
-//                                                ->disabled(),
-//                                        ])
-//                                ])
-//                                ->columns([
-//                                    'sm' => 2,
-//                                ])
-//                                ->columnSpan([
-//                                    'sm' => 2,
-//                                ]),
-//                        ]),
+                                            Forms\Components\TextInput::make('identity_number')
+                                                ->label('Nomor Identitas')
+                                                ->suffixIcon('heroicon-m-credit-card')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return UserIdentity::where('id', $authUserId)->value('identity_number', 'id');
+                                                })
+                                                ->disabled(),
+                                        ]),
+                                    Tabs\Tab::make('Informasi Bank')
+                                        ->icon('heroicon-m-building-office')
+                                        ->iconPosition(IconPosition::After)
+                                        ->schema([
+                                            Forms\Components\TextInput::make('bank_name')
+                                                ->label('Nama Bank')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return BankDetail::where('id', $authUserId)->value('bank_name');
+                                                })
+                                                ->disabled(),
+                                            Forms\Components\TextInput::make('bank_number')
+                                                ->label('Nomor Bank')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return BankDetail::where('id', $authUserId)->value('bank_number');
+                                                })
+                                                ->disabled(),
+                                        ]),
+                                    Tabs\Tab::make('Informasi Usaha')
+                                        ->icon('heroicon-m-building-storefront')
+                                        ->iconPosition(IconPosition::After)
+                                        ->schema([
+                                            Forms\Components\TextInput::make('business_name')
+                                                ->label('Nama Usaha')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return Business::where('id', $authUserId)->value('business_name');
+                                                })
+                                                ->disabled(),
+                                            Forms\Components\TextInput::make('field_of_business')
+                                                ->label('Bidang Usaha')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return Business::where('id', $authUserId)->value('field_of_business');
+                                                })
+                                                ->disabled(),
+                                            Forms\Components\TextInput::make('business_ownership')
+                                                ->label('Kepemilikan Usaha')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return Business::where('id', $authUserId)->value('business_ownership');
+                                                })
+                                                ->disabled(),
+                                            Forms\Components\TextInput::make('business_duration')
+                                                ->label('Lama Usaha Berdiri')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return Business::where('id', $authUserId)->value('business_duration');
+                                                })
+                                                ->disabled(),
+                                            Forms\Components\TextInput::make('income_avg')
+                                                ->label('Penghasilan Rata-Rata')
+                                                ->prefix('Rp.')
+                                                ->default(function () {
+                                                    $authUserId = auth()->id();
+                                                    return Business::where('id', $authUserId)->value('income_avg');
+                                                })
+                                                ->disabled(),
+                                        ])
+                                ])
+                                ->columns([
+                                    'sm' => 2,
+                                ])
+                                ->columnSpan([
+                                    'sm' => 2,
+                                ]),
+                        ]),
                 ])
                     ->nextAction(
                         fn (Action $action) => $action->label('Selanjutnya'),
