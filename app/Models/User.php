@@ -5,6 +5,7 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -83,10 +84,10 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(Business::class,);
 
     }
-    public function Loans(): HasOne
+    public function Loans(): HasMany
     {
 
-        return $this->hasOne(Loans::class,);
+        return $this->hasMany(Loans::class,);
 
     }
 
@@ -96,6 +97,14 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(BankDetail::class,);
 
     }
+
+    public function HistoryTransaction(): HasMany
+    {
+
+        return $this->hasMany(HistoryTransaction::class,);
+
+    }
+
 
     public function canAccessPanel(Panel|\Filament\Panel $panel): bool
     {

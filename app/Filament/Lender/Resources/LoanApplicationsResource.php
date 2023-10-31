@@ -4,6 +4,7 @@ namespace App\Filament\Lender\Resources;
 
 use App\Filament\Lender\Resources\LoanApplicationsResource\Pages;
 use App\Filament\Lender\Resources\LoanApplicationsResource\RelationManagers;
+use App\Models\HistoryTransaction;
 use App\Models\LoanApplications;
 use App\Models\Loans;
 use App\Models\new_identity;
@@ -48,22 +49,27 @@ class LoanApplicationsResource extends Resource
                 $query->where('loan_status', 'Approved');
             })
             ->columns([
+
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('loan_status')
+                    ->label('Status Pinjaman')
                     ->badge()
                     ->color('success')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('loan_duration')
+                    ->label('Lama Pinjaman (bulan)')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('application_date')
+                    ->label('Tanggal Pengajuan')
                     ->dateTime()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
+                    ->label('Jumlah Pinjaman')
                     ->money('idr')
                     ->summarize(Sum::make()->money('idr'))
             ])
@@ -87,7 +93,7 @@ class LoanApplicationsResource extends Resource
 
                             $dataToInsert['user_id'] = $authenticatedUser->id;
 
-                            new_identity::create($dataToInsert);
+                            HistoryTransaction::create($dataToInsert);
 
                             $record->delete();
 
@@ -116,9 +122,9 @@ class LoanApplicationsResource extends Resource
     {
         return [
             'index' => Pages\ListLoanApplications::route('/'),
-            'create' => Pages\CreateLoanApplications::route('/create'),
-            'view' => Pages\ViewLoanApplications::route('/{record}'),
-            'edit' => Pages\EditLoanApplications::route('/{record}/edit'),
+//            'create' => Pages\CreateLoanApplications::route('/create'),
+//            'view' => Pages\ViewLoanApplications::route('/{record}'),
+//            'edit' => Pages\EditLoanApplications::route('/{record}/edit'),
         ];
     }
 }
