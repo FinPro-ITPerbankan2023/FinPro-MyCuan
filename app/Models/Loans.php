@@ -29,6 +29,13 @@ class Loans extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function verify(): void
+    {
+        $this->is_verified = true;
+        $this->save();
+    }
+
+
     protected static function boot()
     {
         parent::boot();

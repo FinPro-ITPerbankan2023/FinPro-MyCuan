@@ -9,6 +9,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -18,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class LoansResource extends Resource
 {
     protected static ?string $model = Loans::class;
+
+    protected static ?string $pluralLabel = 'Ajuan Pinjaman';
 
     protected static ?string $navigationGroup = 'System Management';
 
@@ -65,8 +69,12 @@ class LoansResource extends Resource
                     })
                     ->label('Status Pinjaman'),
 
-                ToggleColumn::make('is_verified')
-                    ->label('Diverifikasi oleh Admin'),
+                IconColumn::make('is_verified')
+                    ->label('Diverifikasi oleh Admin')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-badge')
+                    ->falseIcon('heroicon-o-x-mark')
+                    ->alignCenter(),
 
                 Tables\Columns\TextColumn::make('amount')
                     ->numeric()
@@ -76,7 +84,8 @@ class LoansResource extends Resource
 
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->searchable()
-                    ->label('Lama Pinjaman (Bulan)'),
+                    ->label('Lama Pinjaman (Bulan)')
+                    ->alignCenter(),
 
                 Tables\Columns\TextColumn::make('application_date')
                     ->dateTime()
@@ -116,8 +125,11 @@ class LoansResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Action::make('is_verified')
+                    ->action(fn (Loans $record) => $record->verify())
+                    ->requiresConfirmation()
+                    ->button()
+                    ->label('VERIFIKASI')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
