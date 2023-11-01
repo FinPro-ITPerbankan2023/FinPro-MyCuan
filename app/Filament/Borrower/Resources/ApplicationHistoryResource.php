@@ -21,6 +21,7 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -198,14 +199,14 @@ class ApplicationHistoryResource extends Resource
         })
 
             ->columns([
-                Tables\Columns\TextColumn::make('loan_status')
-                    ->label('Status Pinjaman')
+                TextColumn::make('loan_status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'approved', 'Approved', 'APPROVED' => 'success',
-                        'rejected', 'Rejected', 'REJECTED' => 'danger',
-                        'pending', 'Pending', 'PENDING' => 'info',
-                    }),
+                    ->color(fn (bool $state): string => match ($state) {
+                        false => 'danger',
+                        true => 'success',
+                    })
+                    ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
+                    ->label('Status Pinjaman'),
                 Tables\Columns\TextColumn::make('amount')
                     ->label('Jumlah Dana')
                     ->money('idr')
@@ -213,7 +214,8 @@ class ApplicationHistoryResource extends Resource
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->label('Lama Pengajuan (Bulan)')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('application_date')
                     ->label('Tanggal Pengajuan')
                     ->dateTime()
