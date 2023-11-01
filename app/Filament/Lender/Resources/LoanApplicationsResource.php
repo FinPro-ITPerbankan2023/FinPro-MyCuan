@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -47,7 +48,8 @@ class LoanApplicationsResource extends Resource
 
         return $table
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('is_verified', '1');
+                $query->where('is_verified', 1)
+                    ->where('loan_status', 0);
             })
             ->columns([
 
@@ -55,36 +57,44 @@ class LoanApplicationsResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('loan_status')
-                    ->label('Status Pinjaman')
+
+                TextColumn::make('loan_status')
                     ->badge()
-                    ->color('danger')
-                    ->searchable(),
+                    ->color(fn (bool $state): string => match ($state) {
+                        false => 'danger',
+                        true => 'success',
+                    })
+                    ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
+                    ->label('Status Pinjaman'),
+
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->label('Lama Pinjaman (bulan)')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->alignCenter(),
+
                 Tables\Columns\TextColumn::make('application_date')
                     ->label('Tanggal Pengajuan')
-                    ->dateTime()
+                    ->date()
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->alignCenter(),
+
                 Tables\Columns\TextColumn::make('amount')
                     ->label('Jumlah Pinjaman')
                     ->money('idr')
-//                    ->summarize(Sum::make()->money('idr'))
+                    ->alignCenter(),
             ])
             ->filters([
             ])
             ->actions([
 //                Tables\Actions\ViewAction::make(),
 //                Tables\Actions\EditAction::make(),
-                Action::make('DANAI')
-//                    ->url(fn (Post $record): string => route('posts.edit', $record))
-                    ->openUrlInNewTab()
+                Action::make('loan_status')
+                    ->action(fn (Loans $record) => $record->verifyLoan())
                     ->requiresConfirmation()
                     ->button()
-                    ->label('DANAI PINJAMAN')
+                    ->label('DANAI')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

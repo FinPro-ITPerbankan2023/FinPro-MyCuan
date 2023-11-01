@@ -13,14 +13,19 @@ class HistoryTransaction extends Model
     protected $table = 'history_transactions';
 
     protected $fillable = [
-      'user_id',
+      'borrower',
       'loan_id',
       'total_amount_transaction',
-      'transcation_date'
+      'lender'
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'borrower');
+    }
+
+    public function loan(): BelongsTo
+    {
+        return $this->belongsTo(Loans::class, 'loan_id');
     }
 }

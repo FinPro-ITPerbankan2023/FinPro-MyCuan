@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id');
-            $table->string('loan_status')->default('BELUM DIDANAI');
+            $table->boolean('loan_status')->default('0');
             $table->boolean('is_verified')->default('0');
             $table->integer('amount');
             $table->string('loan_duration');

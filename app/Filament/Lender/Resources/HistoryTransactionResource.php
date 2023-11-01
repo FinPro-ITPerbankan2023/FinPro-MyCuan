@@ -17,9 +17,9 @@ class HistoryTransactionResource extends Resource
 {
     protected static ?string $model = HistoryTransaction::class;
 
-    protected static ?string $modelLabel = 'Riwayat Transaksi';
+    protected static ?string $modelLabel = 'Riwayat Mendanai';
 
-    protected static ?string $pluralLabel = 'Riwayat Transaksi';
+    protected static ?string $pluralLabel = 'Riwayat Mendanai';
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-path-rounded-square';
 
@@ -37,14 +37,41 @@ class HistoryTransactionResource extends Resource
     {
         return $table
             ->columns([
-                //
+
+                Tables\Columns\TextColumn::make('loan_id')
+                    ->label('Nomor Pinjaman')
+                    ->searchable()
+                    ->sortable()
+                    ->alignCenter(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Peminjam')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('loan.amount')
+                    ->label('Jumlah Pinjaman')
+                    ->searchable()
+                    ->sortable()
+                    ->alignCenter()
+                    ->money('idr'),
+
+                Tables\Columns\TextColumn::make('transcation_date')
+                    ->label('Waktu Transaksi')
+                    ->date()
+                    ->alignCenter(),
+
+                Tables\Columns\TextColumn::make('lender')
+                    ->label('Pendana')
+                    ->searchable()
+                    ->sortable()
+                    ->alignCenter(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+//                Tables\Actions\ViewAction::make(),
+//                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

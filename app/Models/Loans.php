@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Loans extends Model
@@ -29,13 +31,24 @@ class Loans extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function verify(): void
+    public function verifyAdmin(): void
     {
         $this->is_verified = true;
         $this->save();
     }
 
+    public function verifyLoan(): void
+    {
+        $this->loan_status = true;
+        $this->save();
 
+        HistoryTransaction::create([
+            'borrower' => $this->id,
+            'loan_id' => $this->id,
+            'transaction_date' => now(),
+            'lender' => Auth::user()->name
+        ]);
+    }
     protected static function boot()
     {
         parent::boot();

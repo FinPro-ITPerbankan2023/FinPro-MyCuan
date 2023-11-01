@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -61,12 +62,13 @@ class LoansResource extends Resource
                     ->searchable()
                     ->label('Nama Peminjam'),
 
-                Tables\Columns\TextColumn::make('loan_status')
+                TextColumn::make('loan_status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'SUDAH DIDANAI' => 'success',
-                        'BELUM DIDANAI' => 'danger',
+                    ->color(fn (bool $state): string => match ($state) {
+                        false => 'danger',
+                        true => 'success',
                     })
+                    ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
                     ->label('Status Pinjaman'),
 
                 IconColumn::make('is_verified')
@@ -126,7 +128,7 @@ class LoansResource extends Resource
             ])
             ->actions([
                 Action::make('is_verified')
-                    ->action(fn (Loans $record) => $record->verify())
+                    ->action(fn (Loans $record) => $record->verifyAdmin())
                     ->requiresConfirmation()
                     ->button()
                     ->label('VERIFIKASI')

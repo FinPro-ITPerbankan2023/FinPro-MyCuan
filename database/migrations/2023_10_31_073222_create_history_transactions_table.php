@@ -14,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('history_transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users', 'id');
-            $table->foreignId('loan_id')->constrained('loans', 'id');
+            $table->foreignId('borrower')->nullable()->constrained('users', 'id');
+            $table->foreignId('loan_id')->nullable()->constrained('loans', 'id');
             $table->dateTime('transcation_date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->bigInteger('total_amount_transaction');
+            $table->string('lender');
             $table->timestamps();
         });
     }
