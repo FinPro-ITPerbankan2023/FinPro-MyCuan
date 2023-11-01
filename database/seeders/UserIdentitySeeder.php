@@ -11,7 +11,7 @@ class UserIdentitySeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 5) as $index) {
+        foreach (range(1, 3) as $index) {
             DB::table('user_identity')->insert([
                 'user_id' => $index,
                 'identity_number' => rand(1000000000000000, 9999999999999999),

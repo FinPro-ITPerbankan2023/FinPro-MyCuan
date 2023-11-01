@@ -16,7 +16,7 @@ class SessionsSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 5) as $index) {
+        foreach (range(1, 3) as $index) {
             DB::table('sessions')->insert([
                 'id' => $index,
                 'user_id' => $index,
