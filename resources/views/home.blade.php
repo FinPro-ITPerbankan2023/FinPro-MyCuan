@@ -19,8 +19,20 @@
                 @if (Route::has('login'))
                     <div class="flex items-center justify-center ml-96 relative">
                         @auth
-                            <a href="{{ url('/dashboard') }}"
-                               class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                            @php
+                                $dashboardRoute = match(auth()->user()->role_id) {
+                                    1 => '/lender',
+                                    2 => '/borrower',
+                                    3 => '/admin',
+                                };
+                            @endphp
+
+                            <a href="{{ url($dashboardRoute) }}" class="block w-48">
+                                <button id="dashboardBtn"
+                                        class="font-['Poppins'] inline-block rounded bg-[#186f65] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] w-full">
+                                    Dashboard
+                                </button>
+                            </a>
                         @else
                             <div class="relative inline-block text-left">
                                 <button id="masukDropdownBtn"
