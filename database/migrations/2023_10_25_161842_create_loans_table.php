@@ -15,11 +15,13 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id');
-            $table->string('loan_status')->default('Pending');
+            $table->string('loan_status')->default('BELUM DIDANAI');
+            $table->boolean('is_verified')->default('0');
             $table->integer('amount');
             $table->string('loan_duration');
             $table->text('loan_purpose');
             $table->dateTime('application_date')->default(DB::raw('CURRENT_TIMESTAMP')); // Set the default value to current timestamp
+            $table->dateTime('verification_date')->nullable();
             $table->dateTime('approval_date')->nullable();
             $table->dateTime('denied_date')->nullable();
             $table->timestamps();

@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -53,31 +54,59 @@ class LoansResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable()
-                    ->searchable(),
-                SelectColumn::make('loan_status')
-                    ->options([
-                        'Approved' => 'Approved',
-                        'Rejected'=> 'Rejected',
-                        'Pending'=> 'Pending',
-                    ])
-                    ->rules(['required']),
+                    ->searchable()
+                    ->label('Nama Peminjam'),
+
+                Tables\Columns\TextColumn::make('loan_status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'SUDAH DIDANAI' => 'success',
+                        'BELUM DIDANAI' => 'danger',
+                    })
+                    ->label('Status Pinjaman'),
+
+                ToggleColumn::make('is_verified')
+                    ->label('Diverifikasi oleh Admin'),
+
                 Tables\Columns\TextColumn::make('amount')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->money('idr')
+                    ->label('Jumlah Pinjaman'),
+
                 Tables\Columns\TextColumn::make('loan_duration')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Lama Pinjaman (Bulan)'),
+
                 Tables\Columns\TextColumn::make('application_date')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Tanggal Pengajuan'),
+
+                Tables\Columns\TextColumn::make('verification_date')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('Tanggal Ajuan Pinjaman Diterima'),
+
                 Tables\Columns\TextColumn::make('approval_date')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('Tanggal Pengajuan Diterima'),
+
                 Tables\Columns\TextColumn::make('denied_date')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('Tanggal Pengajuan Ditolak'),
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('Terakhir Update'),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

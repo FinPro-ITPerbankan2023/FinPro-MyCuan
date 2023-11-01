@@ -12,6 +12,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
@@ -46,7 +47,7 @@ class LoanApplicationsResource extends Resource
 
         return $table
             ->modifyQueryUsing(function (Builder $query) {
-                $query->where('loan_status', 'Approved');
+                $query->where('is_verified', '1');
             })
             ->columns([
 
@@ -57,7 +58,7 @@ class LoanApplicationsResource extends Resource
                 Tables\Columns\TextColumn::make('loan_status')
                     ->label('Status Pinjaman')
                     ->badge()
-                    ->color('success')
+                    ->color('danger')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->label('Lama Pinjaman (bulan)')
@@ -71,13 +72,19 @@ class LoanApplicationsResource extends Resource
                 Tables\Columns\TextColumn::make('amount')
                     ->label('Jumlah Pinjaman')
                     ->money('idr')
-                    ->summarize(Sum::make()->money('idr'))
+//                    ->summarize(Sum::make()->money('idr'))
             ])
             ->filters([
             ])
             ->actions([
 //                Tables\Actions\ViewAction::make(),
 //                Tables\Actions\EditAction::make(),
+                Action::make('DANAI')
+//                    ->url(fn (Post $record): string => route('posts.edit', $record))
+                    ->openUrlInNewTab()
+                    ->requiresConfirmation()
+                    ->button()
+                    ->label('DANAI PINJAMAN')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

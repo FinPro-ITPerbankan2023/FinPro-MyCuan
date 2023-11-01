@@ -21,10 +21,11 @@ class LoansSeeder extends Seeder
             DB::table('loans')->insert([
                 'id' => $index,
                 'user_id' => $index,
-                'loan_status' => 'Pending',
+                'loan_status' => 'BELUM DIDANAI',
+                'is_verified' => '0',
                 'loan_purpose' => $faker->text,
                 'amount' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1000, $max = 100000),
-                'loan_duration' => $faker->numberBetween($min = 1, $max = 12),
+                'loan_duration' => '12 Bulan',
                 'application_date' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
