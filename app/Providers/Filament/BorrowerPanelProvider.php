@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -26,7 +27,7 @@ class BorrowerPanelProvider extends PanelProvider
         return $panel
             ->id('borrower')
             ->path('borrower')
-            ->login()
+//            ->login()
             ->plugin(
                 BreezyCore::make()
                     ->myProfile(
@@ -36,6 +37,10 @@ class BorrowerPanelProvider extends PanelProvider
                         slug: 'my-profile'
                     )
             )
+//            ->userMenuItems([
+//                'logout' => MenuItem::make()
+//                    ->url('logout')
+//            ])
             ->profile()
             ->darkMode(false)
             ->passwordReset()

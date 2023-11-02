@@ -16,7 +16,7 @@
                 <div class="w-8/12 mx-auto">
                     <h1 class="text-white mt-16 font-bold font-poppins text-3xl text-center">Registrasi</h1>
                 </div>
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('register-role') }}">
                     @csrf
                     <div class="w-8/12 mt-16 mx-auto">
                         <x-input-label class="text-white text-xl font-poppins dark:text-white" for="email"
@@ -64,7 +64,7 @@
                         <div
                             class="flex flex-row items-center w-full bg-white rounded-md hover:border-indigo-500 border-transparent border-2 mt-2">
                             <x-input id="phone" type="tel" placeholder="{{ __('Masukan nomor telepon') }} " name="phone"
-                                class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" />
+                                class="w-full py-2.5 ml-3 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" :value="old('phone_number')" required />
                         </div>
                     </div>
                     <div class="flex flex-col w-8/12 mt-6 mx-auto text-white font-poppins">
@@ -81,6 +81,8 @@
                             <p class="text-lg ml-4">Saya telah membaca dan menyetujui semua ketentuan di atas.</p>
                         </div>
                     </div>
+
+                    <input type="hidden" name="role_id" value="2" />
                     <div class="flex flex-col w-8/12 mt-6 mx-auto justify-center">
                         <button id="button-register"
                             class="w-full mt-3 h-10 bg-white text-[#186F65] font-bold text-base font-worksans justify-center rounded-md hover:bg-[#186F65] hover:text-white">
@@ -92,9 +94,12 @@
         </div>
     </div>
     <script>
+        // TODO: Still can't send user to database
+
         const phoneInputField = document.querySelector("#phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            initialCountry: "id",
         });
 
         buttonagree = document.getElementById("button-register");

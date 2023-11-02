@@ -34,37 +34,12 @@
                                 </button>
                             </a>
                         @else
-                            <div class="relative inline-block text-left">
-                                <button id="masukDropdownBtn"
-                                        class="font-['Poppins'] inline-block rounded bg-[#186f65] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] w-48">
-                                    Masuk
+                            <a href="{{ route('login') }}" class="block w-48">
+                                <button id="dashboardBtn"
+                                        class="font-['Poppins'] inline-block rounded bg-[#186f65] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] w-full">
+                                    MASUK
                                 </button>
-                                <div id="masukDropdown" class="hidden origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                        <a href="/borrower"
-                                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                           role="menuitem">Sebagai Peminjam</a>
-                                        <a href="/lender"
-                                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                           role="menuitem">Sebagai Pendana</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <script>
-                                var masukDropdownBtn = document.getElementById('masukDropdownBtn');
-                                var masukDropdown = document.getElementById('masukDropdown');
-
-                                masukDropdownBtn.addEventListener('click', function () {
-                                    masukDropdown.classList.toggle('hidden');
-                                });
-
-                                document.addEventListener('click', function (event) {
-                                    if (!masukDropdownBtn.contains(event.target) && !masukDropdown.contains(event.target)) {
-                                        masukDropdown.classList.add('hidden');
-                                    }
-                                });
-                            </script>
+                            </a>
                         @endauth
                     </div>
                 @endif

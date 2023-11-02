@@ -33,7 +33,7 @@ class LenderPanelProvider extends PanelProvider
             ->id('lender')
             ->path('lender')
             ->profile()
-            ->login()
+//            ->login()
             ->darkMode(false)
             ->plugin(
                 BreezyCore::make()
@@ -44,6 +44,10 @@ class LenderPanelProvider extends PanelProvider
                         slug: 'my-profile'
                     )
             )
+            ->userMenuItems([
+                'logout' => MenuItem::make()
+                    ->url('logout')
+            ])
             ->breadcrumbs(false)
             ->passwordReset()
             ->emailVerification()

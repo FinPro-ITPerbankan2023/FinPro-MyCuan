@@ -3,7 +3,9 @@
         <x-slot name="subheading">
             {{ __('filament-panels::pages/auth/login.actions.register.before') }}
 
-            {{ $this->registerAction }}
+            <a href="{{ route('register-role') }}" class="text-black hover:text-[#13A89E] transition duration-300 ease-in-out underline">
+                {{ __('Register') }}
+            </a>
         </x-slot>
     @endif
 
