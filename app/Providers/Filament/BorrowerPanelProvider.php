@@ -27,7 +27,6 @@ class BorrowerPanelProvider extends PanelProvider
         return $panel
             ->id('borrower')
             ->path('borrower')
-//            ->login()
             ->plugin(
                 BreezyCore::make()
                     ->myProfile(
@@ -37,10 +36,6 @@ class BorrowerPanelProvider extends PanelProvider
                         slug: 'my-profile'
                     )
             )
-//            ->userMenuItems([
-//                'logout' => MenuItem::make()
-//                    ->url('logout')
-//            ])
             ->profile()
             ->darkMode(false)
             ->passwordReset()

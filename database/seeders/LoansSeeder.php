@@ -21,8 +21,11 @@ class LoansSeeder extends Seeder
             DB::table('loans')->insert([
                 'id' => $index,
                 'user_id' => $index,
+                'user_identity_id' => $index,
+                'user_detail_id' => $index,
+                'business_id' => $index,
                 'loan_status' => '0',
-                'is_verified' => '0',
+                'is_verified' => '1',
                 'loan_purpose' => $faker->text,
                 'amount' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1000, $max = 100000),
                 'loan_duration' => '12 Bulan',

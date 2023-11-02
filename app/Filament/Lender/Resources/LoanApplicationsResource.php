@@ -5,22 +5,20 @@ namespace App\Filament\Lender\Resources;
 use App\Filament\Lender\Resources\LoanApplicationsResource\Pages;
 use App\Filament\Lender\Resources\LoanApplicationsResource\RelationManagers;
 use App\Models\HistoryTransaction;
-use App\Models\LoanApplications;
 use App\Models\Loans;
-use App\Models\new_identity;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\RepeatableEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
 class LoanApplicationsResource extends Resource
@@ -51,8 +49,8 @@ class LoanApplicationsResource extends Resource
                 $query->where('is_verified', 1)
                     ->where('loan_status', 0);
             })
-            ->columns([
 
+            ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable()
@@ -88,7 +86,7 @@ class LoanApplicationsResource extends Resource
             ->filters([
             ])
             ->actions([
-//                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make(),
 //                Tables\Actions\EditAction::make(),
                 Action::make('loan_status')
                     ->action(fn (Loans $record) => $record->verifyLoan())
@@ -123,6 +121,49 @@ class LoanApplicationsResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make('Identitas Peminjam')
+                    ->icon('heroicon-o-face-smile')
+                    ->schema([
+                       TextEntry::make('user.name') ->label('Nama'),
+                        TextEntry::make('identity.identity_number') ->label('Nomor Identitas'),
+                        TextEntry::make('detail.phone_number') ->label('Nomor Telepon')->copyable(true),
+                        TextEntry::make('detail.birth_place') ->label('Tempat Lahir'),
+                        TextEntry::make('detail.date_birth') ->label('Tanggal Lahir'),
+                    ]) ->columns(3),
+
+                Section::make('Alamat Peminjam')
+                    ->icon('heroicon-o-map')
+                    ->schema([
+                        TextEntry::make('detail.street') ->label('Jalan'),
+                        TextEntry::make('detail.district') ->label('Kecamatan'),
+                        TextEntry::make('detail.city') ->label('Kota'),
+                        TextEntry::make('detail.province') ->label('Provinsi'),
+                        TextEntry::make('detail.post_code') ->label('Kode Pos'),
+                    ]) ->columns(3),
+
+                Section::make('Usaha Peminjam')
+                    ->icon('heroicon-o-building-storefront')
+                    ->schema([
+                        TextEntry::make('business.business_name') ->label('Nama Usaha'),
+                        TextEntry::make('business.field_of_business') ->label('Bidang Usaha'),
+                        TextEntry::make('business.business_ownership') ->label('Kepemilikan Usaha'),
+                        TextEntry::make('business.business_duration') ->label('Lama Usaha Berdiri'),
+                        TextEntry::make('business.income_avg') ->money('idr') ->label('Pendapat Usaha /Bulan'),
+                    ]) ->columns(3),
+
+
+//                Section::make('Riwayat Pinjaman')
+//                    ->icon('heroicon-o-arrow-path')
+//                    // TODO Add logic to retrieve history of borrower, try with RepeatableEntry
+//
+//                    ->columns(2),
+
+            ]);
+    }
     public static function getRelations(): array
     {
         return [
