@@ -16,7 +16,7 @@
                 <div class="w-8/12 mx-auto">
                     <h1 class="text-white mt-16 font-bold font-poppins text-3xl text-center">Registrasi</h1>
                 </div>
-                <form method="POST" action="{{ route('register-role') }}">
+                <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="w-8/12 mt-16 mx-auto">
                         <x-input-label class="text-white text-xl font-poppins dark:text-white" for="email"
