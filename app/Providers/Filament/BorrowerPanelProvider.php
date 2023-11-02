@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
 
 class BorrowerPanelProvider extends PanelProvider
 {
@@ -27,6 +28,7 @@ class BorrowerPanelProvider extends PanelProvider
         return $panel
             ->id('borrower')
             ->path('borrower')
+            ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
             ->plugin(
                 BreezyCore::make()
                     ->myProfile(

@@ -31,8 +31,8 @@ Route::get('/register-borrower-profile', [RegisterPageController::class, 'Regist
 Route::get('/register-borrower-business', [RegisterPageController::class, 'RegisterBorrowerBusinessPage'])->name('register-borrower-business');
 
 Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament.admin.auth.logout')->middleware('role:admin');
-Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament.lender.auth.logout')->middleware('role:lender');
-Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament.borrower.auth.logout')->middleware('role:borrower');
+Route::post('/auth/lender-logout', [LogoutController::class, 'logout'])->name('filament.lender.auth.logout')->middleware('role:lender');
+Route::post('/auth/borrower-logout', [LogoutController::class, 'logout'])->name('filament.borrower.auth.logout')->middleware('role:borrower');
 
 
 

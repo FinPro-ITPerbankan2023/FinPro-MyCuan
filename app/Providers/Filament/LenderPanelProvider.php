@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
 
 
 class LenderPanelProvider extends PanelProvider
@@ -34,6 +35,7 @@ class LenderPanelProvider extends PanelProvider
             ->path('lender')
             ->profile()
             ->darkMode(false)
+            ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
             ->plugin(
                 BreezyCore::make()
                     ->myProfile(
