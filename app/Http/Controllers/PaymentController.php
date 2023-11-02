@@ -58,4 +58,44 @@ class PaymentController extends Controller
 //            return response()->json(['error' => 'Redirect URL not found in the response'], 500);
         }
     }
+
+
+    public function webhook (Request $request){
+        $auth = base64_encode(env('MIDTRANS_SERVER_KEY'));
+
+        $response = Http::withHeaders([
+            'Content-type' => 'application/json',
+            'Authorization' => "Basic $auth",
+        ])->get('https://api.sandbox.midtrans.com/$request->order_id/status');
+
+        $response = json_decode($response->body());
+
+        $payment = Payment::where('order_id', $response->order_id)->firstOrFail();
+
+        if ($payment->status === 'settlement' || $payment->status === 'capture'){
+            return response()->json('Pembayaran sudah di proses');
+        }
+
+        if($response->transaction_status === 'capture'){
+            $payment->status = 'capture';
+        } else if ($response->transaction_status === 'settlement'){
+            $payment->status = 'settlement';
+        } else if ($response->transaction_status === 'pending'){
+            $payment->status = 'pending';
+        } else if ($response->transaction_status === 'deny') {
+            $payment->status = 'deny';
+        } else if ($response->transaction_status === 'expire') {
+            $payment->status = 'expire';
+        } else if ($response->transaction_status === 'cancel') {
+            $payment->status = 'cancel';
+        }
+
+        $payment->save();
+
+        return response()->json('success');
+
+    }
+
+    //TODO, Still can't get proper post http action from webhook, FIX if have time or delete if not time!
+
 }

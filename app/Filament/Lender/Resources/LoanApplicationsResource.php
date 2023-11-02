@@ -15,6 +15,10 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -52,6 +56,7 @@ class LoanApplicationsResource extends Resource
 
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label('nama Peminjam')
                     ->numeric()
                     ->sortable()
                     ->searchable(),
@@ -65,6 +70,11 @@ class LoanApplicationsResource extends Resource
                     ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
                     ->label('Status Pinjaman'),
 
+                Tables\Columns\TextColumn::make('amount')
+                    ->label('Jumlah Pinjaman')
+                    ->money('idr')
+                    ->alignCenter(),
+
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->label('Lama Pinjaman (bulan)')
                     ->searchable()
@@ -77,22 +87,23 @@ class LoanApplicationsResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->alignCenter(),
-
-                Tables\Columns\TextColumn::make('amount')
-                    ->label('Jumlah Pinjaman')
-                    ->money('idr')
-                    ->alignCenter(),
             ])
             ->filters([
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-//                Tables\Actions\EditAction::make(),
                 Action::make('loan_status')
                     ->action(fn (Loans $record) => $record->verifyLoan())
                     ->requiresConfirmation()
                     ->button()
-                    ->label('DANAI')
+                    ->modalIcon('heroicon-s-hand-thumb-up')
+                    ->modalDescription('Anda akan diarahkan pada halaman pembayaran')
+                    ->modalCancelActionLabel('Batal')
+                    ->modalSubmitActionLabel('Lanjut')
+                    ->label('DANAI'),
+
+                ActionGroup::make([
+                    ViewAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -100,20 +111,6 @@ class LoanApplicationsResource extends Resource
 
                 ]),
                 Tables\Actions\BulkAction::make('Checkout')
-                    ->action(function (Collection $records) {
-                        $authenticatedUser = Auth::user();
-
-                        $records->each(function ($record) use ($authenticatedUser) {
-                            $dataToInsert = $record->toArray();
-
-                            $dataToInsert['user_id'] = $authenticatedUser->id;
-
-                            HistoryTransaction::create($dataToInsert);
-
-                            $record->delete();
-
-                        });
-                    })
             ])
             ->striped()
             ->emptyStateActions([

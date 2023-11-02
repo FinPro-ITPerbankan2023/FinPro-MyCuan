@@ -36,5 +36,7 @@ Route::put('/edit-profile-lender', [EditProfileLender::class, 'editData']);
 Route::get('/marketplace', [LoanListsController::class, 'retrieveLoanList']);
 
 Route::post('/payment', [\App\Http\Controllers\PaymentController::class, 'create']);
+Route::post('/webhooks/midtrans', [\App\Http\Controllers\PaymentController::class, 'webhook']);
+
 
 
