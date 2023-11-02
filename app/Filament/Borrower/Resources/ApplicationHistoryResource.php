@@ -8,6 +8,7 @@ use App\Models\BankDetail;
 use App\Models\Business;
 use App\Models\Loans;
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Models\UserIdentity;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
@@ -74,8 +75,28 @@ class ApplicationHistoryResource extends Resource
                                     return User::where('id', $authUserId)->value('id', 'id');
                                 })
                                 ->disabled()
+                                ->dehydrated(),
+                            Hidden::make('user_identity_id')
+                                ->default(function () {
+                                    $authUserId = auth()->id();
+                                    return UserIdentity::where('id', $authUserId)->value('id', 'id');
+                                })
+                                ->disabled()
+                                ->dehydrated(),
+                            Hidden::make('user_detail_id')
+                                ->default(function () {
+                                    $authUserId = auth()->id();
+                                    return UserDetail::where('id', $authUserId)->value('id', 'id');
+                                })
+                                ->disabled()
+                                ->dehydrated(),
+                            Hidden::make('business_id')
+                                ->default(function () {
+                                    $authUserId = auth()->id();
+                                    return Business::where('id', $authUserId)->value('id', 'id');
+                                })
+                                ->disabled()
                                 ->dehydrated()
-
 
                 ]),
                     Wizard\Step::make('Konfirmasi Pinjaman')
@@ -87,13 +108,6 @@ class ApplicationHistoryResource extends Resource
                                         ->icon('heroicon-m-user-circle')
                                         ->iconPosition(IconPosition::After)
                                         ->schema([
-//                                            Forms\Components\TextInput::make('user_id')
-//                                                ->label('Nama Peminjam')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return User::where('id', $authUserId)->value('name', 'id');
-//                                                })
-//                                                ->disabled(),
                                             Forms\Components\TextInput::make('identity_number')
                                                 ->label('Nomor Identitas')
                                                 ->suffixIcon('heroicon-m-credit-card')
@@ -157,6 +171,7 @@ class ApplicationHistoryResource extends Resource
                                             Forms\Components\TextInput::make('income_avg')
                                                 ->label('Penghasilan Rata-Rata')
                                                 ->prefix('Rp.')
+                                                ->currencyMask(thousandSeparator: ',',decimalSeparator: '.',precision: 2)
                                                 ->default(function () {
                                                     $authUserId = auth()->id();
                                                     return Business::where('id', $authUserId)->value('income_avg');
