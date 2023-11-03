@@ -1,11 +1,11 @@
 <?php
 
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\FileUploadController;
-use App\Http\Controllers\Lender\LenderController;
 use App\Http\Controllers\RegisterRoleController;
 use App\Http\Controllers\Borrower\BorrowerController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterPenerimaDanaController;
+use App\Http\Controllers\RegisterPenerimaDatadiriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
@@ -30,22 +30,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
 
 Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
 Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
-Route::get('/register-lender', [RegisterRoleController::class, 'RegisterLenderPage'])->name('register-lender');
+Route::get('/register-penerima-datadiri', [RegisterPenerimaDatadiriController::class, 'registerPenerimaDatadiri'])->name('register-penerima-datadiri');
 
-Route::group(['middleware' => 'auth'], function() {
-
-    Route::group(['middleware' => 'role:lender', 'prefix' => 'lender', 'as' => 'lender.'], function() {
-        Route::resource('dashboard', BorrowerController::class);
-    });
-    Route::group(['middleware' => 'role:borrower', 'prefix' => 'borrower', 'as' => 'borrower.'], function() {
-        Route::resource('dashboard', LenderController::class);
-    });
-    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
-        Route::resource('dashboard', AdminController::class);
-    });
-});
-
-
-Route::get('file-upload', [ FileUploadController::class, 'getFileUploadForm' ])->name('get.fileupload');
-Route::post('file-upload', [ FileUploadController::class, 'store' ])->name('store.file');
 
