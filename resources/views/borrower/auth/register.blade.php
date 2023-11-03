@@ -95,8 +95,8 @@
 
                                     <div class="text-lg ml-4 text-white">
                                         {!! __('saya telah :membaca and :menyetujui semua ketentuan di atas', [
-                                                'membaca' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-white-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('membaca').'</a>',
-                                                'menyetujui' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-white-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('menyetujui').'</a>',
+                                                'membaca' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-black dark:text-black hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('membaca').'</a>',
+                                                'menyetujui' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-white-600 dark:text-black  hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('menyetujui').'</a>',
                                         ]) !!}
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                     <input type="hidden" name="role_id" value="2" />
 
                     <div class="flex flex-col w-8/12 mt-6 mx-auto justify-center">
-                        <button id="button-register" class="w-full mt-3 h-10 bg-white text-[#186F65] font-bold text-base font-worksans justify-center rounded-md hover:bg-[#186F65] hover:text-white">
+                        <button id="button-register" class="w-full mb-10 mt-3 h-10 bg-white text-[#186F65] font-bold text-base font-worksans justify-center rounded-md hover:bg-[#186F65] hover:text-white">
                             {{ __('DAFTAR') }}
                         </button>
                     </div>

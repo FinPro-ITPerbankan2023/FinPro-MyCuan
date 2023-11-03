@@ -14,7 +14,7 @@
                 <div class="w-1/2">
                     <div class="ml-5">
                         <div class="ml-3 mt-2">
-                            <x-input-label class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="namalengkap" 
+                            <x-input-label class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="namalengkap"
                                 value="{{ __('Nama Lengkap KTP')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -193,7 +193,7 @@
             </div>
             <div class="flex w-full m-5 justify-center">
                 <button
-                    class="bg-[#EFEFFD] mx-0 w-2/6 h-10 text-[#185F65] font-worksans font-extrabold rounded-md hover:border-indigo-500 hover:border" type="submit">Next</button>
+                    class="bg-[#EFEFFD] mx-0 w-2/6 h-10 text-[#185F65] font-worksans font-extrabold rounded-md hover:border-indigo-500 hover:border" type="submit" onclick="window.location.href='{{ route('register-borrower-business') }}'">Next</button>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\Filament\LogoutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisterPageController;
@@ -34,6 +35,9 @@ Route::post('/auth/lender-logout', [LogoutController::class, 'logout'])->name('f
 Route::post('/auth/borrower-logout', [LogoutController::class, 'logout'])->name('filament.borrower.auth.logout')->middleware('role:borrower');
 
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
+
+Route::post('/business', [BusinessController::class, 'InsertTable'])->name('business.information');
+
 
 
 

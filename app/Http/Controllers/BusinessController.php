@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 class BusinessController extends Controller
 {
     public function InsertTable(Request $request)
     {
+//        dd($request->all());
         $request->validate([
             'business_permit_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'business_place_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -53,9 +55,10 @@ class BusinessController extends Controller
             'business_product_image' => $productUrl,
         ]);
 
-        return response()->json(['users' => $userDetail], 201);
-    }
+        return redirect('/borrower');
+//        return response()->json(['users' => $userDetail], 201);
 
+    }
 
     public function getBusiness()
     {
