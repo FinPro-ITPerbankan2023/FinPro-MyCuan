@@ -13,14 +13,14 @@ class RegisterPageController extends Controller
         return view('register-role');
     }
 
-    public function RegisterBorrowerPage()
-    {
-        return view('borrower.auth.register');
-    }
-
     public function RegisterLenderPage()
     {
         return view('lender.auth.register');
+    }
+
+    public function RegisterBorrowerPage()
+    {
+        return view('borrower.auth.register');
     }
 
     public function RegisterBorrowerProfilePage()
