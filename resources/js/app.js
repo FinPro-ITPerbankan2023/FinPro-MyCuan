@@ -24,7 +24,7 @@ function show(){
 function showconfirm(){
     let eyeiconhidden = document.getElementById('eye-hidden-confirm');
     let eyeiconshow = document.getElementById('eye-show-confirm');
-    let password = document.getElementById('password-confirm');
+    let password = document.getElementById('password_confirmation');
 
     eyeiconhidden.onclick = function(){
         if(password.type == "password"){
