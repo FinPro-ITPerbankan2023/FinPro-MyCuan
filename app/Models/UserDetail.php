@@ -4,30 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserDetail extends Model
 {
     use HasFactory;
-    protected $table = 'user_detail';
 
     protected $fillable = [
         'user_id',
+        'number_identity',
         'date_birth',
         'birth_place',
         'street',
-        'district',
-        'city',
         'province',
-        'post_code',
-        'phone_number',
+        'city',
+        'district',
+        'zip_code',
+        'account_number',
+        'account_name',
+        'bank_name',
     ];
-    public function user(): BelongsTo
 
+    public function user() : \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-
-        return $this->belongsTo(User::class);
-
+        return $this->belongsTo(User::class,'user_id','id');
     }
-
 }

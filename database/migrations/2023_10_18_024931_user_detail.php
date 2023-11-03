@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_detail', function (Blueprint $table) {
+        Schema::create('user_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users','id');
+            $table->bigInteger('number_identity');
             $table->date('date_birth')->nullable();
-            $table->string('birth_place')->nullable();
-            $table->text('street')->nullable();
-            $table->text('district')->nullable();
-            $table->text('city')->nullable();
-            $table->text('province')->nullable();
-            $table->string('post_code')->nullable();
-            $table->longText('phone_number')->nullable();
+            $table->string('birth_place');
+            $table->text('street');
+            $table->text('district');
+            $table->text('city');
+            $table->text('province');
+            $table->integer('zip_code')->default(51215)->nullable();
+            $table->bigInteger('account_number');
+            $table->string('account_name');
+            $table->string('bank_name');
             $table->timestamps();
         });
     }
@@ -31,7 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_detail');
+        Schema::dropIfExists('user_details');
 
     }
 };

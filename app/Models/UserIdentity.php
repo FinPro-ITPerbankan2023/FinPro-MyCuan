@@ -13,6 +13,8 @@ class UserIdentity extends Model
     protected $fillable = [
         'user_id',
         'identity_number',
+        'identity_image',
+        'selfie_image',
     ];
 
     public function user(): BelongsTo

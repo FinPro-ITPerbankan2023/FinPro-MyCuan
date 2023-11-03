@@ -4,8 +4,11 @@ namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\UserDetail;
+use App\Models\UserIdentity;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Jetstream\Features;
 
 /**
@@ -18,16 +21,19 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+   
     public function definition(): array
     {
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('password'), // password
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
+            'role_id' => $this->faker->numberBetween(1,3),
             'profile_photo_path' => null,
             'current_team_id' => null,
         ];

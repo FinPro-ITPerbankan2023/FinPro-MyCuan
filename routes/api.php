@@ -20,9 +20,12 @@ use \App\Http\Controllers\UserController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+//user common
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::post('/register', [CreateNewUser::class, 'register']);
+//user detail borrower
+Route::post('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'store']);
+Route::get('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'getAll']);
 
 Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'getBusiness']);
 Route::post('/business', [\App\Http\Controllers\BusinessController::class, 'InsertTable']);
