@@ -9,23 +9,12 @@ use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
-    public function create(Request $request){
+    public function payment(Request $request){
 
         $params = array (
             'transaction_details' => array(
                 'order_id' => Str::uuid(),
-                'gross_amount' => $request->price,
-            ),
-            'item_details' => array (
-                array(
-                    'price' => $request->price,
-                    'quantity' => 1,
-                    'name' => $request->item_name,
-                )
-            ),
-            'customer_details' => array(
-                'first_name' => $request->customer_first_name,
-                'email' => $request->customer_email,
+                'gross_amount' => $request->amount,
             ),
         );
 
@@ -38,24 +27,21 @@ class PaymentController extends Controller
 
         $response = json_decode($response->body());
 
-
         if (property_exists($response, 'redirect_url')) {
-            $payment = new Payment;
+            $payment = new Payment();
             $payment->order_id = $params['transaction_details']['order_id'];
+            $payment->user_id = request('userId');
+            $payment->loan_id = request('loanId');
             $payment->status = 'pending';
-            $payment->price = $request->price;
-            $payment->customer_first_name = $request->customer_first_name;
-            $payment->customer_email = $request->customer_email;
-            $payment->item_name  = $request->item_name;
-            $payment->checkout_link = $response->redirect_url;
+            $payment->payment_date = now();
+            $payment->amount = $request->amount;
+            $payment->payment_link = $response->redirect_url;
+
             $payment->save();
 
-            return response()->json($response);
+            return redirect($response->redirect_url);
         } else {
-            // Handle the case where redirect_url is not present in the response
             dd($response);
-
-//            return response()->json(['error' => 'Redirect URL not found in the response'], 500);
         }
     }
 

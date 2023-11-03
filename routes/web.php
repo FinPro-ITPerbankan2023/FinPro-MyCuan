@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Filament\LogoutController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisterPageController;
 use App\Http\Controllers\Borrower\BorrowerController;
 use App\Http\Controllers\HomeController;
@@ -34,6 +35,7 @@ Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament
 Route::post('/auth/lender-logout', [LogoutController::class, 'logout'])->name('filament.lender.auth.logout')->middleware('role:lender');
 Route::post('/auth/borrower-logout', [LogoutController::class, 'logout'])->name('filament.borrower.auth.logout')->middleware('role:borrower');
 
+Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 
 
 

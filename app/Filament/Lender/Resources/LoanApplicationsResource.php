@@ -56,7 +56,7 @@ class LoanApplicationsResource extends Resource
 
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('nama Peminjam')
+                    ->label('Nama Peminjam')
                     ->numeric()
                     ->sortable()
                     ->searchable(),
@@ -92,7 +92,13 @@ class LoanApplicationsResource extends Resource
             ])
             ->actions([
                 Action::make('loan_status')
-                    ->action(fn (Loans $record) => $record->verifyLoan())
+                    ->action(function (Loans $record) {
+                        $amount = $record->amount;
+                        $userId = auth()->id();
+                        $loanId = $record->id;
+
+                        return redirect()->route('payment', ['amount' => $amount, 'userId' => $userId, 'loanId' => $loanId]);
+                    })
                     ->requiresConfirmation()
                     ->button()
                     ->modalIcon('heroicon-s-hand-thumb-up')
