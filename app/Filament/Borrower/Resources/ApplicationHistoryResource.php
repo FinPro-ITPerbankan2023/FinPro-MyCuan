@@ -19,9 +19,13 @@ use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Forms;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
@@ -208,6 +212,7 @@ class ApplicationHistoryResource extends Resource
     {
         $user = Auth::user();
         $userId = $user->id;
+        $record = Loans::where('user_id', $userId)->get(); // Fetch the records for the specific user
         return $table
         ->modifyQueryUsing(function (Builder $query) use ($userId) {
             $query->where('user_id', $userId);
@@ -222,36 +227,125 @@ class ApplicationHistoryResource extends Resource
                     })
                     ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
                     ->label('Status Pinjaman'),
+
                 Tables\Columns\TextColumn::make('amount')
                     ->label('Jumlah Dana')
                     ->money('idr')
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->label('Lama Pengajuan (Bulan)')
                     ->searchable()
                     ->sortable()
                     ->alignCenter(),
+
+                Tables\Columns\TextColumn::make('paid_loan_installment')
+                    ->label('Cicilan Dibayar'),
+
+                Tables\Columns\TextColumn::make('unpaid_amount_loan')
+                    ->label('Sisa Tagihan'),
+
                 Tables\Columns\TextColumn::make('application_date')
-                    ->label('Tanggal Pengajuan')
-                    ->dateTime()
-                    ->sortable(),
+                    ->label('Tanggal Pengajuan'),
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Tanggal Update Terakhir')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->striped();
 
+            // TODO: Add logic to store unpaid loan, paid loan (month left)
+            ->striped()
+            ->actions([
+                \Filament\Tables\Actions\Action::make('loan_status')
+                    ->action(function (Loans $record) {
+                        $originalAmount = $record->amount;
 
+                        $amount = ($originalAmount / 12) * 1.05; // Add 5%
+
+                        $amount = intval($amount);
+                        $userId = auth()->id();
+                        $loanId = $record->id;
+
+                        return redirect()->route('payment', ['amount' => $amount, 'userId' => $userId, 'loanId' => $loanId]);
+
+                        //TODO add interest to payment details
+                    })
+                    ->requiresConfirmation()
+                    ->button()
+                    ->modalIcon('heroicon-s-hand-thumb-up')
+                    ->modalDescription('Anda akan diarahkan pada halaman pembayaran')
+                    ->modalCancelActionLabel('Batal')
+                    ->modalSubmitActionLabel('Lanjut')
+                    ->hidden(fn (Loans $record) => $record->loan_status !== 1) // Add condition to hide button if the status isn't funded yet.
+                    ->label('BAYAR PINJAMAN'),
+
+                ActionGroup::make([
+                    ViewAction::make(),
+                ]),
+            ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                \Filament\Infolists\Components\Section::make('Informasi Pinjaman')
+                    ->icon('heroicon-o-face-smile')
+                    ->schema([
+                        TextEntry::make('loan_purpose') ->label('Tujuan Pinjaman'),
+
+                        TextEntry::make('loan_duration') ->label('Lama Pinjaman'),
+
+                        TextEntry::make('loan_status') ->label('Status Pinjaman')->copyable(true)
+                            ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
+                            ->badge()
+                            ->color(fn (bool $state): string => match ($state) {
+                                false => 'danger',
+                                true => 'success',
+                            }),
+
+                        TextEntry::make('application_date') ->label('Tanggal Pengajuan'),
+                    ]) ->columns(3),
+
+                \Filament\Infolists\Components\Section::make('Pembayaran Pinjaman')
+                    ->schema([
+                        TextEntry::make('loan_purpose') ->label('Sisa Tagihan'),
+
+                        TextEntry::make('loan_duration') ->label('Cicilan Dibayarkan'),
+
+                        TextEntry::make('intereset') ->label('Bunga Pinjaman')
+                            ->money('IDR')
+                            ->suffix('   (5%) /bulan')
+                            ->default(function (Loans $record) {
+                                // Assuming $record->amount contains the loan amount
+                                $interestPercentage = 5; // Change this to your desired interest rate
+                                $interest = ($record->amount * $interestPercentage) / 100;
+
+                                return number_format($interest, 2, '.', ''); // Format as a decimal with two decimal places
+                            }),
+
+                    ]) ->columns(3),
+
+
+
+
+//                Section::make('Riwayat Pinjaman')
+//                    ->icon('heroicon-o-arrow-path')
+//                    // TODO Add logic to retrieve history of borrower, try with RepeatableEntry
+//
+//                    ->columns(2),
+
+            ]);
+    }
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListApplicationHistories::route('/'),
             'create' => Pages\CreateApplicationHistory::route('/create'),
-            'view' => Pages\ViewApplicationHistory::route('/{record}'),
-            'edit' => Pages\EditApplicationHistory::route('/{record}/edit'),
+//            'view' => Pages\ViewApplicationHistory::route('/{record}'),
+//            'edit' => Pages\EditApplicationHistory::route('/{record}/edit'),
         ];
     }
 
