@@ -29,6 +29,7 @@ class BorrowerController extends Controller
         $request->validate([
             'identity_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'selfie_image'  => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'full_name'  => 'required|string|max:100',
             'date_birth' => 'required|date',
             'number_identity' => 'required|numeric|min:5',
             'birth_place' => 'required|string|max:100',
@@ -52,6 +53,7 @@ class BorrowerController extends Controller
 
             $user = UserDetail::create([
                 'user_id' => $getid,
+                'full_name' => $request->full_name,
                 'number_identity' => $request->number_identity,
                 'date_birth' => $request->date_birth,
                 'birth_place' => $request->birth_place,
@@ -91,7 +93,7 @@ class BorrowerController extends Controller
         }
         catch (Exception $e){
             DB::rollback();
-            return response()->json(['error'=> $e->getMessage()],500);
+            return redirect('/register-penerima-datadiri')->with('success','Post upload');
         }
        
     }

@@ -6,19 +6,22 @@
         <div class="">
             @include('layouts.include.navigation.navigation-register-penerima')
         </div>
+        <form method="POST" action=" {!! url('/register/borrowers') !!}" >
         <div class="flex flex-col bg-white w-8/12 mx-auto my-2 rounded-xl border-b-2 border-solid">
+
             <div class="font-worksans font-extrabold my-5 text-lg ml-10 dark:text-black">
                 <h1>Penerima Dana</h1>
             </div>
             <div class="flex flex-row">
                 <div class="w-1/2">
                     <div class="ml-5">
+                        
                         <div class="ml-3 mt-2">
-                            <x-input-label class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="namalengkap" 
+                            <x-input-label  class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="namalengkap" 
                                 value="{{ __('Nama Lengkap KTP')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="namalengkap" type="text" id="namalengkap"
+                                <x-input name="full_name" type="text" id="full_name"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan nama lengkap Anda') }}" required
                                     autocomplete="namalengkap" />
@@ -29,7 +32,7 @@
                                 value="{{ __('NIK')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="nik" type="text" id="nik"
+                                <x-input name="number_identity" type="text" id="number_identity"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan NIK Anda') }}" required autocomplete="nik" />
                             </div>
@@ -39,7 +42,7 @@
                                 value="{{ __('Tanggal Lahir')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="tgllahir" type="text" id="tgllahir"
+                                <x-input name="date_birth" type="text" id="date_birth"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan tanggal lahir sesuai KTP Anda') }}" required
                                     autocomplete="tgllahir" />
@@ -50,7 +53,7 @@
                                 value="{{ __('Tempat Lahir')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="tmptlahir" type="text" id="tmptlahir"
+                                <x-input name="birth_place" type="text" id="birth_place"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan tempat lahir sesuai KTP Anda') }}" required
                                     autocomplete="tmptlahir" />
@@ -61,7 +64,7 @@
                                 value="{{ __('Alamat Lengkap')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="alamat" type="text" id="alamat"
+                                <x-input name="street" type="text" id="street"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Jalan xxx') }}" required autocomplete="alamat" />
                             </div>
@@ -71,7 +74,7 @@
                                 value="{{ __('Provinsi')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="provinsi" type="text" id="provinsi"
+                                <x-input name="province" type="text" id="province"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Jawa, Kalimantan, dkk') }}" required autocomplete="provinsi" />
                             </div>
@@ -81,7 +84,7 @@
                                 value="{{ __('Kab/Kota')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="kabkota" type="text" id="kabkota"
+                                <x-input name="city" type="text" id="city"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Masukan Kab/Kota Anda') }}" required autocomplete="kabkota" />
                             </div>
@@ -91,7 +94,7 @@
                                 value="{{ __('Kecamatan')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="kecamtn" type="text" id="kecamtn"
+                                <x-input name="disrict" type="text" id="disrict"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Masukan Kecamatan Anda') }}" required autocomplete="kecamtn" />
                             </div>
@@ -105,7 +108,7 @@
                                 value="{{ __('Kode Pos')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="kodepos" type="text" id="kodepos"
+                                <x-input name="zip_code" type="text" id="zip_code"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('709123') }}" required autocomplete="kodepos" />
                             </div>
@@ -115,7 +118,7 @@
                                 for="nomorrekening" value="{{ __('Nomor Rekening')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="nomorrekening" type="text" id="nomorrekening"
+                                <x-input name="account_number" type="text" id="account_number"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('000725649926') }}" required autocomplete="nomorrekening" />
                             </div>
@@ -125,7 +128,7 @@
                                 for="namarekening" value="{{ __('Nama Rekening')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="namarekening" type="text" id="namarekening"
+                                <x-input name="account_name" type="text" id="account_name"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('a/n  xxxxx') }}" required autocomplete="namarekening" />
                             </div>
@@ -135,7 +138,7 @@
                                 value="{{ __('Nama Bank')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="namabank" type="text" id="namabank"
+                                <x-input name="bank_name" type="text" id="bank_name"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Bank Central Asia (BCA)') }}" required
                                     autocomplete="namabank" />
@@ -159,7 +162,7 @@
                                         <div class="flex flex-row ml-5">
                                             <span
                                                 class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg"
-                                                id="buttonuploadfotoktp" onclick="uploadfotoktp()">UPLOAD</span>
+                                               name="selfie_image" id="buttonuploadfotoktp" onclick="uploadfotoktp()">UPLOAD</span>
                                             <span id="textfotoktp" class="flex items-center ml-3 dark:text-black">No file chosen,
                                                 yet.</span>
                                         </div>
@@ -179,7 +182,7 @@
                                         <div class="flex flex-row ml-5 mb-5">
                                             <span
                                                 class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg"
-                                                id="buttonuploadktp" onclick="uploadktp()">UPLOAD</span>
+                                                name="identity_image" id="buttonuploadktp" onclick="uploadktp()">UPLOAD</span>
                                             <span id="textktp" class="flex items-center ml-3 dark:text-black">No file chosen,
                                                 yet.</span>
                                         </div>
@@ -193,8 +196,9 @@
             </div>
             <div class="flex w-full m-5 justify-center">
                 <button
-                    class="bg-[#EFEFFD] mx-0 w-2/6 h-10 text-[#185F65] font-worksans font-extrabold rounded-md hover:border-indigo-500 hover:border" type="submit">Next</button>
+                    class="bg-[#EFEFFD] mx-0 w-2/6 h-10 text-[#185F65] font-worksans font-extrabold rounded-md hover:border-indigo-500 hover:border" type="submit" name="add">Next</button>
             </div>
+        </form>
         </div>
     </div>
 
