@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BusinessSeeder::class);
         $this->call(LoansSeeder::class);
         $this->call(BankDetailSeeder::class);
+        $this->call(PaymentsSeeder::class);
+
     }
 }
