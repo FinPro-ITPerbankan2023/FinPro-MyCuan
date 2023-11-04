@@ -33,3 +33,10 @@ Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrow
 Route::get('/register-penerima-datadiri', [RegisterPenerimaDatadiriController::class, 'registerPenerimaDatadiri'])->name('register-penerima-datadiri');
 
 
+Route::get('/prasyarat', function () {
+    return view('prasyarat');
+});
+
+Route::get('/coba', function () {
+    return view('coba');
+});
