@@ -17,6 +17,7 @@ class UserDetailFactory extends Factory
     public function definition(): array
     {
         return [
+                'full_name'=> $this->faker->name,
                 'number_identity' => $this->faker->randomNumber(null,false),
                 'date_birth' => $this->faker->date,
                 'birth_place' => $this->faker->address,

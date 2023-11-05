@@ -23,7 +23,7 @@
                                 value="{{ __('Nama Lengkap KTP')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="name" type="text" id="full_name"
+                                <x-input name="full_name" type="text" id="full_name"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan nama lengkap Anda') }}" required
                                     autocomplete="namalengkap" />
