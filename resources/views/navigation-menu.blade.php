@@ -12,25 +12,25 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('dashboard') }}">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
 
                     @if (auth()->user()->role_id == 1)
-                        <x-nav-link href="{{ route('lender.dashboard.index') }}" :active="request()->routeIs('lender.dashboard.index')">
+                        <x-nav-link href="/lender">
                             {{ __('Lender Dashboard') }}
                         </x-nav-link>
                     @endif
 
                     @if (auth()->user()->role_id == 2)
-                        <x-nav-link href="{{ route('borrower.dashboard.index') }}" :active="request()->routeIs('borrower.dashboard.index')">
+                        <x-nav-link href="/borrower">
                             {{ __('Borrower Dashboard') }}
                         </x-nav-link>
                     @endif
 
                     @if (auth()->user()->role_id == 3)
-                        <x-nav-link href="{{ route('admin.dashboard.index') }}" :active="request()->routeIs('admin.dashboard.index')">
+                        <x-nav-link href="/admin">
                             {{ __('Admin Dashboard') }}
                         </x-nav-link>
                     @endif
