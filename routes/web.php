@@ -27,6 +27,7 @@ Route::get('/', function () {
 Route::get('/register-role', [RegisterPageController::class, 'registerRole'])->name('register-role');
 Route::get('/register-lender', [RegisterPageController::class, 'RegisterLenderPage'])->name('register-lender');
 Route::get('/register-borrower', [RegisterPageController::class, 'RegisterBorrowerPage'])->name('register-borrower');
+Route::get('/register-borrower-prasyarat', [RegisterPageController::class, 'RegisterPrasyaratBorrowerPage'])->name('register-borrower-prasyarat');
 Route::get('/register-borrower-profile', [RegisterPageController::class, 'RegisterBorrowerProfilePage'])->name('register-borrower-profile');
 Route::get('/register-borrower-business', [RegisterPageController::class, 'RegisterBorrowerBusinessPage'])->name('register-borrower-business');
 

@@ -33,6 +33,11 @@ class RegisterPageController extends Controller
         return view('borrower.informasi-bisnis');
     }
 
+    public function RegisterPrasyaratBorrowerPage()
+    {
+        return view('borrower.prasyarat');
+    }
+
     public function logout()
     {
         Auth::logout();
