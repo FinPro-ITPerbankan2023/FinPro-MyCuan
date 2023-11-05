@@ -15,9 +15,9 @@ class AddRolesFieldsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('role_id')->constrained();
-            $table->string('user_ville')->nullable();
-            $table->string('user_age')->nullable();
-            $table->string('seller_categorie')->nullable();
+//            $table->string('user_ville')->nullable();
+//            $table->string('user_age')->nullable();
+//            $table->string('seller_categorie')->nullable();
         });
     }
 

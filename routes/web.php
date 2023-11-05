@@ -1,10 +1,9 @@
 <?php
 
 
-use App\Http\Controllers\RegisterRoleController;
+use App\Http\Controllers\Filament\LogoutController;
+use App\Http\Controllers\RegisterPageController;
 use App\Http\Controllers\Borrower\BorrowerController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RegisterPenerimaDanaController;
 use App\Http\Controllers\RegisterPenerimaDatadiriController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,14 +22,19 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');})->name('dashboard');
-});
+Route::get('/register-role', [RegisterPageController::class, 'registerRole'])->name('register-role');
+Route::get('/register-lender', [RegisterPageController::class, 'RegisterLenderPage'])->name('register-lender');
+Route::get('/register-borrower', [RegisterPageController::class, 'RegisterBorrowerPage'])->name('register-borrower');
+Route::get('/register-borrower-profile', [RegisterPageController::class, 'RegisterBorrowerProfilePage'])->name('register-borrower-profile');
+Route::get('/register-borrower-business', [RegisterPageController::class, 'RegisterBorrowerBusinessPage'])->name('register-borrower-business');
 
-Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
-Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
-Route::get('/register-penerima-datadiri', [RegisterPenerimaDatadiriController::class, 'registerPenerimaDatadiri'])->name('register-penerima-datadiri');
+Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament.admin.auth.logout')->middleware('role:admin');
+Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament.lender.auth.logout')->middleware('role:lender');
+Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament.borrower.auth.logout')->middleware('role:borrower');
+
+
+
+
 
 
 Route::get('/prasyarat', function () {

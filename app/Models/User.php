@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasApiTokens;
     use HasFactory;
@@ -82,4 +85,42 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Business::class,);
 
     }
+    public function Loans(): HasMany
+    {
+
+        return $this->hasMany(Loans::class,);
+
+    }
+
+    public function BankDetail(): HasOne
+    {
+
+        return $this->hasOne(BankDetail::class,);
+
+    }
+
+    public function HistoryTransaction(): HasMany
+    {
+
+        return $this->hasMany(HistoryTransaction::class,);
+
+    }
+
+
+    public function canAccessPanel(Panel|\Filament\Panel $panel): bool
+    {
+        return match ($panel->getId()) {
+            'admin' => $this->role_id === 3,
+            'borrower' => $this->role_id === 2,
+            'lender' => $this->role_id === 1,
+            default => true,
+        };
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ? Storage::url($this->avatar_url) : null ;
+    }
+
+
 }
