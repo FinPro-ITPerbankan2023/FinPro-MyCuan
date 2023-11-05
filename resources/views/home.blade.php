@@ -3,21 +3,21 @@
 <x-guest-layout>
     <div class="h-auto bg-gradient-to-bl from-[#13a89e] to-white-700 dark:text-black">
         <nav>
-            <div class="flex mx-auto py-5 px-10 ">
-                <div class=" flex flex-row grow-0 w-52 items-center justify-center">
+            <div class="flex px-10 py-5 mx-auto ">
+                <div class="flex flex-row items-center justify-center  grow-0 w-52">
                     <a href="{{ url('home')}}"><img src="{{asset('assets/img/Logo_MyCuan.png')}}" alt="Logo MyCuan"
                             class="w-20 h-20"></a>
                     <a href="{{ url('home')}}">
-                        <p class="text-black ml-6 font-poppins text-2xl">MyCuan</p>
+                        <p class="ml-6 text-2xl text-black font-poppins">MyCuan</p>
                     </a>
                 </div>
-                <div class="flex grow items-center justify-center font-poppins">
+                <div class="flex items-center justify-center grow font-poppins">
                     <a href="#persyaratan" class="mx-5 hover:text-white">Persyaratan Peminjaman</a>
                     <a href="#tentang" class="mx-5 hover:text-white">Tentang Kami</a>
                     <a href="#kontak" class="mx-5 hover:text-white">Kontak</a>
                 </div>
                 @if (Route::has('login'))
-                <div class="flex grow-0 items-center justify-center ml-96">
+                <div class="flex items-center justify-center grow-0 ml-96">
                     @auth
                     <a href="{{ url('/dashboard') }}"
                         class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
@@ -36,45 +36,45 @@
                     Jalani Hidup Tanpa Batasan, Dengan Bantuan My Cuan.
                 </h1>
             </div>
-            <div class="sliderAx max-w-4xl mx-auto pt-5">
+            <div class="max-w-4xl pt-5 mx-auto sliderAx">
                 <div id="slider-1" class="container mx-auto">
-                    <div class="bg-cover bg-center h-52 text-white py-40 px-10 object-fill"
+                    <div class="object-fill px-10 py-40 text-white bg-center bg-cover h-52"
                         style="background-image: url('assets/img/home-img/slider-img/slider-img-1.jpg')">
                     </div>
                     <!-- container -->
                     <br>
                 </div>
                 <div id="slider-2" class="container mx-auto">
-                    <div class="bg-cover bg-center  h-auto text-white py-40 px-10 object-fill"
+                    <div class="object-fill h-auto px-10 py-40 text-white bg-center bg-cover"
                         style="background-image: url('assets/img/home-img/slider-img/slider-img-2.jpg')">
                     </div>
                     <!-- container -->
                     <br>
                 </div>
                 <div id="slider-3" class="container mx-auto">
-                    <div class="bg-cover bg-center  h-auto text-white py-40 px-10 object-fill"
+                    <div class="object-fill h-auto px-10 py-40 text-white bg-center bg-cover"
                         style="background-image: url('assets/img/home-img/slider-img/slider-img-3.jpg')">
                     </div>
                     <!-- container -->
                     <br>
                 </div>
                 <div id="slider-4" class="container mx-auto">
-                    <div class="bg-cover bg-center  h-auto text-white py-40 px-10 object-fill"
+                    <div class="object-fill h-auto px-10 py-40 text-white bg-center bg-cover"
                         style="background-image: url('assets/img/home-img/slider-img/slider-img-4.jpg')">
                     </div>
                     <!-- container -->
                     <br>
                 </div>
             </div>
-            <div class="flex justify-between w-20 mx-auto pb-2">
+            <div class="flex justify-between w-20 pb-2 mx-auto">
                 <button id="sButton1" onclick="sliderButton(0)"
-                    class="slider-button bg-slate-300 rounded-full w-4 pb-2 "></button>
+                    class="w-4 pb-2 rounded-full slider-button bg-slate-300 "></button>
                 <button id="sButton2" onclick="sliderButton(1)"
-                    class="slider-button bg-slate-300 rounded-full w-4 p-2"></button>
+                    class="w-4 p-2 rounded-full slider-button bg-slate-300"></button>
                 <button id="sButton3" onclick="sliderButton(2)"
-                    class="slider-button bg-slate-300 rounded-full w-4 p-2"></button>
+                    class="w-4 p-2 rounded-full slider-button bg-slate-300"></button>
                 <button id="sButton4" onclick="sliderButton(3)"
-                    class="slider-button bg-slate-300 rounded-full w-4 p-2"></button>
+                    class="w-4 p-2 rounded-full slider-button bg-slate-300"></button>
             </div>
             <div class="text-center text-xl font-bold font-['Poppins'] py-5">
                 <h1>
@@ -90,7 +90,7 @@
             </div>
             <div class="mx-40">
                 <div class="grid grid-cols-2 justify-items-center">
-                    <div class="object-cover h-4/5 w-4/5">
+                    <div class="object-cover w-4/5 h-4/5">
                         <img src="{{ asset('assets/img/home-img/persyaratan-peminjaman/img-1.png')}}">
                     </div>
                     <div class="self-center">
@@ -103,10 +103,10 @@
                         <p class="font-['Poppins']">Surat izin usaha ini berfungsi sebagai bukti bahwa usaha Anda
                             beroperasi secara legal dan sesuai dengan regulasi yang berlaku.</p>
                     </div>
-                    <div class="object-cover h-3/5 w-3/5">
+                    <div class="object-cover w-3/5 h-3/5">
                         <img src="{{ asset('assets/img/home-img/persyaratan-peminjaman/img-2.png')}}">
                     </div>
-                    <div class="object-cover h-3/5 w-3/5">
+                    <div class="object-cover w-3/5 h-3/5">
                         <img src="{{ asset('assets/img/home-img/persyaratan-peminjaman/img-3.png')}}">
                     </div>
                     <div class="self-center">
@@ -119,10 +119,10 @@
                         <p class="font-['Poppins']">Calon peminjam harus berusia minimal 20 tahun dan tidak lebih dari
                             60 tahun saat mengajukan pinjaman.</p>
                     </div>
-                    <div class="object-cover h-3/5 w-3/5">
+                    <div class="object-cover w-3/5 h-3/5">
                         <img src="{{ asset('assets/img/home-img/persyaratan-peminjaman/img-4.png')}}">
                     </div>
-                    <div class="object-cover h-3/5 w-3/5">
+                    <div class="object-cover w-3/5 h-3/5">
                         <img src="{{ asset('assets/img/home-img/persyaratan-peminjaman/img-5.png')}}">
                     </div>
                     <div class="self-center">
@@ -139,7 +139,7 @@
             <div class="text-center text-6xl font-bold font-['Poppins'] my-12" id="tentang">
                 <h1>Tentang Kami</h1>
             </div>
-            <div class="flex items-center justify-center my-20 gap-16 px-20">
+            <div class="flex items-center justify-center gap-16 px-20 my-20">
                 <img src="{{ asset('assets/img/Logo_MyCuan.png')}}" class="object-cover h-80 w-80">
                 <p class="self-center font-['Poppins'] text-2xl w-2/4">MyCuan adalah sebuah platform pinjam meminjam
                     uang berbasis teknologi informasi yang menghubungkan peminjam dan pendana secara langsung. Kami
@@ -154,7 +154,7 @@
             </div>
             <div class="flex justify-between gap-10 mt-24">
                 <div class="font-['Poppins']">
-                    <h1 class="font-bold mb-5 text-2xl">Hubungi Kami</h1>
+                    <h1 class="mb-5 text-2xl font-bold">Hubungi Kami</h1>
                     <div class="flex gap-2 mb-3">
                         <svg width="34" height="22" viewBox="0 0 44 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -173,7 +173,7 @@
                     </div>
                 </div>
                 <div class="font-['Poppins'] mx-16 w-1/4">
-                    <h1 class="font-bold mb-5 text-2xl">Alamat Kami</h1>
+                    <h1 class="mb-5 text-2xl font-bold">Alamat Kami</h1>
                     <div class="flex gap-2">
                         <svg width="60" height="45" viewBox="0 0 40 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -185,21 +185,21 @@
                     </div>
                 </div>
                 <div class="font-['Poppins']">
-                    <h1 class="font-bold text-2xl mb-5">Ikuti Kami</h1>
+                    <h1 class="mb-5 text-2xl font-bold">Ikuti Kami</h1>
                     <div class="flex">
-                        <a href="" class="object-cover h-16 w-16">
+                        <a href="" class="object-cover w-16 h-16">
                             <img height="50" width="50"
                                 src="{{ asset('assets/img/home-img/follow-img/instagram-logo.png')}}">
                         </a>
-                        <a href="" class="object-cover h-16 w-16">
+                        <a href="" class="object-cover w-16 h-16">
                             <img height="50" width="50"
                                 src="{{ asset('assets/img/home-img/follow-img/facebook-logo.png')}}">
                         </a>
-                        <a href="" class="object-cover h-16 w-16">
+                        <a href="" class="object-cover w-16 h-16">
                             <img height="50" width="50"
                                 src="{{ asset('assets/img/home-img/follow-img/tiktok-logo.png')}}">
                         </a>
-                        <a href="" class="object-cover h-16 w-16">
+                        <a href="" class="object-cover w-16 h-16">
                             <img height="50" width="50"
                                 src="{{ asset('assets/img/home-img/follow-img/twitter-logo.png')}}">
                         </a>
