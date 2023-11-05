@@ -17,7 +17,7 @@ class UserDetailSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 5) as $index) {
+        foreach (range(1, 3) as $index) {
             DB::table('user_detail')->insert([
                 'user_id' => $index,
                 'date_birth' => $faker->date,
