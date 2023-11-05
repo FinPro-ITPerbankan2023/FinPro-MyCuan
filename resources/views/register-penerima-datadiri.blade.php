@@ -60,13 +60,12 @@
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan tanggal lahir sesuai KTP Anda') }}" required
                                     autocomplete="tgllahir" />
-                                    @error('date_birth')
+                            </div>
+                            @error('date_birth')
                                     <div class="text-danger">
                                         <small class="text-danger" style="color: red">{{$message}}</small>
                                     </div>
                                 @enderror
-                                
-                            </div>
                         </div>
                         <!-- birth_place -->
                         <div class="ml-3 mt-2 form-group">
@@ -241,9 +240,15 @@
                                             <span
                                                 class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg"
                                                name="selfie_image" id="buttonuploadfotoktp" onclick="uploadfotoktp()">UPLOAD</span>
-                                            <span id="textfotoktp" class="flex items-center ml-3 dark:text-black">No file chosen,
+                                               <x-input-file name="selfie_image" id="textfotoktp" />
+                                            <span  name="selfie_image" id="textfotoktp" class="flex items-center ml-3 dark:text-black">No file chosen,
                                                 yet.</span>
                                         </div>
+                                            @error('selfie_image')
+                                            <div class="text-danger">
+                                                <small class="text-danger" style="color: red">{{$message}}</small>
+                                            </div>
+                                            @enderror
                                     </div>
                                 </label>
                                 <input class="hidden" type="file" id="file_upload_foto_ktp" />
@@ -263,9 +268,17 @@
                                             <span
                                                 class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg"
                                                 name="identity_image" id="buttonuploadktp" onclick="uploadktp()">UPLOAD</span>
-                                            <span id="textktp" class="flex items-center ml-3 dark:text-black">No file chosen,
+                                                @component('components.input-file', ['fieldName' => 'identity_image'])
+                                                @endcomponent>
+                                            <span name="identity_image" id="textktp" class="flex items-center ml-3 dark:text-black">No file chosen,
                                                 yet.</span>
                                         </div>
+
+                                        @error('identity_image')
+                                        <div class="text-danger">
+                                            <small class="text-danger" style="color: red">{{$message}}</small>
+                                        </div>
+                                        @enderror
                                     </div>
                                 </label>
                                 <input class="hidden" type="file" name="button2" id="file_upload_ktp" />

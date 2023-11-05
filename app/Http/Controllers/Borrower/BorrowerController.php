@@ -30,8 +30,8 @@ class BorrowerController extends Controller
             'province' => 'required|string|max:100',
             'city' => 'required|string|max:100',
             'district' => 'required|string|max:100',
-            'zip_code' => 'required|integer',
-            'account_number' => 'required|integer|min:5',
+            'zip_code' => 'required|numeric',
+            'account_number' => 'required|numeric|min:5',
             'account_name' => 'required|string|max:100',
             'bank_name' => 'required|string|max:32',
         ]);
