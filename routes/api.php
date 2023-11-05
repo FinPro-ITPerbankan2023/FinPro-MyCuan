@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::post('/register', [CreateNewUser::class, 'register']);
 //user detail borrower
-Route::post('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'store']);
-Route::get('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'getAll']);
+Route::post('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'store'])->name('register-borrowers');
+Route::get('/register/borrowers', [\App\Http\Controllers\Borrower\BorrowerController::class,'getAll'])->name('register.borrowers.getAll');
 
 Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'getBusiness']);
 Route::post('/business', [\App\Http\Controllers\BusinessController::class, 'InsertTable']);

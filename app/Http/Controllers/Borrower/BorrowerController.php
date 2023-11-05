@@ -16,13 +16,6 @@ use Illuminate\Support\Facades\Storage;
 class BorrowerController extends Controller
 {
 
-    public function index()
-    {
-        return view('borrower.dashboard.index');
-    }
-    public function show($id) {
-
-    }
 
     public function store(Request $request)
     {
@@ -82,18 +75,20 @@ class BorrowerController extends Controller
 
               
             //add users identity
-            $userIdentity= UserIdentity::create([
+            UserIdentity::create([
             'user_id' => $getid,
             'identity_number' => $request->number_identity,
             'identity_image' => $identityUrl,
             'selfie_image' => $selfieUrl,
             ]);
             DB::commit();
-            return response()->json(['data' => $user,'number_identity' =>$userIdentity],201);
+            dd($user);
+            return redirect()->route('register-penerima-datadiri')->with('success', 'Data berhasil diunggah');
+            //response()->json(['data' => $user,'number_identity' =>$userIdentity],201);
         }
         catch (Exception $e){
             DB::rollback();
-            return redirect('/register-penerima-datadiri')->with('success','Post upload');
+            return response()->json($e);
         }
        
     }

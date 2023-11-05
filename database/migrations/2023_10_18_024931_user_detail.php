@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users','id');
-            $table->string('full_name')->nullable();
+            $table->string('full_name');
             $table->bigInteger('number_identity');
             $table->date('date_birth')->nullable();
             $table->string('birth_place');
