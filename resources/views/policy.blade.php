@@ -127,5 +127,3 @@
 
 
 </x-guest-layout>
-
-
