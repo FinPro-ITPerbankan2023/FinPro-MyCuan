@@ -4,6 +4,7 @@
 use App\Http\Controllers\RegisterRoleController;
 use App\Http\Controllers\Borrower\BorrowerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RegisterPenerimaDanaController;
 use App\Http\Controllers\RegisterPenerimaDatadiriController;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,3 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
 Route::get('/register-role', [RegisterRoleController::class, 'registerRole'])->name('register-role');
 Route::get('/register-borrower', [RegisterRoleController::class, 'RegisterBorrowerPage'])->name('register-borrower');
 Route::get('/register-penerima-datadiri', [RegisterPenerimaDatadiriController::class, 'registerPenerimaDatadiri'])->name('register-penerima-datadiri');
-
-
