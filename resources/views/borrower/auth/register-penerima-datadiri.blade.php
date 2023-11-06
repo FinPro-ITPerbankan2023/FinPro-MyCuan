@@ -16,7 +16,7 @@
             <div class="flex flex-col bg-white w-8/12 mx-auto my-2 rounded-xl border-b-2 border-solid">
 
             <h1 class="font-worksans font-extrabold my-5 text-lg ml-10 dark:text-black" >Penerima Dana</h1>
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('register.borrower') }}" enctype="multipart/form-data">
                 @csrf
              <div class="flex flex-row">
                 <div class="w-1/2">
@@ -38,17 +38,17 @@
                                     </div>
                            @enderror
                         </div>
-                        <!-- Number identity -->
+                        <!-- Identity Number -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="number_identity"
+                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="identity_number"
                                 value="{{ __('NIK')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="number_identity" type="text" id="number_identity"
+                                <x-input name="identity_number" type="text" id="identity_number"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan NIK Anda') }}" required autocomplete="nik" />
                                 </div>
-                                @error('number_identity')
+                                @error('identity_number')
                                 <div class="text-danger">
                                     <small class="text-danger" style="color: red">{{$message}}</small>
                                        </div>
@@ -155,19 +155,19 @@
                         </div>
                     </div>
                 </div>
-                        <!-- zip_code -->
+                        <!-- post_code -->
                 <div class="w-1/2">
                     <div class="ml-10">
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="zip_code"
+                            <x-input-label class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="post_code"
                                 value="{{ __('Kode Pos')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="zip_code" type="text" id="zip_code"
+                                <x-input name="post_code" type="text" id="post_code"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('709123') }}" required autocomplete="kodepos" />
                             </div>
-                            @error('zip_code')
+                            @error('post_code')
                             <div class="text-danger">
                                 <small class="text-danger" style="color: red">{{$message}}</small>
                             </div>

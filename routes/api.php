@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\Fortify\CreateNewUser;
+use App\Http\Controllers\Borrower\BorrowerController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\Lender\EditProfileLender;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::post('/register', [CreateNewUser::class, 'register']);
+Route::post('/register-borrower', [BorrowerController::class, 'insertTable'])->name('register.borrower');
 
 Route::get('/business', [BusinessController::class, 'getBusiness']);
 Route::post('/business', [BusinessController::class, 'InsertTable']);

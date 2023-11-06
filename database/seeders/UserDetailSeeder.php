@@ -20,14 +20,16 @@ class UserDetailSeeder extends Seeder
         foreach (range(1, 3) as $index) {
             DB::table('user_detail')->insert([
                 'user_id' => $index,
+                'full_name'=> $faker->name,
                 'date_birth' => $faker->date,
                 'birth_place' => $faker->name,
                 'street' => $faker->streetAddress,
                 'district' => $faker->streetName,
                 'city' => $faker->city,
                 'province' => $faker->city,
-                'post_code' => $faker->postcode,
-                'phone_number' => $faker->phoneNumber,
+                'account_number' => $faker->randomNumber,
+                'account_name' => $faker->name,
+                'bank_name' => $faker->name,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

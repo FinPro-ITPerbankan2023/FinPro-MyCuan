@@ -13,14 +13,17 @@ class UserDetail extends Model
 
     protected $fillable = [
         'user_id',
+        'full_name',
         'date_birth',
         'birth_place',
         'street',
-        'district',
-        'city',
         'province',
+        'city',
+        'district',
         'post_code',
-        'phone_number',
+        'account_number',
+        'account_name',
+        'bank_name',
     ];
     public function user(): BelongsTo
 
