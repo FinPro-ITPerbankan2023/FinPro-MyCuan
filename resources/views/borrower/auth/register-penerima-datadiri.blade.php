@@ -27,16 +27,12 @@
                                 value="{{ __('Nama Lengkap KTP')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="full_name" type="text" id="full_name"
+                                <x-input name="" type="text" id="full_name"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan nama lengkap Anda') }}" required
                                     autocomplete="namalengkap" />
                             </div>
-                            @error('full_name')
-                             <div class="text-danger">
-                                 <small class="text-danger" style="color: red">{{$message}}</small>
-                                    </div>
-                           @enderror
+                           
                         </div>
                         <!-- Identity Number -->
                         <div class="ml-3 mt-2 form-group">
@@ -44,15 +40,11 @@
                                 value="{{ __('NIK')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="identity_number" type="text" id="identity_number"
+                                <x-input name="" type="text" id="identity_number"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan NIK Anda') }}" required autocomplete="nik" />
                                 </div>
-                                @error('identity_number')
-                                <div class="text-danger">
-                                    <small class="text-danger" style="color: red">{{$message}}</small>
-                                       </div>
-                              @enderror
+                               
                         </div>
                         <!-- Date Birth -->
                         <div class="ml-3 mt-2 form-group">
@@ -173,18 +165,18 @@
                             </div>
                             @enderror
                         </div>
-                        <!-- account_number -->
+                        <!-- bank_number -->
 
                         <div class="ml-3 mt-2 form-group">
                             <x-input-label class="text-[#868686] text-sm font-poppins "
-                                for="account_number" value="{{ __('Nomor Rekening')}}" />
+                                for="bank_number" value="{{ __('Nomor Rekening')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="account_number" type="text" id="account_number"
+                                <x-input name="bank_number" type="text" id="bank_number"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('000725649926') }}" required autocomplete="nomorrekening" />
                             </div>
-                            @error('account_number')
+                            @error('bank_number')
                             <div class="text-danger">
                                 <small class="text-danger" style="color: red">{{$message}}</small>
                             </div>
@@ -194,18 +186,14 @@
 
                         <div class="ml-3 mt-2 form-group">
                             <x-input-label class="text-[#868686] text-sm font-poppins"
-                                for="account_name" value="{{ __('Nama Rekening')}}" />
+                                for="" value="{{ __('Nama Rekening')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
                                 <x-input name="account_name" type="text" id="account_name"
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('a/n  xxxxx') }}" required autocomplete="namarekening" />
                             </div>
-                            @error('account_name')
-                            <div class="text-danger">
-                                <small class="text-danger" style="color: red">{{$message}}</small>
-                            </div>
-                            @enderror
+                            
                         </div>
                         <!-- bank_name -->
 
@@ -250,7 +238,7 @@
                                         </div>
                                     </div>
                                 </label>
-                                <x-input class="hidden" type="file" name="identity_image" id="file_upload_foto_ktp" accept="image/png, image/jpeg" />
+                                <x-input class="hidden" type="file" name="identity_image" id="file_upload_foto_ktp" accept=" image/*" />
                             </div>
                         <!--identity Image -->
 
@@ -271,7 +259,7 @@
                                                 yet.</span>
                                         </div>
                                     </div>
-                                    <x-input class="hidden" type="file" name="selfie_image" id="file_upload_ktp_selfie" accept="image/png, image/jpeg" />
+                                    <x-input class="hidden" type="file" name="selfie_image" id="file_upload_ktp_selfie" accept=" image/*`" />
                                 </label>
                             </div>
                         </div>

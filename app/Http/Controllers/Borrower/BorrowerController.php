@@ -21,17 +21,20 @@ class BorrowerController extends Controller
     public function insertTable(Request $request)
     {
         $request->validate([
+            //table user_identity
             'identity_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'selfie_image'  => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'full_name'  => 'required|string|max:100',
+           
+            //table user_details
             'date_birth' => 'required|date',
-            'identity_number' => 'required|numeric|min:5',
             'birth_place' => 'required|string|max:100',
             'street' => 'required|string|max:255',
             'province' => 'required|string|max:100',
             'city' => 'required|string|max:100',
             'district' => 'required|string|max:100',
             'post_code' => 'required|numeric',
+            
+            //table bank_details
             'account_number' => 'required|numeric|min:5',
             'account_name' => 'required|string|max:100',
             'bank_name' => 'required|string|max:32',
@@ -47,7 +50,6 @@ class BorrowerController extends Controller
 
             $user = UserDetail::create([
                 'user_id' => $getid,
-                'full_name' => $request->full_name,
                 'date_birth' => $request->date_birth,
                 'birth_place' => $request->birth_place,
                 'street' => $request->street,
@@ -55,16 +57,18 @@ class BorrowerController extends Controller
                 'city' => $request->city,
                 'district' => $request->district,
                 'post_code' => $request->post_code,
-                'account_number' => $request->account_number,
-                'account_name' => $request->account_name,
-                'bank_name' => $request->bank_name,
+            ]);
+            $user->BankDetail()->create([
+                'user_id' => $getid,
+                'bank_name'=> $request->bank_name,
+                'bank_number'=> $request->bank_number,
             ]);
 
 
                 // Upload identity image
                 $identityFileName = $request->identity_image->getClientOriginalName();
                 $identityFilePath = 'identity_image/' . $identityFileName;
-                $identityPath = Storage::disk('s3')->put($identityFilePath, file_get_contents($request->selfie_image));
+                $identityPath = Storage::disk('s3')->put($identityFilePath, file_get_contents($request->identity_image));
                 $identityUrl = Storage::disk('s3')->url($identityFilePath);
 
                 // Upload selfie image
@@ -75,16 +79,17 @@ class BorrowerController extends Controller
 
               
             //add users identity
-            UserIdentity::create([
+            $user->UserIdentity()->create([
             'user_id' => $getid,
-            'identity_number' => $request->identity_number,
             'identity_image' => $identityUrl,
             'selfie_image' => $selfieUrl,
             ]);
+
             DB::commit();
-            dd($user);
-            return redirect()->route('register-penerima-datadiri')->with('success', 'Data berhasil diunggah');
-            //response()->json(['data' => $user,'number_identity' =>$userIdentity],201);
+            // dd($user);
+            dd($request->all());
+            return redirect()->back()->with('message','Property added successfully!');
+
         }
         catch (Exception $e){
             DB::rollback();
