@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Borrower;
 
 use App\Http\Controllers\Controller;
+use App\Models\BankDetail;
 use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\UserIdentity;
@@ -22,6 +23,7 @@ class BorrowerController extends Controller
     {
         $request->validate([
             //table user_identity
+            'identity_number' => 'required|numeric|min:5',
             'identity_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'selfie_image'  => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
            
@@ -32,10 +34,10 @@ class BorrowerController extends Controller
             'province' => 'required|string|max:100',
             'city' => 'required|string|max:100',
             'district' => 'required|string|max:100',
-            'post_code' => 'required|numeric',
+            'post_code' => 'required|numeric|min:5',
             
             //table bank_details
-            'account_number' => 'required|numeric|min:5',
+            'bank_number' => 'required|numeric|min:5',
             'account_name' => 'required|string|max:100',
             'bank_name' => 'required|string|max:32',
         ]);
@@ -48,7 +50,7 @@ class BorrowerController extends Controller
             //add user details
             DB::beginTransaction();
 
-            $user = UserDetail::create([
+            UserDetail::create([
                 'user_id' => $getid,
                 'date_birth' => $request->date_birth,
                 'birth_place' => $request->birth_place,
@@ -58,8 +60,9 @@ class BorrowerController extends Controller
                 'district' => $request->district,
                 'post_code' => $request->post_code,
             ]);
-            $user->BankDetail()->create([
+            BankDetail::create([
                 'user_id' => $getid,
+                'account_name' => $request->account_name,
                 'bank_name'=> $request->bank_name,
                 'bank_number'=> $request->bank_number,
             ]);
@@ -79,15 +82,16 @@ class BorrowerController extends Controller
 
               
             //add users identity
-            $user->UserIdentity()->create([
+            UserIdentity::create([
             'user_id' => $getid,
+            'identity_number' => $request->identity_number,
             'identity_image' => $identityUrl,
             'selfie_image' => $selfieUrl,
             ]);
 
             DB::commit();
             // dd($user);
-            dd($request->all());
+            // dd($request->all());
             return redirect()->back()->with('message','Property added successfully!');
 
         }
@@ -103,5 +107,3 @@ class BorrowerController extends Controller
         return response()->json(['data' => $userDetail],200);
     }
 }
-
-

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('bank_name');
+            $table->string('account_name');
             $table->bigInteger('bank_number');
             $table->timestamps();
         });
