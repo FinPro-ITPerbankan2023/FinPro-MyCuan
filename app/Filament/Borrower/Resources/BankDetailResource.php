@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 class BankDetailResource extends Resource
 {
     protected static ?string $model = BankDetail::class;
-
+    protected static ?string $navigationGroup = 'Data Diri';
     protected static ?string $modelLabel = 'Informasi Bank';
     protected static ?string $pluralLabel = 'Informasi Bank';
 

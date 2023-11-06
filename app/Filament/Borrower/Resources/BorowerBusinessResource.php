@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Auth;
 class BorowerBusinessResource extends Resource
 {
     protected static ?string $model = Business::class;
+    protected static ?string $navigationGroup = 'Data Diri';
+
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
     protected static ?string $label = 'Profile Usaha';
     protected static ?string $pluralLabel = 'Profile Usaha';
-
     public static function form(Form $form): Form
     {
         return $form

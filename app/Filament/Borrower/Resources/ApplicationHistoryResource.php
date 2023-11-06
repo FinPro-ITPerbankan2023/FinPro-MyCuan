@@ -36,12 +36,10 @@ use Illuminate\Support\HtmlString;
 class ApplicationHistoryResource extends Resource
 {
     protected static ?string $model = Loans::class;
-
-    protected static ?string $label = 'Riwayat Pengajuan';
-    protected static ?string $pluralLabel = 'Riwayat Pengajuan';
-    protected static ?string $breadcrumb = 'Riwayat Pengajuan';
+    protected static ?string $pluralLabel = 'Riwayat Peminjaman';
     protected static ?string $navigationLabel = 'Riwayat Pengajuan';
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    protected static ?string $navigationGroup = 'Peminjaman';
     public static function form(Form $form): Form
     {
         return $form
@@ -229,7 +227,7 @@ class ApplicationHistoryResource extends Resource
                     ->label('Status Pinjaman'),
 
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('Jumlah Dana')
+                    ->label('Jumlah Pinjaman')
                     ->money('idr')
                     ->sortable(),
 
@@ -238,12 +236,6 @@ class ApplicationHistoryResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->alignCenter(),
-
-                Tables\Columns\TextColumn::make('paid_loan_installment')
-                    ->label('Cicilan Dibayar'),
-
-                Tables\Columns\TextColumn::make('unpaid_amount_loan')
-                    ->label('Sisa Tagihan'),
 
                 Tables\Columns\TextColumn::make('application_date')
                     ->label('Tanggal Pengajuan'),
@@ -258,29 +250,6 @@ class ApplicationHistoryResource extends Resource
             // TODO: Add logic to store unpaid loan, paid loan (month left)
             ->striped()
             ->actions([
-                \Filament\Tables\Actions\Action::make('loan_status')
-                    ->action(function (Loans $record) {
-                        $originalAmount = $record->amount;
-
-                        $amount = ($originalAmount / 12) * 1.05; // Add 5%
-
-                        $amount = intval($amount);
-                        $userId = auth()->id();
-                        $loanId = $record->id;
-
-                        return redirect()->route('payment', ['amount' => $amount, 'userId' => $userId, 'loanId' => $loanId]);
-
-                        //TODO add interest to payment details
-                    })
-                    ->requiresConfirmation()
-                    ->button()
-                    ->modalIcon('heroicon-s-hand-thumb-up')
-                    ->modalDescription('Anda akan diarahkan pada halaman pembayaran')
-                    ->modalCancelActionLabel('Batal')
-                    ->modalSubmitActionLabel('Lanjut')
-                    ->hidden(fn (Loans $record) => $record->loan_status !== 1) // Add condition to hide button if the status isn't funded yet.
-                    ->label('BAYAR PINJAMAN'),
-
                 ActionGroup::make([
                     ViewAction::make(),
                 ]),
@@ -308,34 +277,6 @@ class ApplicationHistoryResource extends Resource
 
                         TextEntry::make('application_date') ->label('Tanggal Pengajuan'),
                     ]) ->columns(3),
-
-                \Filament\Infolists\Components\Section::make('Pembayaran Pinjaman')
-                    ->schema([
-                        TextEntry::make('loan_purpose') ->label('Sisa Tagihan'),
-
-                        TextEntry::make('loan_duration') ->label('Cicilan Dibayarkan'),
-
-                        TextEntry::make('intereset') ->label('Bunga Pinjaman')
-                            ->money('IDR')
-                            ->suffix('   (5%) /bulan')
-                            ->default(function (Loans $record) {
-                                // Assuming $record->amount contains the loan amount
-                                $interestPercentage = 5; // Change this to your desired interest rate
-                                $interest = ($record->amount * $interestPercentage) / 100;
-
-                                return number_format($interest, 2, '.', ''); // Format as a decimal with two decimal places
-                            }),
-
-                    ]) ->columns(3),
-
-
-
-
-//                Section::make('Riwayat Pinjaman')
-//                    ->icon('heroicon-o-arrow-path')
-//                    // TODO Add logic to retrieve history of borrower, try with RepeatableEntry
-//
-//                    ->columns(2),
 
             ]);
     }

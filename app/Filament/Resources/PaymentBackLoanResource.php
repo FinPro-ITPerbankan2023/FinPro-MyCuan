@@ -2,14 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PaymentLendingResource\Pages;
-use App\Filament\Resources\PaymentLendingResource\RelationManagers;
-use App\Models\Loans;
+use App\Filament\Resources\PaymentBackLoanResource\Pages;
+use App\Filament\Resources\PaymentBackLoanResource\RelationManagers;
 use App\Models\Payment;
-use App\Models\PaymentLending;
+use App\Models\PaymentBackLoan;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
@@ -18,14 +16,13 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Auth;
 
-class PaymentLendingResource extends Resource
+class PaymentBackLoanResource extends Resource
 {
     protected static ?string $model = Payment::class;
 
-    protected static ?string $pluralModelLabel = 'Pembayaran Pendanaan';
     protected static ?string $navigationGroup = 'Pembayaran';
+    protected static ?string $pluralLabel = 'Pembayaran Pinjaman';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -33,7 +30,7 @@ class PaymentLendingResource extends Resource
     {
         return $form
             ->schema([
-
+                //
             ]);
     }
 
@@ -42,7 +39,7 @@ class PaymentLendingResource extends Resource
         return $table
             ->modifyQueryUsing(function (Builder $query) {
                 $query->whereHas('user', function ($userQuery) {
-                    $userQuery->where('role_id', 1);
+                    $userQuery->where('role_id', 2);
                 });
             })
             ->columns([
@@ -81,7 +78,7 @@ class PaymentLendingResource extends Resource
             ])
             ->actions([
                 Action::make('status')
-                    ->action(fn (Payment $record) => $record->verifyPayment())
+                    ->action(fn (Payment $record) => $record->verifyPaymentLoan())
                     ->requiresConfirmation()
                     ->button()
                     ->modalIcon('heroicon-s-check')
@@ -114,10 +111,10 @@ class PaymentLendingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPaymentLendings::route('/'),
-            'create' => Pages\CreatePaymentLending::route('/create'),
-//            'view' => Pages\ViewPaymentLending::route('/{record}'),
-//            'edit' => Pages\EditPaymentLending::route('/{record}/edit'),
+            'index' => Pages\ListPaymentBackLoans::route('/'),
+            'create' => Pages\CreatePaymentBackLoan::route('/create'),
+            'view' => Pages\ViewPaymentBackLoan::route('/{record}'),
+            'edit' => Pages\EditPaymentBackLoan::route('/{record}/edit'),
         ];
     }
 }

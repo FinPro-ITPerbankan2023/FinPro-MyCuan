@@ -39,10 +39,8 @@ class Payment extends Model
         $this->status = 'accepted';
         $this->save();
 
-        // Assuming there's a relationship between Payment and Loan models
         $loanId = $this->loan_id;
 
-        // Query the loans table to get the user_id associated with the loan_id
         $loanUserId = Loans::where('id', $loanId)->value('user_id');
 
         HistoryTransaction::create([
@@ -52,6 +50,21 @@ class Payment extends Model
             'lender' => $this->user->name,
         ]);
     }
+
+    public function verifyPaymentLoan(): void
+    {
+        $this->status = 'accepted';
+        $this->save();
+
+        $loanId = $this->loan_id;
+
+        $loan = Loans::find($loanId);
+
+        $loan->repaid_amount += $this->amount;
+
+        $loan->save();
+    }
+
 
 
     public function setStatusAttribute($value): void

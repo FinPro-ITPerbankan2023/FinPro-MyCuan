@@ -23,6 +23,7 @@ class Loans extends Model
         'business_id',
         'loan_status',
         'amount',
+        'repaid_amount',
         'loan_duration',
         'application_date',
         'approval_date',

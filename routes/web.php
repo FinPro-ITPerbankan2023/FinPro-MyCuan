@@ -36,6 +36,8 @@ Route::post('/auth/lender-logout', [LogoutController::class, 'logout'])->name('f
 Route::post('/auth/borrower-logout', [LogoutController::class, 'logout'])->name('filament.borrower.auth.logout')->middleware('role:borrower');
 
 Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
+Route::get('/repayment', [\App\Http\Controllers\RepayLoanController::class, 'rePayment'])->name('repayment');
+
 
 Route::post('/business', [BusinessController::class, 'InsertTable'])->name('business.information');
 

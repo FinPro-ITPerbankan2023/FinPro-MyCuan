@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('loan_status')->default('0');
             $table->boolean('is_verified')->default('0');
             $table->integer('amount');
+            $table->integer('repaid_amount')->nullable();
             $table->string('loan_duration');
             $table->text('loan_purpose');
             $table->dateTime('application_date')->default(DB::raw('CURRENT_TIMESTAMP')); // Set the default value to current timestamp
