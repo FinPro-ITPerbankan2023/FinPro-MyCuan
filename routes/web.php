@@ -4,6 +4,8 @@
 use App\Http\Controllers\Filament\LogoutController;
 use App\Http\Controllers\RegisterPageController;
 use App\Http\Controllers\Borrower\BorrowerController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterPenerimaDanaController;
 use App\Http\Controllers\RegisterPenerimaDatadiriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PolicyController;

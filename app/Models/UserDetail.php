@@ -16,9 +16,9 @@ class UserDetail extends Model
         'date_birth',
         'birth_place',
         'street',
-        'district',
-        'city',
         'province',
+        'city',
+        'district',
         'post_code',
         'phone_number',
     ];
