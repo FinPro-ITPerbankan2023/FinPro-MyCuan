@@ -26,6 +26,8 @@ class UserDetailSeeder extends Seeder
                 'district' => $faker->streetName,
                 'city' => $faker->city,
                 'province' => $faker->city,
+                'post_code' => rand(1 ,20000),
+                'phone_number' => rand(1 ,20000),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

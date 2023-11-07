@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->date('date_birth')->nullable();
-            $table->string('birth_place');
-            $table->text('street');
-            $table->text('district');
-            $table->text('city');
-            $table->text('province');
-            $table->integer('post_code')->default(51215)->nullable();
-            $table->integer('phone_number')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->text('street')->nullable();
+            $table->text('district')->nullable();
+            $table->text('city')->nullable();
+            $table->text('province')->nullable();
+            $table->integer('post_code')->nullable();
+            $table->bigInteger('phone_number')->nullable();
             $table->timestamps();
         });
     }

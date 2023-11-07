@@ -11,7 +11,7 @@ class RegisterResponse implements Response
         return $request->wantsJson()
             ? response()->json(['two_factor' => false])
             : redirect()->intended(
-                auth()->user()->role_id == 1 ? url('/lender') : (auth()->user()->role_id == 2 ? route('register-borrower-business') : route('home'))
+                auth()->user()->role_id == 1 ? url('/lender') : (auth()->user()->role_id == 2 ? route('register-borrower-prasyarat') : route('home'))
             );
 
         // TODO: Dont forget to change the route to prasyarat page

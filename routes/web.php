@@ -31,8 +31,13 @@ Route::get('/register-role', [RegisterPageController::class, 'registerRole'])->n
 Route::get('/register-lender', [RegisterPageController::class, 'RegisterLenderPage'])->name('register-lender');
 Route::get('/register-borrower', [RegisterPageController::class, 'RegisterBorrowerPage'])->name('register-borrower');
 Route::get('/register-borrower-prasyarat', [RegisterPageController::class, 'RegisterPrasyaratBorrowerPage'])->name('register-borrower-prasyarat');
+
 Route::get('/register-borrower-profile', [RegisterPageController::class, 'RegisterBorrowerProfilePage'])->name('register-borrower-profile');
+Route::post('/register-borrower-profile', [BorrowerController::class, 'insertTable'])->name('register.borrower.profile');
+
 Route::get('/register-borrower-business', [RegisterPageController::class, 'RegisterBorrowerBusinessPage'])->name('register-borrower-business');
+Route::post('/business', [BusinessController::class, 'InsertTable'])->name('business.information');
+
 Route::get('/kebijakan-privasi', [PolicyController::class, 'policy'])->name('kebijakan-privasi');
 
 
@@ -44,7 +49,6 @@ Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('/repayment', [\App\Http\Controllers\RepayLoanController::class, 'rePayment'])->name('repayment');
 
 
-Route::post('/business', [BusinessController::class, 'InsertTable'])->name('business.information');
 
 
 
