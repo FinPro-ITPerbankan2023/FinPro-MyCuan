@@ -215,7 +215,6 @@ class ApplicationHistoryResource extends Resource
         ->modifyQueryUsing(function (Builder $query) use ($userId) {
             $query->where('user_id', $userId);
         })
-
             ->columns([
                 TextColumn::make('loan_status')
                     ->badge()
@@ -247,7 +246,6 @@ class ApplicationHistoryResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
 
-            // TODO: Add logic to store unpaid loan, paid loan (month left)
             ->striped()
             ->actions([
                 ActionGroup::make([
