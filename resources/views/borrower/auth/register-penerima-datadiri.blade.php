@@ -193,7 +193,7 @@
             </div>
             <div class="flex w-full m-5 justify-center">
                 <button
-                    class="bg-[#EFEFFD] mx-0 w-2/6 h-10 text-[#185F65] font-worksans font-extrabold rounded-md hover:border-indigo-500 hover:border" type="submit" onclick="window.location.href='{{ route('register-borrower-business') }}'">Next</button>
+                    class="bg-[#EFEFFD] mx-0 w-2/6 h-10 text-[#185F65] font-worksans font-extrabold rounded-md hover:border-indigo-500 hover:border" type="submit">Next</button>
             </div>
         </div>
     </div>

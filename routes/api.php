@@ -24,7 +24,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/payment', [\App\Http\Controllers\PaymentController::class, 'create']);
+Route::get('/users', [UserController::class, 'getUsers']);
+Route::post('/register', [CreateNewUser::class, 'register']);
+
+Route::get('/business', [BusinessController::class, 'getBusiness']);
+Route::post('/business', [BusinessController::class, 'InsertTable']);
+
+Route::get('/edit-profile-lender', [EditProfileLender::class, 'retrieveData']);
+Route::put('/edit-profile-lender', [EditProfileLender::class, 'editData']);
+
+Route::get('/marketplace', [LoanListsController::class, 'retrieveLoanList']);
 
 
 
