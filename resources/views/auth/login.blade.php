@@ -11,8 +11,12 @@
     <div class="flex flex-wrap max-h-full">
         <div class="w-1/2 h-screen">
             <div class="flex flex-wrap items-center h-40 ">
-                <img src="{{asset('assets/img/Logo_MyCuan.png')}}" alt="Logo MyCuan" class="w-20 h-20 ml-28">
-                <p class="text-[#868686] ml-8 mt-4 font-semibold font-poppins text-2xl">MyCuan</p>
+                <a href="/">
+                    <img src="{{asset('assets/img/Logo_MyCuan.png')}}" alt="Logo MyCuan" class="w-20 h-20 ml-28">
+                </a>
+                <a href="/">
+                    <p class="text-[#868686] ml-8 mt-4 font-semibold font-poppins text-2xl">MyCuan</p>
+                </a>
             </div>
             <div>
                 <img class="w-3/4 h-3/4 ml-16" src="{{asset('assets/img/MyCuan_Image.png')}}" alt="Desain MyCuan">
