@@ -5,6 +5,7 @@ namespace App\Filament\Borrower\Resources;
 use App\Filament\Borrower\Resources\BankDetailResource\Pages;
 use App\Filament\Borrower\Resources\BankDetailResource\RelationManagers;
 use App\Filament\Borrower\Resources\BankDetailResource\RelationManagers\BusinessRelationManager;
+use App\Models\Bank;
 use App\Models\BankDetail;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -39,14 +40,14 @@ class BankDetailResource extends Resource
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('bank_number')
-                    ->label('Nomor Akun')
+                    ->label('Nomor Bank')
                     ->required()
                     ->numeric(),
 
-                Forms\Components\TextInput::make('bank_name')
+                Forms\Components\Select::make('bank_name')
                     ->label('Nama Bank')
-                    ->required()
-                    ->maxLength(255),
+                    ->options(Bank::all()->pluck('nama_bank', 'nama_bank'))
+                    ->searchable(),
             ]);
     }
 

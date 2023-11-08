@@ -74,6 +74,11 @@ class RepayLoanResource extends Resource
                     })
                     ->label('Status Pembayaran'),
 
+
+                Tables\Columns\TextColumn::make('loan_duration')
+                    ->label('Lama Pinjaman')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('amount')
                     ->label('Jumlah Pinjaman')
                     ->money('idr')
@@ -103,8 +108,9 @@ class RepayLoanResource extends Resource
                     ->default(function (Loans $record) {
                         $originalAmount = $record->amount;
                         $repaidAmount = $record->repaid_amount;
+                        $loanDuration = $record->loan_duration;
 
-                        $amountWithInterest = ($originalAmount / 12) * 1.05;
+                        $amountWithInterest = ($originalAmount / $loanDuration) * 1.05;
 
                         if ($repaidAmount >= $originalAmount) {
                             return "0";
@@ -120,8 +126,10 @@ class RepayLoanResource extends Resource
                 \Filament\Tables\Actions\Action::make('loan_status')
                     ->action(function (Loans $record) {
                         $originalAmount = $record->amount;
+                        $loanDuration = $record->loan_duration;
 
-                        $amount = $originalAmount * 1.05 / 12; // Add 5%
+
+                        $amount = $originalAmount * 1.05 / $loanDuration; // Add 5%
 
                         $amount = intval($amount);
                         $userId = auth()->id();

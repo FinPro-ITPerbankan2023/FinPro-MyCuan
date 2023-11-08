@@ -57,16 +57,18 @@ class ApplicationHistoryResource extends Resource
                             Select::make('loan_duration')
                                 ->label('Lama Pinjaman')
                                 ->options([
-                                    '1 Bulan' => '1 Bulan',
-                                    '3 Bulan' => '3 Bulan',
-                                    '6 Bulan' => '6 Bulan',
-                                    '12 Bulan' => '12 Bulan',
-                                    '18 Bulan' => '18 Bulan',
-                                    '24 Bulan' => '24 Bulan'
+                                    '1' => '1 Bulan',
+                                    '3' => '3 Bulan',
+                                    '6' => '6 Bulan',
+                                    '12' => '12 Bulan',
+                                    '18' => '18 Bulan',
+                                    '24' => '24 Bulan'
                                 ])
                                 ->required(),
                             Forms\Components\TextInput::make('amount')
                                 ->label('Jumlah Pinjaman')
+                                ->placeholder('Minimal Rp. 3.000.000')
+                                ->rules('numeric', 'min:3000000')
                                 ->required()
                                 ->prefix('Rp.')
                                 ->inputMode('decimal')

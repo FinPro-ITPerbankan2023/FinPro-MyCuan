@@ -28,7 +28,7 @@ class LoansSeeder extends Seeder
                 'is_verified' => '1',
                 'loan_purpose' => $faker->text,
                 'amount' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1000, $max = 100000),
-                'loan_duration' => '12 Bulan',
+                'loan_duration' => '12',
                 'application_date' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
