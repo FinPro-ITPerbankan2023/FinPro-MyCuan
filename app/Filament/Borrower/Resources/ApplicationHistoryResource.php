@@ -236,8 +236,6 @@ class ApplicationHistoryResource extends Resource
                     ->sortable()
                     ->alignCenter(),
 
-                Tables\Columns\TextColumn::make('application_date')
-                    ->label('Tanggal Pengajuan'),
 
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Tanggal Update Terakhir')
@@ -259,19 +257,9 @@ class ApplicationHistoryResource extends Resource
         return $infolist
             ->schema([
                 \Filament\Infolists\Components\Section::make('Informasi Pinjaman')
-                    ->icon('heroicon-o-face-smile')
+                    ->icon('heroicon-o-play')
                     ->schema([
                         TextEntry::make('loan_purpose') ->label('Tujuan Pinjaman'),
-
-                        TextEntry::make('loan_duration') ->label('Lama Pinjaman'),
-
-                        TextEntry::make('loan_status') ->label('Status Pinjaman')->copyable(true)
-                            ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
-                            ->badge()
-                            ->color(fn (bool $state): string => match ($state) {
-                                false => 'danger',
-                                true => 'success',
-                            }),
 
                         TextEntry::make('application_date') ->label('Tanggal Pengajuan'),
                     ]) ->columns(3),

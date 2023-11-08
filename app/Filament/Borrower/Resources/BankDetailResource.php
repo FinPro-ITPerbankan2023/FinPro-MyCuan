@@ -8,6 +8,9 @@ use App\Filament\Borrower\Resources\BankDetailResource\RelationManagers\Business
 use App\Models\BankDetail;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\Layout\Stack;
@@ -30,15 +33,20 @@ class BankDetailResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('bank_name')
+                Forms\Components\TextInput::make('account_name')
+                    ->label('Nama Akun')
                     ->required()
                     ->maxLength(255),
+
                 Forms\Components\TextInput::make('bank_number')
+                    ->label('Nomor Akun')
                     ->required()
                     ->numeric(),
+
+                Forms\Components\TextInput::make('bank_name')
+                    ->label('Nama Bank')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -51,30 +59,51 @@ class BankDetailResource extends Resource
                 $query->where('user_id', $userId);
             })
             ->columns([
-                Stack::make([
-                    Tables\Columns\TextColumn::make('bank_name')
-                        ->searchable(),
+                    Tables\Columns\TextColumn::make('account_name')
+                        ->label('Nama Akun'),
+
                     Tables\Columns\TextColumn::make('bank_number')
-                        ->copyable(),
-                ]),
+                        ->label('Nomor Akun'),
+
+                    Tables\Columns\TextColumn::make('bank_name')
+                        ->label('Nama Bank')
+                        ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                ])
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make('Identitas Peminjam')
+                    ->icon('heroicon-o-credit-card')
+
+                    ->schema([
+                        TextEntry::make('account_name')
+                            ->label('Nama Akun'),
+
+                        TextEntry::make('bank_number')
+                            ->label('Nomor Akun'),
+
+                        TextEntry::make('bank_name')
+                            ->label('Nama Bank')
+                    ])
+                    ->collapsible()
+                    ->columns(3),
+            ]);
+    }
     public static function getRelations(): array
     {
         return [
@@ -91,7 +120,7 @@ class BankDetailResource extends Resource
         return [
             'index' => Pages\ListBankDetails::route('/'),
             'create' => Pages\CreateBankDetail::route('/create'),
-            'view' => Pages\ViewBankDetail::route('/{record}'),
+//            'view' => Pages\ViewBankDetail::route('/{record}'),
             'edit' => Pages\EditBankDetail::route('/{record}/edit'),
         ];
     }

@@ -136,7 +136,9 @@ class LoanApplicationsResource extends Resource
                         TextEntry::make('detail.phone_number') ->label('Nomor Telepon')->copyable(true),
                         TextEntry::make('detail.birth_place') ->label('Tempat Lahir'),
                         TextEntry::make('detail.date_birth') ->label('Tanggal Lahir'),
-                    ]) ->columns(3),
+                    ])
+                    ->collapsible()
+                    ->columns(3),
 
                 Section::make('Alamat Peminjam')
                     ->icon('heroicon-o-map')
@@ -146,7 +148,9 @@ class LoanApplicationsResource extends Resource
                         TextEntry::make('detail.city') ->label('Kota'),
                         TextEntry::make('detail.province') ->label('Provinsi'),
                         TextEntry::make('detail.post_code') ->label('Kode Pos'),
-                    ]) ->columns(3),
+                    ])
+                    ->collapsible()
+                    ->columns(3),
 
                 Section::make('Usaha Peminjam')
                     ->icon('heroicon-o-building-storefront')
@@ -156,15 +160,9 @@ class LoanApplicationsResource extends Resource
                         TextEntry::make('business.business_ownership') ->label('Kepemilikan Usaha'),
                         TextEntry::make('business.business_duration') ->label('Lama Usaha Berdiri'),
                         TextEntry::make('business.income_avg') ->money('idr') ->label('Pendapat Usaha /Bulan'),
-                    ]) ->columns(3),
-
-
-//                Section::make('Riwayat Pinjaman')
-//                    ->icon('heroicon-o-arrow-path')
-//                    // TODO Add logic to retrieve history of borrower, try with RepeatableEntry
-//
-//                    ->columns(2),
-
+                    ])
+                    ->collapsible()
+                    ->columns(3),
             ]);
     }
     public static function getRelations(): array

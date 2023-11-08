@@ -36,8 +36,10 @@ class RepayLoanResource extends Resource
 {
     protected static ?string $model = Loans::class;
     protected static ?string $pluralLabel = 'Pembayaran Pinjaman';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationIcon = 'heroicon-o-bolt';
     protected static ?string $navigationGroup = 'Peminjaman';
+
 
     public static function form(Form $form): Form
     {
@@ -66,9 +68,9 @@ class RepayLoanResource extends Resource
                         $record->repaid_amount >= $record->amount => 'success',
                     })
                     ->formatStateUsing(fn ($record): string => match (true) {
-                        $record->repaid_amount === 0 => __("NOT PAID"),
-                        $record->repaid_amount < $record->amount => __("PARTIALLY PAID"),
-                        $record->repaid_amount >= $record->amount => __("FULLY PAID"),
+                        $record->repaid_amount === 0 => __("BELUM DIBAYAR"),
+                        $record->repaid_amount < $record->amount => __("DIBAYAR SEBAGIAN"),
+                        $record->repaid_amount >= $record->amount => __("SUDAH LUNAS"),
                     })
                     ->label('Status Pembayaran'),
 
