@@ -27,7 +27,7 @@ class PaymentLendingResource extends Resource
     protected static ?string $pluralModelLabel = 'Pembayaran Pendanaan';
     protected static ?string $navigationGroup = 'Pembayaran';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrows-right-left';
 
     public static function form(Form $form): Form
     {
@@ -111,6 +111,10 @@ class PaymentLendingResource extends Resource
         ];
     }
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
     public static function getPages(): array
     {
         return [

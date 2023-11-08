@@ -24,7 +24,7 @@ class PaymentBackLoanResource extends Resource
     protected static ?string $navigationGroup = 'Pembayaran';
     protected static ?string $pluralLabel = 'Pembayaran Pinjaman';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrows-up-down';
 
     public static function form(Form $form): Form
     {
@@ -58,10 +58,10 @@ class PaymentBackLoanResource extends Resource
                     ->label('ID Pinjaman'),
 
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Pendana'),
+                    ->label('Pembayar'),
 
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('Jumlah Pendanaan')
+                    ->label('Jumlah Pembayaran')
                     ->money('idr'),
 
                 Tables\Columns\TextColumn::make('payment_date')
@@ -108,6 +108,10 @@ class PaymentBackLoanResource extends Resource
         ];
     }
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
     public static function getPages(): array
     {
         return [
