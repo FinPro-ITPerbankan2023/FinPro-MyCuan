@@ -74,7 +74,8 @@ class LenderPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->favicon(asset('assets/img/Logo_MyCuan.png'));
     }
 
 }
