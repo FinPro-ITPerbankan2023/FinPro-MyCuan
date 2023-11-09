@@ -122,7 +122,7 @@ class BankDetailResource extends Resource
             'index' => Pages\ListBankDetails::route('/'),
             'create' => Pages\CreateBankDetail::route('/create'),
 //            'view' => Pages\ViewBankDetail::route('/{record}'),
-            'edit' => Pages\EditBankDetail::route('/{record}/edit'),
+//            'edit' => Pages\EditBankDetail::route('/{record}/edit'),
         ];
     }
 }

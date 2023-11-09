@@ -70,7 +70,7 @@ class BorrowerController extends Controller
 
                 // Upload identity image
                 $identityFileName = $request->identity_image->getClientOriginalName();
-                $identityFilePath = 'identity_image/' . $identityFileName;
+                $identityFilePath = 'identity_images/' . $identityFileName;
                 $identityPath = Storage::disk('s3')->put($identityFilePath, file_get_contents($request->identity_image));
                 $identityUrl = Storage::disk('s3')->url($identityFilePath);
 

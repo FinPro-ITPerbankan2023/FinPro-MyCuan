@@ -40,10 +40,20 @@ class UserIdentityResource extends Resource
 
                 Forms\Components\FileUpload::make('identity_image')
                     ->label('Foto KTP')
+                    ->preserveFilenames()
+                    ->image()
+                    ->directory('identity_images')
+                    ->visibility('private')
+                    ->required()
                     ->columnSpanFull(),
 
                 Forms\Components\FileUpload::make('selfie_image')
                     ->label('Foto Selfie + KTP')
+                    ->preserveFilenames()
+                    ->image()
+                    ->directory('selfie_images')
+                    ->visibility('private')
+                    ->required()
                     ->columnSpanFull(),
             ]);
     }
@@ -123,7 +133,7 @@ class UserIdentityResource extends Resource
             'index' => Pages\ListUserIdentities::route('/'),
             'create' => Pages\CreateUserIdentity::route('/create'),
 //            'view' => Pages\ViewUserIdentity::route('/{record}'),
-            'edit' => Pages\EditUserIdentity::route('/{record}/edit'),
+//            'edit' => Pages\EditUserIdentity::route('/{record}/edit'),
         ];
     }
 }

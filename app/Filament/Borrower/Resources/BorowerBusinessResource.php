@@ -61,15 +61,30 @@ class BorowerBusinessResource extends Resource
 
                 Forms\Components\FileUpload::make('business_permit_image')
                     ->label('Foto Izin Usaha')
-                    ->image(),
+                    ->preserveFilenames()
+                    ->image()
+                    ->directory('business_permit_images')
+                    ->visibility('private')
+                    ->required()
+                    ->columnSpanFull(),
 
                 Forms\Components\FileUpload::make('business_place_image')
                     ->label('Foto Tempat Usaha')
-                    ->image(),
+                    ->preserveFilenames()
+                    ->image()
+                    ->directory('business_place_images')
+                    ->visibility('private')
+                    ->required()
+                    ->columnSpanFull(),
 
                 Forms\Components\FileUpload::make('business_product_image')
                     ->label('Foto Product Usaha')
-                    ->image(),
+                    ->preserveFilenames()
+                    ->image()
+                    ->directory('business_product_images')
+                    ->visibility('private')
+                    ->required()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -145,14 +160,17 @@ class BorowerBusinessResource extends Resource
 
                         ImageEntry::make('business_permit_image')
                             ->disk('s3')
+                            ->columnSpanFull()
                             ->label('Foto Izin Usaha'),
 
                         ImageEntry::make('business_product_image')
                             ->disk('s3')
+                            ->columnSpanFull()
                             ->label('Foto Produk Usaha'),
 
                         ImageEntry::make('business_place_image')
                             ->disk('s3')
+                            ->columnSpanFull()
                             ->label('Foto Tempat Usaha'),
                     ]) ->columns(3),
 

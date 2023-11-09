@@ -172,9 +172,9 @@ class RepayLoanResource extends Resource
                                 $record->repaid_amount >= $record->amount => 'success',
                             })
                             ->formatStateUsing(fn ($record): string => match (true) {
-                                $record->repaid_amount === 0 => __("NOT PAID"),
-                                $record->repaid_amount < $record->amount => __("PARTIALLY PAID"),
-                                $record->repaid_amount >= $record->amount => __("FULLY PAID"),
+                                $record->repaid_amount === 0 => __("BELUM DIBAYAR"),
+                                $record->repaid_amount < $record->amount => __("DIBAYAR SEBAGIAN"),
+                                $record->repaid_amount >= $record->amount => __("SUDAH LUNAS"),
                             })
                             ->label('Status Pembayaran'),
 
@@ -184,6 +184,7 @@ class RepayLoanResource extends Resource
                 \Filament\Infolists\Components\Section::make('Pembayaran Pinjaman')
                     ->schema([
                         TextEntry::make('unpaid_amount') ->label('Sisa Tagihan')
+                            ->money('IDR')
                             ->default(function (Loans $record) {
                                 $repaid_amount = $record->repaid_amount;
                                 $originalAmount = $record->amount;
@@ -194,7 +195,8 @@ class RepayLoanResource extends Resource
 
                                 return ($amount);
                             }),
-                        TextEntry::make('repaid_amount') ->label('Cicilan Dibayarkan'),
+                        TextEntry::make('repaid_amount') ->label('Cicilan Dibayarkan')
+                            ->money('IDR'),
 
                         TextEntry::make('intereset') ->label('Bunga Pinjaman')
                             ->money('IDR')
