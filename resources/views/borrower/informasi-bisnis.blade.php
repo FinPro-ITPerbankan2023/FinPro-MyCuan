@@ -167,61 +167,73 @@
 
                         <div class="w-1/2 flex flex-col gap-10 shadow-xl border border-zinc-200 rounded-xl py-10">
 
-                            <div class="w-3/4 mx-auto font-poppins font-bold text-black text-2xl">Masukkan Foto</div>
+                            <div class="w-3/4 ml-16 font-poppins font-bold text-black text-2xl">Masukkan Foto</div>
 
-                            <div class="w-3/4 mx-auto">
-                                <div class="flex flex-col">
-                                    <div class="flex items-center mb-4">
-                                        <input id="business_permit_image" name="business_permit_image" type="file" accept="image/*" class="hidden" />
-                                        <label for="business_permit_image" class="cursor-pointer font-bold text-lg text-gray-900 dark:text-gray-900">
-                                            Foto surat izin bisnis:
-                                        </label>
-                                    </div>
-                                    <div class="flex">
-                                        <button type="button" onclick="document.getElementById('business_permit_image').click();" class="text-white bg-[#185F65] justify-center py-3 px-10 rounded-md font-poppins font-bold text-lg">
-                                            {{ __('UPLOAD') }}
-                                        </button>
-                                    </div>
+                            <div>
+                                <div class="relative ml-16 w-3/4 font-worksans">
+                                    <label title="Click to upload" for="button_upload" class="w-3/4">
+                                        <div class="flex flex-col">
+                                            <div class="p-5">
+                                            <span
+                                                class="block text-base font-semibold relative text-black group-hover:text-blue-500 dark:text-black">
+                                                Foto Izin Usaha :
+                                            </span>
+                                            </div>
+                                            <div class="flex flex-row ml-5">
+                                            <span type="file"
+                                                  class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg cursor-pointer"
+                                                  for="file_upload_izin_usaha" name="business_permit_image" id="business_permit_image" onclick="uploadIzinUsaha()">UPLOAD</span>
+                                                <span id="textIzinUsaha" class="flex items-center ml-3 dark:text-black">Belum ada file yang dipilih.</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <x-input class="hidden" type="file" name="business_permit_image" id="file_upload_izin_usaha" accept=" image/*" />
+                                </div>
+                                <!--identity Image -->
+
+                                <div class="relative ml-16 w-3/4 font-worksans">
+                                    <label title="Click to upload" for="button3" class="w-3/4">
+                                        <div class="flex flex-col">
+                                            <div class="p-5">
+                                            <span
+                                                class="block text-base font-semibold relative text-black dark:text-black group-hover:text-blue-500">
+                                                Foto Tempat Usaha :
+                                            </span>
+                                            </div>
+                                            <div class="flex flex-row ml-5">
+                                            <span type="file"
+                                                  class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg cursor-pointer"
+                                                  for="file_upload_tempat_usaha" name="business_place_image" id="business_place_image" onclick="uploadTempatUsaha()">UPLOAD</span>
+                                                <span id="textTempatUsaha" class="flex items-center ml-3 dark:text-black">Belum ada file yang dipilih.</span>
+                                            </div>
+                                        </div>
+                                        <x-input class="hidden" type="file" name="business_place_image" id="file_upload_tempat_usaha" accept=" image/*`" />
+                                    </label>
+                                </div>
+
+                                <div class="relative ml-16 w-3/4 font-worksans">
+                                    <label title="Click to upload" for="button3" class="w-3/4">
+                                        <div class="flex flex-col">
+                                            <div class="p-5">
+                                            <span
+                                                class="block text-base font-semibold relative text-black dark:text-black group-hover:text-blue-500">
+                                                Foto Produk Usaha :
+                                            </span>
+                                            </div>
+                                            <div class="flex flex-row ml-5">
+                                            <span type="file"
+                                                  class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg cursor-pointer"
+                                                  for="file_upload_produk_usaha" name="business_product_image" id="business_product_image" onclick="uploadProdukUsaha()">UPLOAD</span>
+                                                <span id="textProdukUsaha" class="flex items-center ml-3 dark:text-black">Belum ada file yang dipilih.</span>
+                                            </div>
+                                        </div>
+                                        <x-input class="hidden" type="file" name="business_product_image" id="file_upload_produk_usaha" accept=" image/*`" />
+                                    </label>
                                 </div>
                             </div>
 
 
-                            <!-- For Foto bisnis/usaha -->
-                            <div class="w-3/4 mx-auto">
-                                <div class="flex flex-col">
-                                    <div class="flex items-center mb-4">
-                                        <input id="business_place_image" name="business_place_image" type="file" accept="image/*" class="hidden" />
-                                        <label for="business_place_image" class="cursor-pointer font-bold text-lg text-gray-900 dark:text-gray-900">
-                                            Foto bisnis/usaha:
-                                        </label>
-                                    </div>
-                                    <div class="flex">
-                                        <button type="button" onclick="document.getElementById('business_place_image').click();" class="text-white bg-[#185F65] justify-center py-3 px-10 rounded-md font-poppins font-bold text-lg">
-                                            {{ __('UPLOAD') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- For Foto produk yang dijual -->
-                            <div class="w-3/4 mx-auto">
-                                <div class="flex flex-col">
-                                    <div class="flex items-center mb-4">
-                                        <input id="business_product_image" name="business_product_image" type="file" accept="image/*" class="hidden" />
-                                        <label for="business_product_image" class="cursor-pointer font-bold text-lg text-gray-900 dark:text-gray-900">
-                                            Foto produk yang dijual:
-                                        </label>
-                                    </div>
-                                    <div class="flex">
-                                        <button type="button" onclick="document.getElementById('business_product_image').click();" class="text-white bg-[#185F65] justify-center py-3 px-10 rounded-md font-poppins font-bold text-lg">
-                                            {{ __('UPLOAD') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="w-3/4 mx-auto font-poppins font-bold text-[#185F65] text-xl">
+                            <div class="w-3/4 ml-16 font-poppins font-bold text-[#185F65] text-xl">
                                 Anda sudah mencapai pada tahap akhir pengisian data, pastikan semua sudah terisi dengan lengkap dan benar. Terimakasih karena sudah percaya MyCuan
                             </div>
                         </div>
@@ -237,5 +249,74 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function uploadIzinUsaha() {
+            const realFileBtn = document.getElementById("file_upload_izin_usaha");
+            const customBtn = document.getElementById("business_permit_image");
+            const customTxt = document.getElementById("textIzinUsaha");
+            event = event || window.event;
+
+            if(event.target.id != realFileBtn){
+                realFileBtn.click();
+            };
+
+            realFileBtn.addEventListener("change", function () {
+                if (realFileBtn.value) {
+                    customTxt.innerHTML = realFileBtn.value.match(
+                        /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                    )[1];
+                } else {
+                    customTxt.innerHTML = "Belum ada file yang dipilih.";
+                }
+            });
+        }
+
+        function uploadTempatUsaha() {
+            const realFileBtn = document.getElementById("file_upload_tempat_usaha");
+            const customBtn = document.getElementById("business_place_image");
+            const customTxt = document.getElementById("textTempatUsaha");
+            event = event || window.event;
+
+            if(event.target.id != realFileBtn){
+                realFileBtn.click();
+            };
+
+            realFileBtn.addEventListener("change", function () {
+                if (realFileBtn.value) {
+                    customTxt.innerHTML = realFileBtn.value.match(
+                        /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                    )[1];
+                } else {
+                    customTxt.innerHTML = "Belum ada file yang dipilih.";
+                }
+            });
+        }
+
+        function uploadProdukUsaha() {
+            const realFileBtn = document.getElementById("file_upload_produk_usaha");
+            const customBtn = document.getElementById("business_product_image");
+            const customTxt = document.getElementById("textProdukUsaha");
+            event = event || window.event;
+
+            if(event.target.id != realFileBtn){
+                realFileBtn.click();
+            };
+
+            realFileBtn.addEventListener("change", function () {
+                if (realFileBtn.value) {
+                    customTxt.innerHTML = realFileBtn.value.match(
+                        /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                    )[1];
+                } else {
+                    customTxt.innerHTML = "Belum ada file yang dipilih.";
+                }
+            });
+        }
+        var datadiri = document.getElementById("datadiri");
+
+        datadiri.style.backgroundColor = '#185F65';
+        datadiri.style.color = "#EFEFFD"
+    </script>
 
 </x-guest-layout>

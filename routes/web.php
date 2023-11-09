@@ -40,7 +40,6 @@ Route::post('/business', [BusinessController::class, 'InsertTable'])->name('busi
 
 Route::get('/kebijakan-privasi', [PolicyController::class, 'policy'])->name('kebijakan-privasi');
 
-
 Route::post('/auth/logout', [LogoutController::class, 'logout'])->name('filament.admin.auth.logout')->middleware('role:admin');
 Route::post('/auth/lender-logout', [LogoutController::class, 'logout'])->name('filament.lender.auth.logout')->middleware('role:lender');
 Route::post('/auth/borrower-logout', [LogoutController::class, 'logout'])->name('filament.borrower.auth.logout')->middleware('role:borrower');
@@ -49,13 +48,3 @@ Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::get('/repayment', [\App\Http\Controllers\RepayLoanController::class, 'rePayment'])->name('repayment');
 
 
-
-
-
-
-
-
-
-Route::get('/coba', function () {
-    return view('coba');
-});
