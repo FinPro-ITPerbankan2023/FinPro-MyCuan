@@ -5,9 +5,9 @@
         <nav>
             <div class="flex px-10 py-5 mx-auto ">
                 <div class="flex flex-row items-center justify-center  grow-0 w-52">
-                    <a href="{{ url('home')}}"><img src="{{asset('assets/img/Logo_MyCuan.png')}}" alt="Logo MyCuan"
+                    <a href="{{ url('/')}}"><img src="{{asset('assets/img/Logo_MyCuan.png')}}" alt="Logo MyCuan"
                             class="w-20 h-20"></a>
-                    <a href="{{ url('home')}}">
+                    <a href="{{ url('/')}}">
                         <p class="ml-6 text-2xl text-black font-poppins">MyCuan</p>
                     </a>
                 </div>
@@ -224,7 +224,7 @@
                 </div>
             </div>
         </div>
-        <footer class="text-center text-stone-400">
+        <footer class="text-center">
             <p>&copy; 2023 MyCuan</p>
         </footer>
     </div>

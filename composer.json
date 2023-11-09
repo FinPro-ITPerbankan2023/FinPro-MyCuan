@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "andes2912/indobank": "^0.9.0",
         "ariaieboy/filament-currency": "^1.1",
         "filament/filament": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
@@ -19,6 +20,7 @@
         "laravel/tinker": "^2.8",
         "league/flysystem-aws-s3-v3": "^3.16",
         "livewire/livewire": "^3.0",
+        "midtrans/midtrans-php": "^2.5",
         "njxqlus/filament-progressbar": "^1.0"
     },
     "require-dev": {

@@ -41,9 +41,11 @@ class CreateNewUser implements CreatesNewUsers
             'phone_number' => $input['phone_number'],
         ]);
 
-        $user->userIdentity()->create([
-            'identity_number' => $input['identity_number'] ?? null,
-        ]);
+        if (isset($input['identity_number'])) {
+            $user->userIdentity()->create([
+                'identity_number' => $input['identity_number'],
+            ]);
+        }
 
         return $user;
     }

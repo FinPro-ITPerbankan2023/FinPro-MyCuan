@@ -24,7 +24,7 @@ class LoansResource extends Resource
 
     protected static ?string $pluralLabel = 'Ajuan Pinjaman';
 
-    protected static ?string $navigationGroup = 'System Management';
+    protected static ?string $navigationGroup = 'Loan Management';
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
@@ -151,6 +151,10 @@ class LoansResource extends Resource
         ];
     }
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
     public static function getPages(): array
     {
         return [

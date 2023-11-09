@@ -8,6 +8,7 @@ use App\Models\BankDetail;
 use App\Models\Business;
 use App\Models\Loans;
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Models\UserIdentity;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
@@ -18,9 +19,13 @@ use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Forms;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
@@ -31,12 +36,10 @@ use Illuminate\Support\HtmlString;
 class ApplicationHistoryResource extends Resource
 {
     protected static ?string $model = Loans::class;
-
-    protected static ?string $label = 'Riwayat Pengajuan';
-    protected static ?string $pluralLabel = 'Riwayat Pengajuan';
-    protected static ?string $breadcrumb = 'Riwayat Pengajuan';
+    protected static ?string $pluralLabel = 'Riwayat Peminjaman';
     protected static ?string $navigationLabel = 'Riwayat Pengajuan';
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    protected static ?string $navigationGroup = 'Peminjaman';
     public static function form(Form $form): Form
     {
         return $form
@@ -54,16 +57,18 @@ class ApplicationHistoryResource extends Resource
                             Select::make('loan_duration')
                                 ->label('Lama Pinjaman')
                                 ->options([
-                                    '1 Bulan' => '1 Bulan',
-                                    '3 Bulan' => '3 Bulan',
-                                    '6 Bulan' => '6 Bulan',
-                                    '12 Bulan' => '12 Bulan',
-                                    '18 Bulan' => '18 Bulan',
-                                    '24 Bulan' => '24 Bulan'
+                                    '1' => '1 Bulan',
+                                    '3' => '3 Bulan',
+                                    '6' => '6 Bulan',
+                                    '12' => '12 Bulan',
+                                    '18' => '18 Bulan',
+                                    '24' => '24 Bulan'
                                 ])
                                 ->required(),
                             Forms\Components\TextInput::make('amount')
                                 ->label('Jumlah Pinjaman')
+                                ->placeholder('Minimal Rp. 3.000.000')
+                                ->rules('numeric', 'min:3000000')
                                 ->required()
                                 ->prefix('Rp.')
                                 ->inputMode('decimal')
@@ -74,8 +79,28 @@ class ApplicationHistoryResource extends Resource
                                     return User::where('id', $authUserId)->value('id', 'id');
                                 })
                                 ->disabled()
+                                ->dehydrated(),
+                            Hidden::make('user_identity_id')
+                                ->default(function () {
+                                    $authUserId = auth()->id();
+                                    return UserIdentity::where('id', $authUserId)->value('id', 'id');
+                                })
+                                ->disabled()
+                                ->dehydrated(),
+                            Hidden::make('user_detail_id')
+                                ->default(function () {
+                                    $authUserId = auth()->id();
+                                    return UserDetail::where('id', $authUserId)->value('id', 'id');
+                                })
+                                ->disabled()
+                                ->dehydrated(),
+                            Hidden::make('business_id')
+                                ->default(function () {
+                                    $authUserId = auth()->id();
+                                    return Business::where('id', $authUserId)->value('id', 'id');
+                                })
+                                ->disabled()
                                 ->dehydrated()
-
 
                 ]),
                     Wizard\Step::make('Konfirmasi Pinjaman')
@@ -87,13 +112,6 @@ class ApplicationHistoryResource extends Resource
                                         ->icon('heroicon-m-user-circle')
                                         ->iconPosition(IconPosition::After)
                                         ->schema([
-//                                            Forms\Components\TextInput::make('user_id')
-//                                                ->label('Nama Peminjam')
-//                                                ->default(function () {
-//                                                    $authUserId = auth()->id();
-//                                                    return User::where('id', $authUserId)->value('name', 'id');
-//                                                })
-//                                                ->disabled(),
                                             Forms\Components\TextInput::make('identity_number')
                                                 ->label('Nomor Identitas')
                                                 ->suffixIcon('heroicon-m-credit-card')
@@ -157,6 +175,7 @@ class ApplicationHistoryResource extends Resource
                                             Forms\Components\TextInput::make('income_avg')
                                                 ->label('Penghasilan Rata-Rata')
                                                 ->prefix('Rp.')
+                                                ->currencyMask(thousandSeparator: ',',decimalSeparator: '.',precision: 2)
                                                 ->default(function () {
                                                     $authUserId = auth()->id();
                                                     return Business::where('id', $authUserId)->value('income_avg');
@@ -193,11 +212,11 @@ class ApplicationHistoryResource extends Resource
     {
         $user = Auth::user();
         $userId = $user->id;
+        $record = Loans::where('user_id', $userId)->get(); // Fetch the records for the specific user
         return $table
         ->modifyQueryUsing(function (Builder $query) use ($userId) {
             $query->where('user_id', $userId);
         })
-
             ->columns([
                 TextColumn::make('loan_status')
                     ->badge()
@@ -207,36 +226,55 @@ class ApplicationHistoryResource extends Resource
                     })
                     ->formatStateUsing(fn (bool $state): string => $state ? __("SUDAH DIDANAI") : __("BELUM DIDANAI"))
                     ->label('Status Pinjaman'),
+
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('Jumlah Dana')
+                    ->label('Jumlah Pinjaman')
                     ->money('idr')
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('loan_duration')
                     ->label('Lama Pengajuan (Bulan)')
                     ->searchable()
                     ->sortable()
                     ->alignCenter(),
-                Tables\Columns\TextColumn::make('application_date')
-                    ->label('Tanggal Pengajuan')
-                    ->dateTime()
-                    ->sortable(),
+
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Tanggal Update Terakhir')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->striped();
 
-
+            ->striped()
+            ->actions([
+                ActionGroup::make([
+                    ViewAction::make(),
+                ]),
+            ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                \Filament\Infolists\Components\Section::make('Informasi Pinjaman')
+                    ->icon('heroicon-o-play')
+                    ->schema([
+                        TextEntry::make('loan_purpose') ->label('Tujuan Pinjaman'),
+
+                        TextEntry::make('application_date') ->label('Tanggal Pengajuan'),
+                    ]) ->columns(3),
+
+            ]);
+    }
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListApplicationHistories::route('/'),
             'create' => Pages\CreateApplicationHistory::route('/create'),
-            'view' => Pages\ViewApplicationHistory::route('/{record}'),
-            'edit' => Pages\EditApplicationHistory::route('/{record}/edit'),
+//            'view' => Pages\ViewApplicationHistory::route('/{record}'),
+//            'edit' => Pages\EditApplicationHistory::route('/{record}/edit'),
         ];
     }
 

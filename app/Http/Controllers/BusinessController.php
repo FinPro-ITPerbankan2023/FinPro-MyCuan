@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\Loans;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 class BusinessController extends Controller
 {
     public function InsertTable(Request $request)
     {
+//        dd($request->all());
         $request->validate([
+            // Business form verification
             'business_permit_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'business_place_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'business_product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -20,6 +24,10 @@ class BusinessController extends Controller
             'business_ownership' => 'required|string',
             'business_duration' => 'required|string',
             'income_avg' => 'required|integer',
+
+            // Loan form verification
+            'loan_purpose' => 'required|string',
+            'amount' => 'required|integer'
         ]);
 
         // Upload business_permit_image
@@ -53,9 +61,17 @@ class BusinessController extends Controller
             'business_product_image' => $productUrl,
         ]);
 
-        return response()->json(['users' => $userDetail], 201);
-    }
+        $userLoan = Loans::create([
+            'user_id' => $request->user_id,
+            'amount' => $request->amount,
+            'loan_purpose'=> $request->loan_purpose
 
+        ]);
+
+        return redirect('/borrower');
+//        return response()->json(['users' => $userDetail], 201);
+
+    }
 
     public function getBusiness()
     {

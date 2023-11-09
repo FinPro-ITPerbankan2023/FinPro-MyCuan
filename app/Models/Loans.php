@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -17,8 +18,12 @@ class Loans extends Model
 
     protected $fillable = [
         'user_id',
+        'user_identity_id',
+        'user_detail_id',
+        'business_id',
         'loan_status',
         'amount',
+        'repaid_amount',
         'loan_duration',
         'application_date',
         'approval_date',
@@ -30,6 +35,22 @@ class Loans extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function identity(): BelongsTo
+    {
+        return $this->belongsTo(UserIdentity::class, 'user_identity_id');
+    }
+
+    public function detail(): BelongsTo
+    {
+        return $this->belongsTo(UserDetail::class, 'user_detail_id');
+    }
+
+    public function business(): BelongsTo
+    {
+        return $this->belongsTo(Business::class, 'business_id');
+    }
+
 
     public function verifyAdmin(): void
     {

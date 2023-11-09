@@ -34,10 +34,6 @@ class AdminPanelProvider extends PanelProvider
         ->colors([
                 'primary' => Color::Cyan,
             ])
-//            ->userMenuItems([
-//                'logout' => MenuItem::make()
-//                    ->url('logout')
-//            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -60,6 +56,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->favicon(asset('assets/img/Logo_MyCuan.png'));
     }
 }

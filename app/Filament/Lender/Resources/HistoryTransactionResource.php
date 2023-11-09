@@ -101,8 +101,8 @@ class HistoryTransactionResource extends Resource
         return [
             'index' => Pages\ListHistoryTransactions::route('/'),
             'create' => Pages\CreateHistoryTransaction::route('/create'),
-            'view' => Pages\ViewHistoryTransaction::route('/{record}'),
-            'edit' => Pages\EditHistoryTransaction::route('/{record}/edit'),
+//            'view' => Pages\ViewHistoryTransaction::route('/{record}'),
+//            'edit' => Pages\EditHistoryTransaction::route('/{record}/edit'),
         ];
     }
 }

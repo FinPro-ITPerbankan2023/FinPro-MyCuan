@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "intl-tel-input": "^18.2.1"
+        "intl-tel-input": "^18.2.1",
+        "sweetalert2": "^11.9.0"
     }
 }

@@ -16,27 +16,16 @@
             <div class="flex flex-col bg-white w-8/12 mx-auto my-2 rounded-xl border-b-2 border-solid">
 
             <h1 class="font-worksans font-extrabold my-5 text-lg ml-10 dark:text-black" >Penerima Dana</h1>
-            <form method="POST" action="{{ route('register.borrower') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('register.borrower.profile') }}" enctype="multipart/form-data">
                 @csrf
-             <div class="flex flex-row">
+
+                <div class="flex flex-row">
                 <div class="w-1/2">
                     <div class="ml-5">
-                        <!-- Full name -->
-                        <div class="ml-3 mt-2 form-group">
-                            <x-input-label  class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="full_name" 
-                                value="{{ __('Nama Lengkap KTP')}}" />
-                            <div
-                                class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
-                                <x-input name="" type="text" id="full_name"
-                                    class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
-                                    placeholder="{{ __('Silakan masukan nama lengkap Anda') }}" required
-                                    autocomplete="namalengkap" />
-                            </div>
-                           
-                        </div>
+
                         <!-- Identity Number -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="identity_number"
+                            <x-input-label class="font-semibold text-black text-lg font-poppins dark:text-black" for="identity_number"
                                 value="{{ __('NIK')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -44,11 +33,11 @@
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('Silakan masukan NIK Anda') }}" required autocomplete="nik" />
                                 </div>
-                               
+
                         </div>
                         <!-- Date Birth -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="date_birth"
+                            <x-input-label class="font-semibold  text-black text-lg font-poppins dark:text-black" for="date_birth"
                                 value="{{ __('Tanggal Lahir')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -61,12 +50,12 @@
                                         <small class="text-danger" style="color: red">{{$message}}</small>
                                     </div>
                                 @enderror
-                                
+
                             </div>
                         </div>
                         <!-- birth_place -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="birth_place"
+                            <x-input-label class="font-semibold  text-black text-lg font-poppins dark:text-black" for="birth_place"
                                 value="{{ __('Tempat Lahir')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -83,7 +72,7 @@
                         </div>
                         <!-- Street -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="street"
+                            <x-input-label class="font-semibold  text-black text-lg font-poppins dark:text-black" for="street"
                                 value="{{ __('Alamat Lengkap')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -99,7 +88,7 @@
                         </div>
                         <!-- Province -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="province"
+                            <x-input-label class="font-semibold  text-black text-lg font-poppins dark:text-black" for="province"
                                 value="{{ __('Provinsi')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -115,7 +104,7 @@
                         </div>
                         <!-- city -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="city"
+                            <x-input-label class="font-semibold  text-black text-lg font-poppins dark:text-black" for="city"
                                 value="{{ __('Kab/Kota')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -131,7 +120,7 @@
                         </div>
                         <!-- district -->
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-lg font-poppins dark:text-[#868686]" for="district"
+                            <x-input-label class="font-semibold  text-black text-lg font-poppins dark:text-black" for="district"
                                 value="{{ __('Kecamatan')}}" />
                             <div
                                 class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -145,19 +134,15 @@
                             </div>
                             @enderror
                         </div>
-                    </div>
-                </div>
-                        <!-- post_code -->
-                <div class="w-1/2">
-                    <div class="ml-10">
+
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-sm font-poppins dark:text-[#868686]" for="post_code"
-                                value="{{ __('Kode Pos')}}" />
+                            <x-input-label class="font-semibold  text-black text-sm font-poppins dark:text-black" for="post_code"
+                                           value="{{ __('Kode Pos')}}" />
                             <div
-                                class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
+                                class="flex flex-row items-center w-3/4 bg-white rounded-lg border-indigo-500 border-2 mt-2">
                                 <x-input name="post_code" type="text" id="post_code"
-                                    class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
-                                    placeholder="{{ __('709123') }}" required autocomplete="kodepos" />
+                                         class="w-full py-2.5 ml-1 px-0 border-transparent focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
+                                         placeholder="{{ __('709123') }}" required autocomplete="kodepos" />
                             </div>
                             @error('post_code')
                             <div class="text-danger">
@@ -165,10 +150,15 @@
                             </div>
                             @enderror
                         </div>
+                    </div>
+                </div>
+                        <!-- post_code -->
+                <div class="w-1/2">
+                    <div class="ml-10">
                         <!-- bank_number -->
 
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-sm font-poppins "
+                            <x-input-label class="font-semibold  text-black text-sm font-poppins "
                                 for="bank_number" value="{{ __('Nomor Rekening')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -185,7 +175,7 @@
                         <!-- account_name -->
 
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-sm font-poppins"
+                            <x-input-label class="font-semibold  text-black text-sm font-poppins"
                                 for="" value="{{ __('Nama Rekening')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -193,12 +183,12 @@
                                     class="w-full py-2.5 ml-1 px-0 border-transparent  focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent"
                                     placeholder="{{ __('a/n  xxxxx') }}" required autocomplete="namarekening" />
                             </div>
-                            
+
                         </div>
                         <!-- bank_name -->
 
                         <div class="ml-3 mt-2 form-group">
-                            <x-input-label class="text-[#868686] text-sm font-poppins " for="bank_name"
+                            <x-input-label class="font-semibold  text-black text-sm font-poppins " for="bank_name"
                                 value="{{ __('Nama Bank')}}" />
                             <div
                                 class="flex flex-row items-center w-10/12 bg-white rounded-lg border-indigo-500 border-2 mt-2">
@@ -233,8 +223,7 @@
                                             <span type="file"
                                                 class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg cursor-pointer"
                                                for="file_upload_foto_ktp" name="identity_image" id="identity_image" onclick="uploadfotoktp()">UPLOAD</span>
-                                                <span id="textfotoktp" class="flex items-center ml-3 dark:text-black">No file chosen,
-                                                yet.</span>
+                                                <span id="textfotoktp" class="flex items-center ml-3 dark:text-black">Belum ada file yang dipilih.</span>
                                         </div>
                                     </div>
                                 </label>
@@ -255,8 +244,7 @@
                                             <span type="file"
                                                 class="flex w-1/4 bg-[#185F65] text-white text-base items-center justify-center font-bold h-12 border rounded-lg cursor-pointer"
                                                 for="file_upload_ktp_selfie" name="selfie_image" id="selfie_image" onclick="uploadktp()">UPLOAD</span>
-                                                <span id="textktp" class="flex items-center ml-3 dark:text-black">No file chosen,
-                                                yet.</span>
+                                                <span id="textktp" class="flex items-center ml-3 dark:text-black">Belum ada file yang dipilih.</span>
                                         </div>
                                     </div>
                                     <x-input class="hidden" type="file" name="selfie_image" id="file_upload_ktp_selfie" accept=" image/*`" />
@@ -291,7 +279,7 @@
                         /[\/\\]([\w\d\s\.\-\(\)]+)$/
                     )[1];
                 } else {
-                    customTxt.innerHTML = "No file chosen, yet.";
+                    customTxt.innerHTML = "Belum ada file yang dipilih.";
                 }
             });
         }
@@ -312,7 +300,7 @@
                         /[\/\\]([\w\d\s\.\-\(\)]+)$/
                     )[1];
                 } else {
-                    customTxt.innerHTML = "No file chosen, yet.";
+                    customTxt.innerHTML = "Belum ada file yang dipilih.";
                 }
             });
         }

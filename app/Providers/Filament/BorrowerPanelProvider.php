@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
 
 class BorrowerPanelProvider extends PanelProvider
 {
@@ -27,20 +28,16 @@ class BorrowerPanelProvider extends PanelProvider
         return $panel
             ->id('borrower')
             ->path('borrower')
-//            ->login()
+            ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
             ->plugin(
                 BreezyCore::make()
                     ->myProfile(
                         shouldRegisterUserMenu: true,
                         shouldRegisterNavigation: false,
-                        hasAvatars: true,
+                        hasAvatars: false,
                         slug: 'my-profile'
                     )
             )
-//            ->userMenuItems([
-//                'logout' => MenuItem::make()
-//                    ->url('logout')
-//            ])
             ->profile()
             ->darkMode(false)
             ->passwordReset()
@@ -73,6 +70,7 @@ class BorrowerPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->favicon(asset('assets/img/Logo_MyCuan.png'));
     }
 }
