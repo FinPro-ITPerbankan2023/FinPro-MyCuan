@@ -41,7 +41,7 @@ class LenderPanelProvider extends PanelProvider
                     ->myProfile(
                         shouldRegisterUserMenu: true,
                         shouldRegisterNavigation: false,
-                        hasAvatars: true,
+                        hasAvatars: false,
                         slug: 'my-profile'
                     )
             )

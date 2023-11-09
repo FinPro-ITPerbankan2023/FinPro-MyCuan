@@ -16,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens;
     use HasFactory;
@@ -116,11 +116,5 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             default => true,
         };
     }
-
-    public function getFilamentAvatarUrl(): ?string
-    {
-        return $this->avatar_url ? Storage::url($this->avatar_url) : null ;
-    }
-
 
 }
