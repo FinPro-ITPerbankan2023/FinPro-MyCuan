@@ -47,7 +47,7 @@
                             <div class="w-3/4 mx-auto">
                                 <x-input-label class="text-black text-xl font-poppins dark:text-black" for="business_name" value="{{ __('Nama Usaha')}}" />
                                 <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
-                                    <x-input name="business_name" type="business_name" id="business_name" class="w-full py-2.5 ml-3 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukan nama usaha Anda') }}" required autocomplete="username" :value="old('business_name')" />
+                                    <x-input name="business_name" type="business_name" id="business_name" class="w-full py-2.5 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukan nama usaha Anda') }}" required autocomplete="username" :value="old('business_name')" />
                                 </div>
                                 <!-- alert email -->
                                 <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
@@ -64,7 +64,7 @@
                             <div class="w-3/4 mx-auto">
                                 <x-input-label class="text-black text-xl font-poppins dark:text-black" for="field_of_business" value="{{ __('Bidang Usaha')}}" />
                                 <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
-                                    <x-input name="field_of_business" type="field_of_business" id="field_of_business" class="w-full py-2.5 ml-3 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukan bidang usaha Anda') }}" required autocomplete="username" :value="old('field_of_business')" />
+                                    <x-input name="field_of_business" type="field_of_business" id="field_of_business" class="w-full py-2.5 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukan bidang usaha Anda') }}" required autocomplete="username" :value="old('field_of_business')" />
                                 </div>
                                 <!-- alert email -->
                                 <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
@@ -81,7 +81,7 @@
                             <div class="w-3/4 mx-auto">
                                 <x-input-label class="text-black text-xl font-poppins dark:text-black" for="business_ownership" value="{{ __('Kepimilikan Usaha')}}" />
                                 <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
-                                    <x-input name="business_ownership" type="business_ownership" id="business_ownership" class="w-full py-2.5 ml-3 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Swasta, UMKM, dll') }}" required autocomplete="username" :value="old('business_ownership')" />
+                                    <x-input name="business_ownership" type="business_ownership" id="business_ownership" class="w-full py-2.5 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Swasta, UMKM, dll') }}" required autocomplete="username" :value="old('business_ownership')" />
                                 </div>
                                 <!-- alert email -->
                                 <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
@@ -98,7 +98,7 @@
                             <div class="w-3/4 mx-auto">
                                 <x-input-label class="text-black text-xl font-poppins dark:text-black" for="business_duration" value="{{ __('Lama Usaha')}}" />
                                 <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
-                                    <x-input name="business_duration" type="business_duration" id="business_duration" class="w-full py-2.5 ml-3 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('1 tahun, 2 tahun, dkk') }}" required autocomplete="username" :value="old('business_duration')" />
+                                    <x-input name="business_duration" type="business_duration" id="business_duration" class="w-full py-2.5 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('1 tahun, 2 tahun, dkk') }}" required autocomplete="username" :value="old('business_duration')" />
                                 </div>
                                 <!-- alert email -->
                                 <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
@@ -115,7 +115,7 @@
                             <div class="w-3/4 mx-auto">
                                 <x-input-label class="text-black text-xl font-poppins dark:text-black" for="loan_purpose" value="{{ __('Tujuan Peminjaman')}}" />
                                 <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
-                                    <x-input name="loan_purpose" type="loan_purpose" id="loan_purpose" class="w-full py-2.5 ml-3 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukkan tujuannya') }}" required autocomplete="username" :value="old('loan_purpose')" />
+                                    <x-input name="loan_purpose" type="loan_purpose" id="loan_purpose" class="w-full py-2.5 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Silakan masukkan tujuannya') }}" required autocomplete="username" :value="old('loan_purpose')" />
                                 </div>
                                 <!-- alert email -->
                                 <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
@@ -132,7 +132,7 @@
                             <div class="w-3/4 mx-auto">
                                 <x-input-label class="text-black text-xl font-poppins dark:text-black" for="income_avg" value="{{ __('Rata-Rata Penghasilan Perbulan')}}" />
                                 <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
-                                    <x-input name="income_avg" type="income_avg" id="income_avg" class="w-full py-2.5 ml-3 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Rp1.000.000,-') }}" required autocomplete="username" :value="old('income_avg')" />
+                                    <x-input name="income_avg" type="income_avg" id="income_avg" class="w-full py-2.5 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Rp1.000.000,-') }}" required autocomplete="username" :value="old('income_avg')" />
                                 </div>
                                 <!-- alert email -->
                                 <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />
@@ -149,7 +149,7 @@
                             <div class="w-3/4 mx-auto">
                                 <x-input-label class="text-black text-xl font-poppins dark:text-black" for="amount" value="{{ __('Jumlah Peminjaman')}}" />
                                 <div class="flex flex-row items-center w-full bg-white rounded-md border-gray-600 hover:border-sky-600 border-2 mt-2">
-                                    <x-input name="amount" type="amount" id="amount" class="w-full py-2.5 ml-3 px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Rp10.000.000,-') }}" required autocomplete="username" :value="old('amount')" />
+                                    <x-input name="amount" type="amount" id="amount" class="w-full py-2.5  px-0 focus:border-transparent focus:ring-0 dark:bg-white dark:border-transparent dark:focus:ring-0 dark:focus:border-transparent" placeholder="{{ __('Rp10.000.000,-') }}" required autocomplete="username" :value="old('amount')" />
                                 </div>
                                 <!-- alert email -->
                                 <x-input-error for="email" class="mb-4 font-medium text-sm text-white dark:text-white justify-center text-center mt-5 bg-red-600 border-red-800 px-4 py-3 rounded relative" />

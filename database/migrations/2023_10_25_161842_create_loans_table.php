@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('business_id')->nullable()->constrained('business', 'id');
             $table->boolean('loan_status')->default('0');
             $table->boolean('is_verified')->default('0');
-            $table->integer('amount');
+            $table->bigInteger('amount');
             $table->integer('repaid_amount')->default(0);
             $table->string('loan_duration')->default(12);
             $table->text('loan_purpose');
