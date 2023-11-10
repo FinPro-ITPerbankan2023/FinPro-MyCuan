@@ -53,12 +53,15 @@ class RepayLoanResource extends Resource
     {
         $user = Auth::user();
         $userId = $user->id;
-        $record = Loans::where('user_id', $userId)->get();
+        $record = Loans::where('user_id', $userId)
+            ->where('is_verified', 1)
+            ->get();
+
         return $table
             ->modifyQueryUsing(function (Builder $query) use ($userId) {
-                $query->where('user_id', $userId);
+                $query->where('user_id', $userId)
+                    ->where('is_verified', 1);
             })
-
             ->columns([
                 TextColumn::make('loan_status')
                     ->badge()

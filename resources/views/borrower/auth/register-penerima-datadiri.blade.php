@@ -18,6 +18,7 @@
             <h1 class="font-worksans font-extrabold my-5 text-lg ml-10 dark:text-black" >Penerima Dana</h1>
             <form method="POST" action="{{ route('register.borrower.profile') }}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                 <div class="flex flex-row">
                 <div class="w-1/2">

@@ -23,6 +23,8 @@
             <div class="w-1/2 p-10 ml-32 ml-auto bg-white rounded-lg shadow-xl" style="margin-left: 50px; margin-top:50px">
                 <div class="flex flex-col">
                     <form id="prasyaratForm">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
                         <div class="flex flex-col items-center justify-center">
                             <div class="flex items-center">
                                 <img src="{{asset('assets/img/Logo_MyCuan.png')}}" alt="Logo MyCuan" class="w-16 mr-2 h-19">
